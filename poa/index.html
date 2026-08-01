@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SarvaVeda LLM — Plan of Action</title>
+<meta name="description" content="The SarvaVeda Plan of Action: 111 numbered work units across four stages, the data sources the corpus is assembled from, and what remains to be loaded." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Noto+Serif+Devanagari:wght@400;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --indigo:#1D2B5E; --indigo-deep:#141E42; --gold:#A8802C; --gold-bright:#C9A227;
+  --maroon:#7A1E1E; --leaf:#3E6B35; --ivory:#FBF8F0; --ivory-deep:#F3EDDD;
+  --ink:#26221A; --muted:#6b6350; --line:#D9CDA8;
+  --display:'Cormorant Garamond',Garamond,serif;
+  --body:'Spectral',Georgia,serif;
+  --deva:'Noto Serif Devanagari',serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ivory);color:var(--ink);font-family:var(--body);
+  line-height:1.68;font-size:18px;-webkit-font-smoothing:antialiased}
+.deva{font-family:var(--deva)}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+a{color:var(--indigo)}
+/* top bar */
+.bar{position:sticky;top:0;z-index:10;background:rgba(251,248,240,.92);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;max-width:1100px}
+.bar .brand{font-family:var(--display);font-size:1.3rem;color:var(--indigo);font-weight:600}
+.bar .brand b{color:var(--gold)}
+.bar a{text-decoration:none;font-size:.95rem}
+/* hero */
+.head{background:var(--indigo-deep);color:#f1ecdc}
+.head .wrap{padding:66px 24px 52px;max-width:1100px}
+.head .eyebrow{font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-bright)}
+.head h1{font-family:var(--display);font-size:clamp(2.6rem,6vw,4rem);margin:.2em 0 0;color:#fff;font-weight:600;line-height:1.05}
+.head p{max-width:60ch;color:#ccc3a8;margin:18px 0 0;font-size:1.12rem}
+.head .motto{font-family:var(--deva);color:var(--gold-bright);font-size:1.4rem;margin-top:24px}
+/* contents */
+.toc{background:var(--ivory-deep);border-bottom:1px solid var(--line)}
+.toc .wrap{padding:26px 24px;max-width:1100px}
+.toc h2{font-family:var(--display);color:var(--indigo);font-size:1.1rem;margin:0 0 12px;
+  letter-spacing:.02em;text-transform:uppercase;font-weight:600}
+.toc ol{margin:0;padding:0;list-style:none;columns:2;column-gap:40px;font-size:.98rem}
+.toc li{margin:0 0 7px;break-inside:avoid}
+.toc a{text-decoration:none} .toc a:hover{color:var(--gold)}
+.toc .n{color:var(--gold);font-family:var(--display);font-weight:600;margin-right:8px}
+/* sections */
+section{padding:52px 0;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+h2.sec{font-family:var(--display);color:var(--indigo);font-size:clamp(1.7rem,3.4vw,2.5rem);
+  font-weight:600;margin:0 0 6px;line-height:1.1;scroll-margin-top:70px}
+.kicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+  font-weight:600;margin-bottom:6px}
+h3{font-family:var(--display);color:var(--indigo);font-size:1.35rem;font-weight:600;
+  margin:32px 0 6px}
+p{margin:14px 0}
+ul{margin:12px 0;padding-left:1.2em} li{margin:6px 0}
+strong{color:var(--maroon)}
+.lead{font-size:1.15rem;color:#4a4436}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.96rem}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+td.amt{font-family:var(--display)}
+.tier{font-family:var(--display);color:var(--gold);font-weight:600}
+/* phase blocks */
+.phase{display:grid;grid-template-columns:170px 1fr;gap:26px;padding:22px 0;border-top:1px solid var(--line)}
+.phase:first-of-type{border-top:0}
+.phase .ph{font-family:var(--display);color:var(--gold);font-size:1.2rem;font-weight:600}
+.phase .mo{font-size:.82rem;color:var(--muted);letter-spacing:.03em}
+.phase h3{margin:0 0 8px}
+.phase ul{margin:0;font-size:.98rem}
+/* callout */
+.note{background:var(--ivory-deep);border-left:3px solid var(--gold);padding:16px 20px;
+  border-radius:0 8px 8px 0;margin:22px 0;font-size:.98rem}
+footer{background:var(--indigo-deep);color:#cbc2a7;text-align:center;padding:50px 24px}
+footer .m{font-family:var(--deva);color:var(--gold-bright);font-size:1.5rem;margin-bottom:14px}
+footer a{color:var(--gold-bright)}
+.backlink{display:inline-block;margin-top:20px}
+@media (max-width:720px){.toc ol{columns:1}.phase{grid-template-columns:1fr;gap:6px}}
+
+/* plan page additions */
+.tw{overflow-x:auto;margin:18px 0 26px}
+table.tbl{border-collapse:collapse;width:100%;font-size:.92rem;font-family:var(--body)}
+table.tbl th{background:var(--indigo);color:#fff;text-align:left;padding:9px 11px;
+  font-weight:600;font-size:.82rem;letter-spacing:.03em;text-transform:uppercase}
+table.tbl td{padding:8px 11px;border-bottom:1px solid var(--line);vertical-align:top}
+table.tbl tr:nth-child(even) td{background:rgba(243,237,221,.5)}
+table.tbl td.u{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--maroon);
+  font-weight:600}
+.pill{display:inline-block;padding:2px 9px;border-radius:11px;font-size:.76rem;
+  white-space:nowrap;border:1px solid transparent}
+.pill.done{background:#e6f0e6;color:#2f5c2a;border-color:#bcd6b8}
+.pill.prog{background:#e7edf8;color:#1D2B5E;border-color:#c3d1ea}
+.pill.ready{background:#fdf3d8;color:#8a6a12;border-color:#e8d49a}
+.pill.wait{background:#f8e6e6;color:#7A1E1E;border-color:#e5bcbc}
+.pill.plan{background:#efece4;color:#6b6350;border-color:#ddd6c4}
+.stat{display:flex;flex-wrap:wrap;gap:14px;margin:22px 0 8px}
+.stat div{flex:1 1 150px;background:var(--ivory-deep);border:1px solid var(--line);
+  border-radius:6px;padding:14px 16px}
+.stat b{display:block;font-family:var(--display);font-size:2rem;color:var(--indigo);
+  line-height:1}
+.stat span{font-size:.82rem;color:var(--muted)}
+.stg{border-left:3px solid var(--gold);padding:2px 0 2px 22px;margin:26px 0}
+.stg h3{font-family:var(--display);color:var(--indigo);font-size:1.5rem;margin:0 0 8px;font-weight:600}
+.stg h3 span{display:inline-block;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);vertical-align:middle;margin-right:12px;font-family:var(--body);font-weight:600}
+.stg p{margin:0 0 11px}
+.note{background:var(--ivory-deep);border-left:3px solid var(--gold);
+  padding:14px 18px;margin:20px 0;font-size:.95rem}
+</style>
+</head>
+<body>
+
+<div class="bar"><div class="wrap">
+  <a class="brand" href="/">Sarva<b>Veda</b> LLM</a>
+  <a href="/">← Home</a>
+</div></div>
+
+<header class="head"><div class="wrap">
+  <div class="eyebrow">Plan of Action</div>
+  <h1>Plan of Action</h1>
+  <p>The plan divided into 111 numbered units across four stages; the sources the
+     corpus is assembled from; and an honest account of what is loaded, what is queued,
+     and what has still to be acquired.</p>
+  <div class="motto deva">॥ अनन्ता वै वेदाः ॥</div>
+</div></header>
+
+<nav class="toc"><div class="wrap">
+  <h2>Contents</h2>
+  <ol>
+    <li><a href="#stages"><span class="n">1</span>The plan in four stages</a></li>
+    <li><a href="#position"><span class="n">2</span>Where the work stands</a></li>
+    <li><a href="#sources"><span class="n">3</span>Data sources</a></li>
+    <li><a href="#pending"><span class="n">4</span>Pending uploads</a></li>
+    <li><a href="#gaps"><span class="n">5</span>Acquisition gaps</a></li>
+    <li><a href="#tasks"><span class="n">6</span>Project tasks</a></li>
+  </ol>
+</div></nav>
+
+<div class="wrap">
+
+<section id="stages">
+  <div class="kicker">Section 1</div>
+  <h2 class="sec">The plan in four stages</h2>
+  <p class="lead">The work divides into four stages. They are thematic rather than
+     strictly sequential — collection continues while the lexicon is built, and the
+     lexicon deepens while the applications are written.</p>
+
+  <div class="stg">
+    <h3><span>Stage 1</span> Collect and load the texts</h3>
+    <p>Veda, Vedāṅga, Upāṅga and Upaveda; the Purāṇas, Itihāsa, Kāvya and the ancillary
+       literature, together with their commentaries. Where a text is not already
+       proof-read, it enters through the digitisation route.</p>
+    <p>Loading is not mere ingestion. The Bhāṣya is processed so that its Vyākaraṇa and
+       śāstra references are linked to their targets; the related portions are brought
+       together, so a Mantra or Brāhmaṇa passage stands beside its Pada-pāṭha and its
+       Bhāṣyam; and the MAP analysis is produced for each mantra on demand rather than
+       stored. Throughout, a master list is maintained that can absorb further texts and
+       references without being restructured.</p>
+  </div>
+
+  <div class="stg">
+    <h3><span>Stage 2</span> Pada Kośa — the vocabulary</h3>
+    <p>Three vocabularies, built by different means because they are different in kind.</p>
+    <p><strong>Rūḍha</strong> — the conventional vocabulary, drawn from the kośas. Being
+       non-compositional by definition, it must be enumerated rather than derived.</p>
+    <p><strong>Vaidika</strong> — every available Pada-pāṭha ingested, Pada-pāṭha generated
+       where none exists, and the unique words with their meanings extracted from the Veda
+       Bhāṣyam. A Pada-pāṭha processor brings uniformity at load time and keeps the
+       processed padas separately, so that the Krama and Vikṛti sandhi layers can be built
+       upon them.</p>
+    <p><strong>Yaugika</strong> — the Vyākaraṇa Vocabulary Engine: the Pāṇinian word-space,
+       over a hundred million forms, each carrying its complete sūtra-by-sūtra derivation,
+       with meanings in Telugu, Kannada, Hindi and English. Telugu leads, because the
+       team's native expertise gives the subtlest sense.</p>
+    <p>Alongside these: Nirukta etymology, with traditional nirvacana set beside the formal
+       Pāṇinian vyutpatti; the liṅga rules from Nāma-liṅgānuśāsana, Mahābhāṣya and Kāśikā;
+       Krama and the eight Vikṛti forms from Jaṭā to Ghana, with rule-verified sandhi and
+       svara at every junctura; and Varṇa Krama — akṣara-by-akṣara decomposition with svara
+       and mātrā, built directly on Śikṣā and Prātiśākhya.</p>
+  </div>
+
+  <div class="stg">
+    <h3><span>Stage 3</span> Synthesis and applications</h3>
+    <p>Data synthesised across the verticals to establish Vākya analysis, and the
+       cross-references that run through Veda, Vedāṅga, Upāṅga and Upaveda connected so the
+       corpus reads as one body rather than many.</p>
+    <p><strong>Anuvāda</strong> — translation of the mantras into Indian languages founded
+       solely on the Bhāṣya; where no Bhāṣya exists, on the principles of Sāyaṇācārya.
+       <strong>Samānatā</strong> — an engine determining similarity in śabda and in artha.</p>
+    <p>On these rest the applications: Śrauta Prayoga generation with every step carrying a
+       traceable sūtra citation; the Mīmāṃsā Nyāya engine; Sāmaveda stotra generation with
+       viṣṭuti patterns and stobha insertion; Tarka sentence structure in the śābda-bodha
+       style with pariṣkāra; Sāma sound analysis, audio in and notation out, with the Ūha
+       engine that re-frames melody onto new chandas; and the Chatur-Darśana engine, which
+       interprets one sentence in parallel through Tarka, Vyākaraṇa, Mīmāṃsā and Vedānta —
+       the śāstrārtha assembly, computed.</p>
+  </div>
+
+  <div class="stg">
+    <h3><span>Stage 4</span> Presentation</h3>
+    <p>The work reaches its audience: integration with general search; the Vedic perspective
+       offered on any topic on demand, with societal reference; APIs for researchers seeking
+       Vedic references with plain meanings; video, audio and web publication; webinars; the
+       VVS textbooks; short-form material across thousands of topics; a daily presence; and
+       a considered śāstra perspective on contemporary events.</p>
+  </div>
+</section>
+
+<section id="position">
+  <div class="kicker">Section 2</div>
+  <h2 class="sec">Where the work stands</h2>
+  <p class="lead">The plan is deliberately granular. Each unit carries a permanent
+     number, a definition of done, and its dependencies — so progress is a matter of
+     record rather than impression.</p>
+  <div class="stat">
+    <div><b>111</b><span>numbered work units</span></div>
+    <div><b>8</b><span>complete</span></div>
+    <div><b>10</b><span>ready to start</span></div>
+    <div><b>227</b><span>corpus artefacts held</span></div>
+    <div><b>2.9 GB</b><span>of primary text</span></div>
+  </div>
+  <p>Unit numbers (<span class="u">SVU-001</span> onward) never change and never encode
+     a stage, so work can be resequenced without renumbering. The same discipline governs
+     every identifier in the project: an identifier records what a thing <em>is</em>,
+     never where it currently sits.</p>
+</section>
+
+<section id="sources">
+  <div class="kicker">Section 3</div>
+  <h2 class="sec">Data sources</h2>
+  <p class="lead">The corpus is assembled from the Foundation's own digitised holdings,
+     the open Sanskrit lexical corpora, and a Pāṇinian derivation engine that generates
+     grammatical forms rather than storing them.</p>
+  <div class="tw"><table class="tbl"><thead><tr>
+<th>Source</th>
+<th>What it contributes</th>
+<th>Items</th>
+<th>Size</th>
+</tr></thead><tbody>
+<tr><td><strong>Veda mūla</strong></td><td>Saṃhitā text of the four Vedas, with svara</td><td>30</td><td>86 MB</td></tr>
+<tr><td><strong>Pada-pāṭha</strong></td><td>Word-separated recitational text</td><td>7</td><td>7 MB</td></tr>
+<tr><td><strong>Bhāṣya</strong></td><td>Traditional commentary — Sāyaṇa, Bhaṭṭa Bhāskara and others</td><td>94</td><td>2,324 MB</td></tr>
+<tr><td><strong>Vedāṅga</strong></td><td>Śikṣā, Prātiśākhya, Kalpa and the ancillary śāstras</td><td>63</td><td>233 MB</td></tr>
+<tr><td><strong>Prayoga</strong></td><td>Ritual manuals and performance texts</td><td>33</td><td>321 MB</td></tr>
+<tr><td><strong>Lexical — Cologne Digital Sanskrit Lexicon</strong></td><td>44 dictionaries: Monier-Williams, Apte, Amarakośa, Vācaspatyam, Śabdakalpadruma and others</td><td>44</td><td>—</td></tr>
+<tr><td><strong>Lexical — indic-dict collections</strong></td><td>19 further kośa builds used as independent cross-check witnesses</td><td>19</td><td>—</td></tr>
+<tr><td><strong>Grammatical engine</strong></td><td>Pāṇinian derivation engine with the Dhātupāṭha — 2,229 dhātus, 5,160 sūtras, 128 kṛt and 181 taddhita pratyayas</td><td>1</td><td>—</td></tr>
+<tr><td><strong>Pāṇinian reference corpora</strong></td><td>Aṣṭādhyāyī commentary and annotation sets surveyed for reuse</td><td>4</td><td>—</td></tr>
+</tbody></table></div>
+  <div class="note"><strong>On the lexical sources.</strong> The lexical collections are
+     held for comparison and corroboration: of the distinct Sanskrit words assembled,
+     roughly two-thirds are attested by more than one independent kośa. Where a word rests
+     on a single witness it is recorded as such rather than presented as settled.</div>
+</section>
+
+<section id="pending">
+  <div class="kicker">Section 4</div>
+  <h2 class="sec">Pending uploads</h2>
+  <p class="lead">Every held artefact is classified by what stands between it and the
+     pipeline. Nothing has been loaded to the production corpus yet — the schema is still
+     under scholarly review — so the whole holding is queued.</p>
+  <div class="tw"><table class="tbl"><thead><tr>
+<th>State</th>
+<th>Meaning</th>
+<th>Files</th>
+<th>Size</th>
+</tr></thead><tbody>
+<tr><td><strong>Ready to load</strong></td><td>Text-bearing files that need no conversion.</td><td>156</td><td>569 MB</td></tr>
+<tr><td><strong>Awaiting assembly</strong></td><td>Recognition already complete; output not yet assembled.</td><td>30</td><td>1,300 MB</td></tr>
+<tr><td><strong>Awaiting triage</strong></td><td>To be checked for a text layer before any recognition.</td><td>34</td><td>1,085 MB</td></tr>
+<tr><td><strong>Awaiting conversion</strong></td><td>Legacy word-processor formats.</td><td>2</td><td>7 MB</td></tr>
+<tr><td><strong>Superseded</strong></td><td>A better copy of the same work is held.</td><td>5</td><td>10 MB</td></tr>
+</tbody></table></div>
+  <div class="note"><strong>The immediate opportunity.</strong> A substantial block of
+     text recognition has already been completed and paid for, but the output was never
+     assembled into documents. Assembling it requires no new expenditure and is the
+     largest body of readable text available to the project today. It is unit
+     <span class="u">SVU-027</span> in the plan below.</div>
+</section>
+
+<section id="gaps">
+  <div class="kicker">Section 5</div>
+  <h2 class="sec">Acquisition gaps</h2>
+  <p class="lead">The seventy-two volume plan names 390 distinct works. Reconciling
+     that requirement against the holdings shows precisely what has still to be sourced.</p>
+  <div class="tw"><table class="tbl"><thead><tr>
+<th>Position</th>
+<th>Distinct works</th>
+</tr></thead><tbody>
+<tr><td><strong>Held</strong></td><td>19</td></tr>
+<tr><td><strong>Held, pending verification</strong></td><td>68</td></tr>
+<tr><td><strong>Not yet acquired</strong></td><td>303</td></tr>
+</tbody></table></div>
+  <h3>Where the gaps concentrate</h3>
+  <div class="tw"><table class="tbl"><thead><tr>
+<th>Category</th>
+<th>Works to acquire</th>
+</tr></thead><tbody>
+<tr><td>Darśana / Philosophy</td><td>34</td></tr>
+<tr><td>Saṃhitā</td><td>30</td></tr>
+<tr><td>Saṅgīta / Nāṭya</td><td>23</td></tr>
+<tr><td>Purāṇa</td><td>21</td></tr>
+<tr><td>Dharmasūtra / Smṛti</td><td>19</td></tr>
+<tr><td>Kāvya / Alaṃkāra</td><td>18</td></tr>
+<tr><td>Brāhmaṇa</td><td>15</td></tr>
+<tr><td>Stotra / Nāmāvali</td><td>14</td></tr>
+<tr><td>Upaniṣad</td><td>14</td></tr>
+<tr><td>Gṛhyasūtra</td><td>13</td></tr>
+</tbody></table></div>
+  <p>The holdings are strongest in Veda mūla, bhāṣya and vedāṅga — the Foundation's own
+     scholarly territory — and thinnest in the darśana, purāṇa, kāvya and applied-śāstra
+     divisions. Acquisition is therefore sequenced by what the volumes actually require,
+     not by what is easiest to obtain.</p>
+</section>
+
+<section id="tasks">
+  <div class="kicker">Section 6</div>
+  <h2 class="sec">Project tasks</h2>
+  <p class="lead">Four stages, 111 units. Stage numbering is thematic; several
+     stages run concurrently. Items marked <span class="pill wait">Awaiting decision</span>
+     are held pending a scholarly determination and are deliberately not started, because
+     the determination may change the work.</p>
+
+  <h3>Stage 0 · Foundation &amp; Governance <span style="font-size:.7em;color:var(--muted);font-weight:400">— 12 units, 4 complete</span></h3>
+  <p>Infrastructure, schema, governance and the registers that everything else is tracked against.</p>
+  <div class="tw"><table class="tbl"><thead><tr>
+<th>Unit</th>
+<th>Task</th>
+<th>Track</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><span class="u">SVU-001</span></td><td><strong>Corpus schema v1 sign-off and apply</strong></td><td>Governance</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-002</span></td><td><strong>Migration 007 and the pada_class enum</strong></td><td>Governance</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-003</span></td><td><strong>GPU box commissioning</strong></td><td>Infra</td><td><span class="pill ready">Ready to start</span></td></tr>
+<tr><td><span class="u">SVU-004</span></td><td><strong>Core data services deployed</strong></td><td>Infra</td><td><span class="pill ready">Ready to start</span></td></tr>
+<tr><td><span class="u">SVU-005</span></td><td><strong>Scholarly review panel constituted</strong></td><td>Governance</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-006</span></td><td><strong>Licence declarations for the three own-artefacts</strong></td><td>Governance</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-007</span></td><td><strong>Repository governance and access control</strong></td><td>Governance</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-008</span></td><td><strong>Document numbering and register</strong></td><td>Governance</td><td><span class="pill done">Complete</span></td></tr>
+<tr><td><span class="u">SVU-009</span></td><td><strong>Dataset register with loading status</strong></td><td>Corpus</td><td><span class="pill done">Complete</span></td></tr>
+<tr><td><span class="u">SVU-010</span></td><td><strong>Required-books reconciliation vs the 72 volumes</strong></td><td>Corpus</td><td><span class="pill done">Complete</span></td></tr>
+<tr><td><span class="u">SVU-011</span></td><td><strong>Document pipeline and OOXML validity gate</strong></td><td>Tooling</td><td><span class="pill done">Complete</span></td></tr>
+<tr><td><span class="u">SVU-012</span></td><td><strong>Corpus resilience and off-site replication</strong></td><td>Risk</td><td><span class="pill plan">Planned</span></td></tr>
+</tbody></table></div>
+  <h3>Stage 1 · Collect &amp; Load the Corpus <span style="font-size:.7em;color:var(--muted);font-weight:400">— 29 units, 2 complete</span></h3>
+  <p>Encoding the accent correctly, then loading the text — mūla, pada-pāṭha, bhāṣya and the ancillary śāstras — with provenance intact.</p>
+  <div class="tw"><table class="tbl"><thead><tr>
+<th>Unit</th>
+<th>Task</th>
+<th>Track</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><span class="u">SVU-020</span></td><td><strong>VijayaDV PUA inventory</strong></td><td>Encoding</td><td><span class="pill done">Complete</span></td></tr>
+<tr><td><span class="u">SVU-021</span></td><td><strong>PUA three-class classification (draft)</strong></td><td>Encoding</td><td><span class="pill done">Complete</span></td></tr>
+<tr><td><span class="u">SVU-022</span></td><td><strong>Residual PUA → Unicode bindings</strong></td><td>Encoding</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-023</span></td><td><strong>Accent-collapse principle confirmed</strong></td><td>Encoding</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-024</span></td><td><strong>Full mūla conversion, all four Vedas</strong></td><td>Encoding</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-025</span></td><td><strong>Round-trip gate extended to the full corpus</strong></td><td>Encoding</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-026</span></td><td><strong>Load group 1 — 120 text-ready files</strong></td><td>Loading</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-027</span></td><td><strong>Assemble the 30 already-OCR&#x27;d volumes</strong></td><td>Loading</td><td><span class="pill ready">Ready to start</span></td></tr>
+<tr><td><span class="u">SVU-028</span></td><td><strong>Triage the 34 un-OCR&#x27;d PDFs (gate O1)</strong></td><td>Loading</td><td><span class="pill ready">Ready to start</span></td></tr>
+<tr><td><span class="u">SVU-029</span></td><td><strong>OCR the genuine scans</strong></td><td>Loading</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-030</span></td><td><strong>Plain-text extraction for text-layer PDFs</strong></td><td>Loading</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-031</span></td><td><strong>Convert the 2 legacy .doc/.pub files</strong></td><td>Loading</td><td><span class="pill ready">Ready to start</span></td></tr>
+<tr><td><span class="u">SVU-032</span></td><td><strong>Retire the 5 superseded PDFs</strong></td><td>Loading</td><td><span class="pill ready">Ready to start</span></td></tr>
+<tr><td><span class="u">SVU-033</span></td><td><strong>Ingest the Kalpa Sūtra Unicode collection (Track A)</strong></td><td>Corpus</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-034</span></td><td><strong>Citation extractor and quoted-text register</strong></td><td>Corpus</td><td><span class="pill ready">Ready to start</span></td></tr>
+<tr><td><span class="u">SVU-035</span></td><td><strong>Prioritised acquisition list from the 303 gaps</strong></td><td>Corpus</td><td><span class="pill ready">Ready to start</span></td></tr>
+<tr><td><span class="u">SVU-036</span></td><td><strong>Tier-3 normalisation — GRETIL, Muktabodha, VHP</strong></td><td>Corpus</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-037</span></td><td><strong>Sentence segmentation and locus tagging</strong></td><td>Corpus</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-038</span></td><td><strong>Fix the locus identifier scheme</strong></td><td>Architecture</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-039</span></td><td><strong>Embeddings generated and loaded to Qdrant</strong></td><td>Retrieval</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-040</span></td><td><strong>Knowledge graph v1 in Neo4j</strong></td><td>Retrieval</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-041</span></td><td><strong>MAP gold exemplars processed</strong></td><td>MAP</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-042</span></td><td><strong>Bhāṣya cross-linked to Vyākaraṇa and Śāstra references</strong></td><td>MAP</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-043</span></td><td><strong>Mantra / Brāhmaṇa grouping assembled</strong></td><td>MAP</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-044</span></td><td><strong>Dynamic MAP analysis per mantra</strong></td><td>MAP</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-045</span></td><td><strong>Master list that absorbs new references</strong></td><td>Corpus</td><td><span class="pill prog">In progress</span></td></tr>
+<tr><td><span class="u">SVU-046</span></td><td><strong>Feed vaakya.vedanidhi.in during the work</strong></td><td>Delivery</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-047</span></td><td><strong>Digitisation ledger and seven-stage pipeline commissioned</strong></td><td>OCR</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-048</span></td><td><strong>Reconcile filing of recently added documents</strong></td><td>Hygiene</td><td><span class="pill ready">Ready to start</span></td></tr>
+</tbody></table></div>
+  <h3>Stage 2 · Pada Kośa <span style="font-size:.7em;color:var(--muted);font-weight:400">— 24 units, 2 complete</span></h3>
+  <p>The lexical foundation: the conventional vocabulary drawn from the kośas, the Vedic vocabulary drawn from pada-pāṭha and bhāṣya, and the compositional vocabulary generated from Pāṇini&#x27;s rules.</p>
+  <div class="tw"><table class="tbl"><thead><tr>
+<th>Unit</th>
+<th>Task</th>
+<th>Track</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><span class="u">SVU-050</span></td><td><strong>Load Compartment A — the kośa corpus</strong></td><td>Pada Kośa A</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-051</span></td><td><strong>Kośa census published</strong></td><td>Pada Kośa A</td><td><span class="pill done">Complete</span></td></tr>
+<tr><td><span class="u">SVU-052</span></td><td><strong>Access and serving policy for third-party lexical sources</strong></td><td>Pada Kośa A</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-053</span></td><td><strong>Kośa precedence order for the reader</strong></td><td>Pada Kośa A</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-054</span></td><td><strong>Flag the 106,014 single-attestation words</strong></td><td>Pada Kośa A</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-055</span></td><td><strong>Ingest all available Pada Pāṭhas</strong></td><td>Pada Kośa V</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-056</span></td><td><strong>Pada Pāṭha Processor</strong></td><td>Pada Kośa V</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-057</span></td><td><strong>Generate Padapāṭha where none exists</strong></td><td>Pada Kośa V</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-058</span></td><td><strong>Vaidika Pada Kośa — words and meanings from Bhāṣya</strong></td><td>Pada Kośa V</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-059</span></td><td><strong>Yaugika generator built and green</strong></td><td>Pada Kośa B</td><td><span class="pill done">Complete</span></td></tr>
+<tr><td><span class="u">SVU-060</span></td><td><strong>Svara print convention fixed</strong></td><td>Pada Kośa B</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-061</span></td><td><strong>Pracaya / ekaśruti decision</strong></td><td>Pada Kośa B</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-062</span></td><td><strong>Accent-agreement harness against the gold corpus</strong></td><td>Pada Kośa B</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-063</span></td><td><strong>Form-space target decided</strong></td><td>Pada Kośa B</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-064</span></td><td><strong>Full paradigm sweep</strong></td><td>Pada Kośa B</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-065</span></td><td><strong>FST lexicon compiled</strong></td><td>Pada Kośa B</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-066</span></td><td><strong>Multilingual morpheme glosses</strong></td><td>Pada Kośa B</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-067</span></td><td><strong>Nirukta etymology engine</strong></td><td>Nirukta</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-068</span></td><td><strong>Gender rules and the liṅga authorities</strong></td><td>Vyākaraṇa</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-069</span></td><td><strong>Sandhi rule engine</strong></td><td>Pāṭha</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-070</span></td><td><strong>Krama generation</strong></td><td>Pāṭha</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-071</span></td><td><strong>Eight Vikṛti forms</strong></td><td>Pāṭha</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-072</span></td><td><strong>Varṇa Krama generator</strong></td><td>Pāṭha</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-073</span></td><td><strong>Lookup service and hover payload</strong></td><td>Pada Kośa</td><td><span class="pill prog">In progress</span></td></tr>
+</tbody></table></div>
+  <h3>Stage 3 · Synthesis, Models &amp; Applications <span style="font-size:.7em;color:var(--muted);font-weight:400">— 30 units, 0 complete</span></h3>
+  <p>Cross-referencing, translation, the generative engines, and the reading application built on top of them.</p>
+  <div class="tw"><table class="tbl"><thead><tr>
+<th>Unit</th>
+<th>Task</th>
+<th>Track</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><span class="u">SVU-080</span></td><td><strong>Cross-reference graph across all verticals</strong></td><td>Synthesis</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-081</span></td><td><strong>Anuvāda — Bhāṣya-grounded translation</strong></td><td>Synthesis</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-082</span></td><td><strong>Samānatā — śabda and artha similarity engine</strong></td><td>Synthesis</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-083</span></td><td><strong>Vākya analysis</strong></td><td>Synthesis</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-084</span></td><td><strong>SFT dataset assembled</strong></td><td>Model</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-085</span></td><td><strong>Base model QLoRA fine-tune</strong></td><td>Model</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-086</span></td><td><strong>RAG pipeline</strong></td><td>Model</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-087</span></td><td><strong>RLHF-lite preference pass</strong></td><td>Model</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-088</span></td><td><strong>Re-benchmark the QLoRA epoch estimate</strong></td><td>Model</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-089</span></td><td><strong>Śrauta Prayoga generation</strong></td><td>Engine</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-090</span></td><td><strong>Sāmaveda Stotra generation</strong></td><td>Engine</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-091</span></td><td><strong>Vikṛti Pāṭha model</strong></td><td>Engine</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-092</span></td><td><strong>Tarka sentence-structure model</strong></td><td>Engine</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-093</span></td><td><strong>Varṇa Krama model</strong></td><td>Engine</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-094</span></td><td><strong>Sāma sound analysis</strong></td><td>Engine</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-095</span></td><td><strong>Ūha engine</strong></td><td>Engine</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-096</span></td><td><strong>Mīmāṃsā Nyāya engine</strong></td><td>Engine</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-097</span></td><td><strong>Chatur-Darśana interpretation engine</strong></td><td>Engine</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-098</span></td><td><strong>Layered text display L1–L5</strong></td><td>App</td><td><span class="pill prog">In progress</span></td></tr>
+<tr><td><span class="u">SVU-099</span></td><td><strong>Grammar hover system</strong></td><td>App</td><td><span class="pill prog">In progress</span></td></tr>
+<tr><td><span class="u">SVU-100</span></td><td><strong>Prayoga Mode interface</strong></td><td>App</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-101</span></td><td><strong>Vikṛti generator interface</strong></td><td>App</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-102</span></td><td><strong>Sāma Studio</strong></td><td>App</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-103</span></td><td><strong>Tarka Workbench and Varṇa Krama viewer</strong></td><td>App</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-104</span></td><td><strong>Stotra Library and Nirukta Explorer</strong></td><td>App</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-105</span></td><td><strong>Cross-disciplinary notes layer</strong></td><td>App</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-106</span></td><td><strong>vLLM serving with batching and caching</strong></td><td>Infra</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-107</span></td><td><strong>Institutional pilot</strong></td><td>Validation</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-108</span></td><td><strong>Swadharma QA benchmark</strong></td><td>Validation</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-109</span></td><td><strong>Prayoga validated against the 2026 Agniṣṭoma record</strong></td><td>Validation</td><td><span class="pill plan">Planned</span></td></tr>
+</tbody></table></div>
+  <h3>Stage 4 · Presentation &amp; Outreach <span style="font-size:.7em;color:var(--muted);font-weight:400">— 16 units, 0 complete</span></h3>
+  <p>Publication, the researcher interface, and bringing the material to a general audience.</p>
+  <div class="tw"><table class="tbl"><thead><tr>
+<th>Unit</th>
+<th>Task</th>
+<th>Track</th>
+<th>Status</th>
+</tr></thead><tbody>
+<tr><td><span class="u">SVU-115</span></td><td><strong>sarvaveda.info updated with this plan</strong></td><td>Site</td><td><span class="pill ready">Ready to start</span></td></tr>
+<tr><td><span class="u">SVU-116</span></td><td><strong>Static pre-rendering for discoverability</strong></td><td>Site</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-117</span></td><td><strong>Contribution mechanism — in-page edit to pull request</strong></td><td>Site</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-118</span></td><td><strong>Public web app with tiered access</strong></td><td>Release</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-119</span></td><td><strong>Researcher API</strong></td><td>Release</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-120</span></td><td><strong>Search-engine integration and structured data</strong></td><td>Reach</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-121</span></td><td><strong>Vedic perspective on demand, with societal references</strong></td><td>Reach</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-122</span></td><td><strong>Video, audio and web publication pipeline</strong></td><td>Media</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-123</span></td><td><strong>Webinar programme</strong></td><td>Media</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-124</span></td><td><strong>VVS textbooks</strong></td><td>Media</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-125</span></td><td><strong>AI-produced reels across thousands of topics</strong></td><td>Media</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-126</span></td><td><strong>Daily social presence</strong></td><td>Media</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-127</span></td><td><strong>Daily śāstra perspective on contemporary events</strong></td><td>Media</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-128</span></td><td><strong>Publish the consultation papers</strong></td><td>Release</td><td><span class="pill wait">Awaiting decision</span></td></tr>
+<tr><td><span class="u">SVU-129</span></td><td><strong>Continuous learning cycle</strong></td><td>Release</td><td><span class="pill plan">Planned</span></td></tr>
+<tr><td><span class="u">SVU-130</span></td><td><strong>Video corpus transcription</strong></td><td>Corpus</td><td><span class="pill plan">Planned</span></td></tr>
+</tbody></table></div>
+
+  <div class="note"><strong>How to read this.</strong> A unit is complete only when its
+     definition of done is met and a test asserts it. "Ready to start" means no decision
+     and no prerequisite stands in the way. The plan is a living document and unit numbers
+     are permanent, so this page can be compared honestly against itself over time.</div>
+</section>
+
+</div>
+
+<footer style="background:var(--indigo-deep);color:#ccc3a8;padding:38px 0;margin-top:10px">
+  <div class="wrap" style="max-width:1100px;font-size:.92rem">
+    <div class="deva" style="color:var(--gold-bright);font-size:1.15rem">॥ अनन्ता वै वेदाः ॥</div>
+    <p style="margin:10px 0 0">SarvaVeda LLM — a project of Sanātana Guru Sampradāya
+       Pratiṣṭhānam · Veda Vijñāna Viṣṭaram, Mysore.
+       <a href="/" style="color:var(--gold-bright)">Home</a> ·
+       <a href="/roadmap.html" style="color:var(--gold-bright)">Full roadmap</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
