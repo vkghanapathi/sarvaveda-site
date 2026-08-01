@@ -1,0 +1,4 @@
+# Local-only. Never published — anything committed here is served publicly
+# at sarvaveda.info/<filename>, so backups and zips must stay out of git.
+_local/
+*.zip
