@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Veda Vijñāna Series — 72 Volumes | SarvaVeda</title>
+<meta name="description" content="The Veda Vijñāna Series: a seventy-two volume encyclopaedia of Sanātana Dharma across twelve thematic divisions — the complete volume register, with production status for every title.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Noto+Serif+Devanagari:wght@400;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--indigo:#1D2B5E;--indigo-deep:#141E42;--gold:#A8802C;--gold-bright:#C9A227;
+--maroon:#7A1E1E;--leaf:#3E6B35;--ivory:#FBF8F0;--ivory-deep:#F3EDDD;--ink:#26221A;--line:#D9CDA8}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Spectral',Georgia,serif;background:var(--ivory);color:var(--ink);line-height:1.65}
+.dn{font-family:'Noto Serif Devanagari',serif}
+h1,h2,h3,.display{font-family:'Cormorant Garamond',Garamond,serif}
+a{color:var(--maroon);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:3px solid var(--gold-bright);outline-offset:2px}
+nav{position:sticky;top:0;z-index:50;background:rgba(251,248,240,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:.7rem 1.5rem}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.35rem;letter-spacing:.06em}
+.nav-brand a{color:var(--indigo);text-decoration:none}
+.nav-brand span{color:var(--gold)}
+.nav-links{display:flex;gap:1.5rem;font-size:.86rem;letter-spacing:.08em;text-transform:uppercase}
+.nav-links a{color:var(--ink);border-bottom:2px solid transparent;padding-bottom:2px;text-decoration:none}
+.nav-links a:hover{border-color:var(--gold);text-decoration:none}
+.nav-links a[aria-current="page"]{border-color:var(--maroon)}
+@media(max-width:980px){.nav-links{display:none}}
+.hero{max-width:1180px;margin:0 auto;padding:3.5rem 1.5rem 2rem;text-align:center}
+.orn{color:var(--gold);letter-spacing:.5em;font-size:1rem}
+.hero-eyebrow{font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:1.2rem 0 .8rem}
+.hero h1{font-size:clamp(2.3rem,5vw,3.9rem);line-height:1.05;color:var(--indigo);font-weight:600;letter-spacing:.02em}
+.hero .vols{font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,2.4vw,1.8rem);color:var(--maroon);margin-top:.4rem;letter-spacing:.18em;text-transform:uppercase}
+.hero .sub{margin:1.4rem auto 0;font-size:1.1rem;max-width:40rem;color:#4A4335}
+.hero .credit{margin-top:1.8rem;font-size:.9rem;color:#6B6350;line-height:1.9}
+.hero .credit b{color:var(--indigo);font-weight:600}
+.hero-ctas{margin-top:2rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-block;padding:.75rem 1.6rem;font-size:.88rem;letter-spacing:.1em;text-transform:uppercase;border:1.5px solid var(--indigo);transition:all .2s;text-decoration:none}
+.btn:hover{text-decoration:none}
+.btn-solid{background:var(--indigo);color:var(--ivory)}
+.btn-solid:hover{background:var(--indigo-deep)}
+.btn-line{color:var(--indigo)}
+.btn-line:hover{background:var(--indigo);color:var(--ivory)}
+.band{background:var(--indigo);color:var(--ivory);padding:2.6rem 1.5rem}
+.band-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;text-align:center}
+.band .num{font-family:'Cormorant Garamond',serif;font-size:2.6rem;font-weight:600;color:var(--gold-bright);line-height:1}
+.band .lbl{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;margin-top:.5rem;color:#C9CFE4}
+@media(max-width:820px){.band-inner{grid-template-columns:repeat(2,1fr)}}
+section{max-width:1180px;margin:0 auto;padding:4.2rem 1.5rem 1rem}
+.narrow{max-width:50rem}
+.sec-eyebrow{font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.sec-title{font-size:clamp(1.8rem,3vw,2.5rem);color:var(--indigo);font-weight:600;margin:.4rem 0 1rem}
+.prose p{margin-top:1rem;color:#3E382C;font-size:1.01rem}
+.convictions{margin-top:2rem;display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
+.conv{background:#fff;border:1px solid var(--line);border-top:3px solid var(--gold);padding:1.5rem 1.5rem}
+.conv .n{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--gold);font-weight:700;line-height:1}
+.conv h3{font-size:1.15rem;color:var(--indigo);font-weight:600;margin:.3rem 0 .6rem}
+.conv p{font-size:.93rem;color:#4A4335;margin-top:.6rem}
+@media(max-width:780px){.convictions{grid-template-columns:1fr}}
+.serves{margin-top:1.8rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.serve{background:#fff;border:1px solid var(--line);border-left:3px solid var(--maroon);padding:1.1rem 1.2rem;font-size:.92rem;color:#4A4335}
+.serve b{color:var(--indigo);display:block;font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;margin-bottom:.25rem}
+@media(max-width:900px){.serves{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.serves{grid-template-columns:1fr}}
+.tbl-wrap{margin-top:2rem;overflow-x:auto;border:1px solid var(--line);background:#fff}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:.95rem}
+th,td{text-align:left;padding:.8rem 1.2rem;border-bottom:1px solid var(--line)}
+th{background:var(--ivory-deep);font-family:'Spectral',serif;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:500}
+tbody tr:last-child td{border-bottom:none}
+td.dnum{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--gold);font-weight:700;width:3rem}
+td.rng{white-space:nowrap;color:var(--maroon);font-weight:600}
+td.amt{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--maroon);font-weight:600;white-space:nowrap}
+.legend{margin-top:1.6rem;display:flex;gap:1.4rem;flex-wrap:wrap;font-size:.83rem;color:#6B6350}
+.pill{display:inline-block;font-family:'Spectral',serif;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .6rem;border:1px solid;white-space:nowrap}
+.pill.ready{color:var(--leaf);border-color:var(--leaf);background:#EAF3EC}
+.pill.review{color:var(--gold);border-color:var(--gold);background:#FFF6E0}
+.pill.prod{color:#6B6350;border-color:#C3B99C;background:var(--ivory-deep)}
+.division{margin-top:3rem}
+.division h3{font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+  border-bottom:2px solid var(--gold);padding-bottom:.5rem;display:flex;justify-content:space-between;gap:1rem;align-items:baseline}
+.division h3 .rng{font-family:'Spectral',serif;color:var(--maroon);letter-spacing:.08em}
+.vol{display:grid;grid-template-columns:3.2rem 1fr;gap:1.1rem;padding:1.25rem 0;border-bottom:1px solid var(--line)}
+.vol:last-child{border-bottom:none}
+.vol .no{font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:#D9CDA8;font-weight:700;line-height:1;text-align:right}
+.vol .hd{display:flex;gap:.8rem;align-items:baseline;flex-wrap:wrap}
+.vol h4{font-family:'Cormorant Garamond',serif;font-size:1.28rem;color:var(--indigo);font-weight:600}
+.vol p{font-size:.93rem;color:#4A4335;margin-top:.4rem}
+.insts{margin-top:2rem;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.inst{background:#fff;border:1px solid var(--line);border-top:3px solid var(--maroon);padding:1.2rem 1.2rem;font-size:.92rem;color:#4A4335}
+@media(max-width:900px){.insts{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.insts{grid-template-columns:1fr}}
+.sponsor{background:var(--ivory-deep);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:4rem;padding-bottom:3rem}
+.sponsor section{padding-top:4rem}
+.amount{text-align:center;margin-top:2rem}
+.amount .big{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,6vw,4rem);color:var(--maroon);font-weight:700;line-height:1}
+.amount .cap{font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-top:.5rem}
+.support{background:var(--indigo);color:var(--ivory);margin-top:4.5rem;padding:4rem 1.5rem;text-align:center}
+.support h2{font-size:clamp(1.8rem,3vw,2.4rem);font-weight:600;color:var(--ivory)}
+.support .dn{color:var(--gold-bright);font-size:1.35rem;margin-top:.7rem;line-height:1.7}
+.support .gloss{font-size:.88rem;color:#C9CFE4;font-style:italic;margin-top:.3rem}
+.support p{max-width:42rem;margin:1.2rem auto 0;color:#C9CFE4;font-size:.97rem}
+.donate-row{margin-top:2rem;display:flex;gap:1.1rem;flex-wrap:wrap;justify-content:center}
+.support .btn{border-color:var(--gold-bright);color:var(--gold-bright)}
+.support .btn:hover{background:var(--gold-bright);color:var(--indigo-deep)}
+.donate-btn{display:flex;flex-direction:column;align-items:center;gap:.28rem;padding:.85rem 1.8rem;text-transform:none;letter-spacing:0}
+.donate-btn .donate-main{font-size:.9rem;letter-spacing:.09em;text-transform:uppercase;font-weight:600}
+.donate-btn .donate-sub{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;opacity:.82}
+footer{background:var(--indigo-deep);color:#9BA3C4;padding:2rem 1.5rem;text-align:center;font-size:.82rem;letter-spacing:.04em}
+footer .dn{color:var(--gold);font-size:1rem;margin-bottom:.5rem;display:block}
+footer a{color:#C9CFE4}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav><div class="nav-inner">
+  <div class="nav-brand"><a href="/">SARVA<span>VEDA</span> LLM</a></div>
+  <div class="nav-links">
+    <a href="/#corpus">Corpus</a>
+    <a href="/#models">Models</a>
+    <a href="/#roadmap">Roadmap</a>
+    <a href="/poa">Plan of Action</a>
+    <a href="/vvs" aria-current="page">The Series</a>
+    <a href="#sponsor">Sponsor</a>
+  </div>
+</div></nav>
+
+<header class="hero">
+  <div class="orn">❧ ✦ ❧</div>
+  <div class="hero-eyebrow">Master Register of Publications</div>
+  <h1>Veda Vijñāna Series</h1>
+  <div class="vols">72 Volumes</div>
+  <p class="sub">A Comprehensive Encyclopaedia of Sanātana Dharma — spanning Veda, Vedāṅga, Upaveda, Itihāsa, Purāṇa, Dharmaśāstra, Arts, Pilgrimage, Sages, Saints, and Civilisation.</p>
+  <div class="credit"><b>Editor in Chief</b> · Dr. Vamshi Krishna Ghanapathi, D.Litt.<br>Sanatana Guru Sampradaya Pratishthanam · Veda Vijñāna Viṣṭaram, Mysore, Karnataka, India<br>With the inspiration and benediction of our Sadguru His Holiness Śrī Gaṇapathy Sachchidānanda Svāmījī</div>
+  <div class="hero-ctas">
+    <a class="btn btn-solid" href="#register">The complete register</a>
+    <a class="btn btn-line" href="#sponsor">Sponsor a volume</a>
+  </div>
+</header>
+
+<div class="band"><div class="band-inner">
+  <div><div class="num">72</div><div class="lbl">Volumes</div></div>
+  <div><div class="num">12</div><div class="lbl">Thematic divisions</div></div>
+  <div><div class="num">8</div><div class="lbl">Complete or in review</div></div>
+  <div><div class="num">1,400+</div><div class="lbl">Assessment questions</div></div>
+</div></div>
+
+<section id="about" class="narrow">
+  <div class="sec-eyebrow">About</div>
+  <h2 class="sec-title">About this Series</h2>
+  <div class="prose">
+  </div>
+</section>
+
+<section id="why">
+  <div class="sec-eyebrow">Purpose</div>
+  <h2 class="sec-title">Why this Series matters</h2>
+  <p class="sec-lede narrow">Rarely has the whole of the Sanātana Dharma tradition been laid out, in a single ordered series, in clear modern English — faithful to the primary sources, yet legible to a reader who has never opened a Sanskrit text. That is the gap the Veda Vijñāna Series exists to close. Four convictions drive the work.</p>
+  <div class="convictions">
+    <div class="conv">
+      <div class="n">1</div>
+      <h3>Preserving an endangered intellectual heritage</h3>
+      <p>For more than three thousand years the knowledge of the Vedas and their ancillary sciences was carried by an unbroken oral lineage of teacher and pupil. That lineage is now thinning: each generation, fewer scholars remain who can read the mula text, hold the accent, and expound the meaning.</p>
+      <p>The Series fixes this living inheritance in a durable, referenced form — in print and in permanent digital editions — so that no branch of the tradition is lost for want of a competent exposition in a language the modern reader commands.</p>
+    </div>
+    <div class="conv">
+      <div class="n">2</div>
+      <h3>Opening the tradition to the English-reading world</h3>
+      <p>Most of the world's students of Dharma — in India and across the diaspora — now read most comfortably in English, yet the reliable expositions remain locked in Sanskrit or in academic monographs that presume years of prior training. The Series meets the reader where they are: a learner in Mysore, Melbourne, or Minneapolis can open any volume and find the tradition on its own terms — consistent IAST transliteration, genuine primary sources rather than second-hand summaries, and explanations pitched to be understood, not merely admired.</p>
+    </div>
+    <div class="conv">
+      <div class="n">3</div>
+      <h3>From sacred text to living classroom</h3>
+      <p>Every volume is written to be taught. The prose is pitched at the serious high-school and undergraduate reader; technical terms are introduced, not assumed; and the material is structured for a syllabus, not only a shelf. A companion digital edition makes the same content searchable and portable, and a bank of more than fourteen hundred assessment questions turns the Series into a ready resource for examinations, quiz competitions, and guided self-study.</p>
+    </div>
+    <div class="conv">
+      <div class="n">4</div>
+      <h3>Scholarship without compromise</h3>
+      <p>Accessibility is never bought at the price of accuracy. Each volume works from the primary texts; transliteration follows the international IAST convention throughout; Vedic accents and special characters are set in the dedicated VijayaDV font so that nothing is silently normalised or lost; and every completed draft passes through scholarly review before it is declared ready — a body of work a specialist can cite with confidence and a newcomer can read with ease.</p>
+    </div>
+  </div>
+</section>
+
+<section id="architecture" class="narrow">
+  <div class="sec-eyebrow">Order</div>
+  <h2 class="sec-title">The architecture of the Series</h2>
+  <div class="prose">
+    <p>The seventy-two volumes are not a miscellany. They follow the classical order in which a traditional institution imparts knowledge — outward from the root to its branches, and from revealed text to applied science and lived culture. Twelve thematic divisions organise the whole: the foundational śāstras establish the ground; the Veda corpus presents the four Vedas and their auxiliaries; the Kalpa Sūtra manuals and applied “Solutions” volumes carry the ritual into practice; the Vedāṅgas and Upāṅgas supply the six limbs and the schools of reasoning; the Upavedas open onto medicine, defence, music, and statecraft; Itihāsa and the Purāṇas preserve narrative and cosmology; Dharmaśāstra codifies conduct; literature, arts, and mathematics record the civilisational achievement; the Punya Kṣetra series maps sacred geography; and the closing volumes gather the lives of the Seers, Saints, and leaders who carried the tradition to today.</p>
+  </div>
+</section>
+
+<section id="readers">
+  <div class="sec-eyebrow">Readership</div>
+  <h2 class="sec-title">Whom the Series serves</h2>
+  <p class="sec-lede narrow">The Series is written for six overlapping readerships, and each volume is measured against all of them:</p>
+  <div class="serves">
+    <div class="serve"><b>The scholar</b>who requires reliable primary-source references, consistent transliteration, and citable expositions.</div>
+    <div class="serve"><b>The student</b>in school, college, or a traditional paṭhaśālā, who needs a structured, teachable text and a means of self-assessment.</div>
+    <div class="serve"><b>The practising Vaidika</b>who seeks clear, applied guidance for ritual and observance drawn directly from the manuals.</div>
+    <div class="serve"><b>The institution and library</b>which needs an authoritative, complete, and well-produced reference collection.</div>
+    <div class="serve"><b>The diaspora family</b>which wishes to pass the tradition to children who read and think in English.</div>
+    <div class="serve"><b>The general reader</b>of serious interest, who wants the tradition explained honestly and whole.</div>
+  </div>
+</section>
+
+<section id="method" class="narrow">
+  <div class="sec-eyebrow">Production</div>
+  <h2 class="sec-title">How each volume is made</h2>
+  <div class="prose">
+    <p>Every title advances through the same disciplined pipeline: a detailed structural blueprint is drafted; the text is composed from the mula sources with full IAST transliteration and Vedic-accent typesetting; the completed draft is examined and corrected by qualified reviewers; Sanskrit and English are aligned for study editions where relevant; and the volume is finally issued in two forms — an archival print edition and a permanent online edition. Each volume's position in this pipeline is recorded as its production status in the register that follows.</p>
+  </div>
+  <div class="legend">
+    <span><span class="pill ready">Ready</span> &nbsp;complete and typeset</span>
+    <span><span class="pill review">For Review</span> &nbsp;draft under scholarly review</span>
+    <span><span class="pill prod">Prior Production</span> &nbsp;structured and in active development</span>
+  </div>
+</section>
+
+<section id="glance">
+  <div class="sec-eyebrow">Overview</div>
+  <h2 class="sec-title">The Series at a glance</h2>
+  <p class="sec-lede narrow">The seventy-two volumes are distributed across twelve thematic divisions, following the classical curriculum from foundational śāstra to lived civilisation:</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th></th><th>Division</th><th>Volumes</th></tr></thead><tbody>
+      <tr><td class="dnum">1</td><td>Foundational Śāstras</td><td class="rng">Vols. 1–10</td></tr>
+      <tr><td class="dnum">2</td><td>Veda Corpus</td><td class="rng">Vols. 11–21</td></tr>
+      <tr><td class="dnum">3</td><td>Vedic Manuals — Kalpa Sūtras</td><td class="rng">Vols. 22–25</td></tr>
+      <tr><td class="dnum">4</td><td>Vedic Solutions — Applied Ritual</td><td class="rng">Vols. 26–29</td></tr>
+      <tr><td class="dnum">5</td><td>Vedāṅgas &amp; Upāṅgas</td><td class="rng">Vols. 30–38</td></tr>
+      <tr><td class="dnum">6</td><td>Upavedas &amp; Applied Sciences</td><td class="rng">Vols. 39–45</td></tr>
+      <tr><td class="dnum">7</td><td>Itihāsa</td><td class="rng">Vols. 46–47</td></tr>
+      <tr><td class="dnum">8</td><td>Purāṇas</td><td class="rng">Vols. 48–50</td></tr>
+      <tr><td class="dnum">9</td><td>Dharmaśāstra</td><td class="rng">Vols. 51–53</td></tr>
+      <tr><td class="dnum">10</td><td>Literature, Arts &amp; Mathematics</td><td class="rng">Vols. 54–61</td></tr>
+      <tr><td class="dnum">11</td><td>Punya Kṣetra Series</td><td class="rng">Vols. 62–67</td></tr>
+      <tr><td class="dnum">12</td><td>Seers, Saints &amp; Civilisation</td><td class="rng">Vols. 68–72</td></tr>
+    </tbody></table></div>
+  <p class="sec-lede narrow" style="margin-top:1.2rem">The complete volume register on the following pages lists every title with its current production status. Volumes 1–8 — the foundational śāstras and the first Karma Prabodha ritual volumes — are the most advanced, already complete or under final review; the remaining volumes are structured and in active development.</p>
+</section>
+
+<section id="register">
+  <div class="sec-eyebrow">Complete Volume Register</div>
+  <h2 class="sec-title">All seventy-two volumes</h2>
+  <p class="sec-lede narrow">Every title in the Series with its current production status, in the classical order of study — from the foundational śāstras outward to lived civilisation.</p>
+  <div class="division">
+    <h3>FOUNDATIONAL ŚĀSTRAS<span class="rng">Vols. 1–10</span></h3>
+    <div class="vol">
+      <div class="no">1</div>
+      <div>
+        <div class="hd"><h4>The Veda</h4><span class="pill ready">Ready</span></div>
+        <p>A guided textbook that opens the whole Vedic corpus for the newcomer: what the Veda is, its division into Mantra and Brāhmaṇa and into karma- and jñāna-kāṇḍa, and why it exists. Built on the discourses of the Kāñcī Paramācārya and other teachers of our own time, with a careful key to IAST pronunciation and the svaras.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">2</div>
+      <div>
+        <div class="hd"><h4>Vedānta — Upaniṣad</h4><span class="pill ready">Ready</span></div>
+        <p>The second guided textbook carries the reader from ritual to realisation, presenting the Upaniṣads as the culmination — the anta — of the Veda. It surveys the principal Upaniṣadic teachings and the schools of Vedānta in the same accessible, teachable format as Book 1.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">3</div>
+      <div>
+        <div class="hd"><h4>Vedāṅga — Upāṅga</h4><span class="pill ready">Ready</span></div>
+        <p>The third foundational textbook maps the six limbs of the Veda — Śikṣā, Vyākaraṇa, Chandas, Nirukta, Kalpa, and Jyotiṣa — together with the ancillary sciences, showing how each protects and applies the revealed text. It prepares the student for the specialist volumes that follow.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">4</div>
+      <div>
+        <div class="hd"><h4>Karma Prabodha 1 — Nitya Karma</h4><span class="pill review">For Review</span></div>
+        <p>An English rendering of Dr. Ghanapathi's teaching on the daily obligatory rites (nitya-karma), explaining why the Veda commands action and how the karma- and jñāna-kāṇḍas relate. As Part 1 of Book 4, it grounds ritual practice in its scriptural rationale.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">5</div>
+      <div>
+        <div class="hd"><h4>Karma Prabodha 2 — Aitareya Brāhmaṇa</h4><span class="pill review">For Review</span></div>
+        <p>A comparative study of the Aitareya Brāhmaṇa and Āraṇyaka of the Ṛgveda, opening with the classical definitions of mantra, ṛk, sāman, and yajus and the categories of arthavāda. It treats Pañcikā I in full, Pañcikā II in part, and the remaining pañcikās through selected samples.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">6</div>
+      <div>
+        <div class="hd"><h4>Karma Prabodha 3 — Pravargya Upasat Compendium</h4><span class="pill review">For Review</span></div>
+        <p>A study of the principles of the Pravargya and Upasad rites of the Kṛṣṇa-Yajurveda, examining the myth of the severed head of the yajña, the meaning of the śānti-mantras, and whether the Pravargya stands alone or is a limb of the Soma sacrifice.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">7</div>
+      <div>
+        <div class="hd"><h4>Karma Prabodha 4 — Havir-Yajña (Kāṇva) 1</h4><span class="pill review">For Review</span></div>
+        <p>The first of a two-volume critical study of the havir-yajñas in the Kāṇva recension of the Śatapatha Brāhmaṇa. It covers the preface, the establishing of the fires (Agnyādheya), and the iṣṭi rites through the darśa-pūrṇamāsa.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">8</div>
+      <div>
+        <div class="hd"><h4>Karma Prabodha 4 — Havir-Yajña (Kāṇva) 2</h4><span class="pill review">For Review</span></div>
+        <p>The concluding volume carries the study through the Cāturmāsya seasonal rites and the paśubandha, with the technical definitions and the closing grantha-upasaṃhāra. Together the two volumes translate the complete thesis.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">9</div>
+      <div>
+        <div class="hd"><h4>Karma Prabodha 5 — Agniṣṭoma Prayoga</h4><span class="pill prod">Prior Production</span></div>
+        <p>A practical manual for the Agniṣṭoma, the archetypal one-day Soma sacrifice that serves as the model for the whole class of soma-yāgas. It documents the sequence of the rite, the offices of its priests, and its ritual application.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">10</div>
+      <div>
+        <div class="hd"><h4>Karma Prabodha 6 — Agnicayana Prayoga</h4><span class="pill prod">Prior Production</span></div>
+        <p>A manual for the Agnicayana, the grand rite of building the fire-altar of ten thousand bricks in the form of the bird — among the most elaborate of the śrauta sacrifices. It documents the construction, the mantras, and the symbolism of the rite.</p>
+      </div>
+    </div>
+  </div>
+  <div class="division">
+    <h3>VEDA CORPUS<span class="rng">Vols. 11–21</span></h3>
+    <div class="vol">
+      <div class="no">11</div>
+      <div>
+        <div class="hd"><h4>Ṛgveda — Book 1</h4><span class="pill prod">Prior Production</span></div>
+        <p>A complete orientation to the Ṛgveda: what it is, its statistical shape, its śākhās and the living Nambūdiri tradition, and its transmission through the guru-śiṣya paramparā. It introduces the Aitareya and Śāṅkhāyana Brāhmaṇas and the textual pyramid that rises from Saṃhitā to Upaniṣad.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">12</div>
+      <div>
+        <div class="hd"><h4>Ṛgveda Ākhyāyikā — Hotā Supplement</h4><span class="pill prod">Prior Production</span></div>
+        <p>A companion volume on the narrative (ākhyāyikā) hymns of the Ṛgveda, read maṇḍala by maṇḍala through the fourfold theory of Vedic language and the frame of arthavāda. It also treats the office of the Hotṛ and his four assistants and the powers of mantra custody.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">13</div>
+      <div>
+        <div class="hd"><h4>Kṛṣṇa Yajurveda</h4><span class="pill prod">Prior Production</span></div>
+        <p>Opens with the legend of Vyāsa's great distribution of the Veda, Vaiśampāyana's curse, and Yājñavalkya's Āditya-vidyā, then presents the Taittirīya Saṃhitā in the Āpastamba school. It explains what the epithet Kṛṣṇa (mixed) means and how to read the saṃhitā as an operational manual.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">14</div>
+      <div>
+        <div class="hd"><h4>Kṛṣṇa Yajurveda — VVV Supplement</h4><span class="pill prod">Prior Production</span></div>
+        <p>A supplement focused on the central role of the Adhvaryu, the statistical and structural detail of the Taittirīya Saṃhitā, and the Āpastamba Śrautasūtra. It carries the Śrī Rudram and an ākhyāyikā-koṣa of Yajurvedic narratives.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">15</div>
+      <div>
+        <div class="hd"><h4>Śukla Yajurveda</h4><span class="pill prod">Prior Production</span></div>
+        <p>Traces the emergence of the white recension from Yājñavalkya's new school and the court of Janaka, and presents the forty adhyāyas of the Vājasaneyi Saṃhitā. It gives special attention to the Īśāvāsya Upaniṣad, the Puruṣasūkta, and the Kāṭyāyana Śrautasūtra.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">16</div>
+      <div>
+        <div class="hd"><h4>Sāmaveda</h4><span class="pill prod">Prior Production</span></div>
+        <p>Presents the Veda of song: the priority of gāna, the Udgātṛ and his assembly, the five-fold sāman structure, and the step-by-step transformation of an ṛk into a sāman. It documents the base gāna styles, the eighteen bhāva-vikāras, and the four song-books.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">17</div>
+      <div>
+        <div class="hd"><h4>Ākhyāyika Kośa — Sāmaveda</h4><span class="pill prod">Prior Production</span></div>
+        <p>A thematic anthology of thirty-five Sāmavedic stories in full narrative, each with its arthavāda frame, its connection to song, and its distilled teaching (upadeśa-sāra). The themes range from brahman-recognition to the cosmic power of gāna and the women who taught it.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">18</div>
+      <div>
+        <div class="hd"><h4>Sāmaveda Stotra Sequences Annexe</h4><span class="pill prod">Prior Production</span></div>
+        <p>A reference annexe that tabulates the stotra sequences of the Soma rites day by day — from the one-day Agniṣṭoma to the year-long sattras — with rite profiles, stoma progressions, and the climactic Mahāvrata day.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">19</div>
+      <div>
+        <div class="hd"><h4>Atharvaveda</h4><span class="pill prod">Prior Production</span></div>
+        <p>Presents the fourth Veda in its own right: its unique position in the canon, the seers Atharvan, Bhṛgu, and Āṅgiras, the Śaunakīya and Paippalāda recensions, and the five pillars of its content. It emphasises the Atharvaveda as medicine — the healing of the world.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">20</div>
+      <div>
+        <div class="hd"><h4>Ākhyāyika Kośa — Atharvaveda</h4><span class="pill prod">Prior Production</span></div>
+        <p>A companion anthology of thirty-five Atharvavedic stories with their arthavāda frames and teachings, organised by theme — the healing triad of maṇi, mantra, and oṣadhi; the earth as healer; and philosophical liberation.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">21</div>
+      <div>
+        <div class="hd"><h4>Atharvavedic Biomedical Research Articles I &amp; II</h4><span class="pill prod">Prior Production</span></div>
+        <p>A developed research volume proposing a modern biomedical reading of Atharvavedic healing: the logic of combination (saṃbhṛtam), the maṇi as a crystalline carrier, and the mantra as an acoustic modulator, set out as a phased in-vitro research programme. It bridges Vedic text and contemporary drug-delivery science.</p>
+      </div>
+    </div>
+  </div>
+  <div class="division">
+    <h3>VEDIC MANUALS — KALPA SŪTRAS<span class="rng">Vols. 22–25</span></h3>
+    <div class="vol">
+      <div class="no">22</div>
+      <div>
+        <div class="hd"><h4>Vedic Manual 1 — Kalpa Sūtras for Ṛgveda</h4><span class="pill prod">Prior Production</span></div>
+        <p>Centres on the Āśvalāyana Śrauta- and Gṛhya-sūtras, mapping the Hotṛ's śastra recitations to their episodes, the three modes of oblation in the domestic fire, and the prāyaścitta for ritual error. It is the Ṛgvedic architecture of śrauta and gṛhya practice.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">23</div>
+      <div>
+        <div class="hd"><h4>Vedic Manual 2 — Kalpa Sūtras for Yajurveda</h4><span class="pill prod">Prior Production</span></div>
+        <p>A master register of the Yajurvedic Kalpa traditions — śrauta, gṛhya, and paribhāṣā texts — carried through the fire rites from Agnyādhāna to Agnicayana, the havir-yajñas, the Cāturmāsya, and the Soma sacrifices across seven traditions.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">24</div>
+      <div>
+        <div class="hd"><h4>Vedic Manual 3 — Kalpa Sūtras for Sāmaveda</h4><span class="pill prod">Prior Production</span></div>
+        <p>Explains why the Sāmavedic Kalpa is fundamentally different, the independent Jaiminīya tradition, the Udgātṛ and his team, and the sāman and stotra-śastra systems — with a rite register set out in parallel across three traditions.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">25</div>
+      <div>
+        <div class="hd"><h4>Vedic Manual 4 — Kalpa Sūtras for Atharvaveda</h4><span class="pill prod">Prior Production</span></div>
+        <p>Covers the four layers of the Atharvavedic Kalpa: the Brahman's office in the Vaitāna Śrautasūtra, the Kauśika Sūtra with its healing (bheṣaja) and ābhicārika sections, and the Gopatha Brāhmaṇa.</p>
+      </div>
+    </div>
+  </div>
+  <div class="division">
+    <h3>VEDIC SOLUTIONS — APPLIED RITUAL TEXTS<span class="rng">Vols. 26–29</span></h3>
+    <div class="vol">
+      <div class="no">26</div>
+      <div>
+        <div class="hd"><h4>Ṛgvedic Solutions — Ṛgvidhāna and Dharma Sindhu</h4><span class="pill prod">Prior Production</span></div>
+        <p>Presents the applied use of Ṛgvedic mantras: the method of the Ṛgvidhāna, the Dharma Sindhu as its practical backbone, and the Mīmāṃsā framework of nitya, naimittika, and kāmya rites. It is a manual of mantra-application to the needs of life.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">27</div>
+      <div>
+        <div class="hd"><h4>Yajurvedic Solutions — Śānti, Gṛhya &amp; Expiation</h4><span class="pill prod">Prior Production</span></div>
+        <p>Applies the threefold taxonomy of rites across the Yajurvedic texts — obligatory, optional, and expiatory-pacificatory — with a full register of the Śānti Kamalākara's twenty-six categories and the Śrī Rudra as the backbone of the śānti system. It covers sandhyāvandana, agnihotra, saṃskāras, cāturmāsya, śrāddha, and upākarma.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">28</div>
+      <div>
+        <div class="hd"><h4>Sāmavedic Solutions — Sāmavidhāna Brāhmaṇa</h4><span class="pill prod">Prior Production</span></div>
+        <p>Draws on the Sāmavidhāna Brāhmaṇa and the Chāndogya Upaniṣad to present the applied power of song: the daily breath-sāman, a register of desired results, the stealth (ābhicāra) tradition, and thirty-two upāsanās for every level of aspirant.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">29</div>
+      <div>
+        <div class="hd"><h4>Atharvavedic Solutions — Śānti &amp; Pariśiṣṭa</h4><span class="pill prod">Prior Production</span></div>
+        <p>Gathers the five Atharvavedic applied texts — Śānti Kalpa, Atharva Pariśiṣṭa, Kauśika Gṛhyasūtra, Nakṣatra Kalpa, and Gopatha Brāhmaṇa — around the figure of the Brahman priest, applying the three-category framework to healing and protection.</p>
+      </div>
+    </div>
+  </div>
+  <div class="division">
+    <h3>VEDĀṄGAS &amp; UPĀṄGAS — ANCILLARY SCIENCES<span class="rng">Vols. 30–38</span></h3>
+    <div class="vol">
+      <div class="no">30</div>
+      <div>
+        <div class="hd"><h4>Śikṣā</h4><span class="pill prod">Prior Production</span></div>
+        <p>The science of Vedic phonetics: the six Vedāṅgas and their hierarchy, the Prātiśākhyas, the phoneme inventory, and the eight aspects of every syllable — sound, place, instrument, effort, and the rest. Its purpose is rakṣā, the faultless preservation of the living Veda.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">31</div>
+      <div>
+        <div class="hd"><h4>Vyākaraṇa and Nirukta</h4><span class="pill prod">Prior Production</span></div>
+        <p>Treats grammar — the face (mukha) of the Veda — through its nine schools culminating in Pāṇini's Aṣṭādhyāyī, together with Yāska's Nirukta, the science of etymology. It sets out the legendary lineage from Indra and Bṛhaspati down to the human grammarians.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">32</div>
+      <div>
+        <div class="hd"><h4>Chandas — Vedic and Lateral</h4><span class="pill prod">Prior Production</span></div>
+        <p>The science of metre, from the Veda's own designation as Chandas to the seven classical Vedic metres, the problem of irregular scansion, and the Prātiśākhya authorities. It carries metre forward into later Sanskrit verse and musical tāla.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">33</div>
+      <div>
+        <div class="hd"><h4>Jyotiṣam — Vedic, Paurāṇic, and Lateral</h4><span class="pill prod">Prior Production</span></div>
+        <p>The eye of the Veda: the Vedāṅga Jyotiṣa as the science of time-reckoning, the two clocks of sun and moon, eclipses, the nakṣatra maṇḍala, and the pañcāṅga. It traces astronomy's evolution from sky-observation to the analysis of the world.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">34</div>
+      <div>
+        <div class="hd"><h4>Mīmāṃsā Śāstra</h4><span class="pill prod">Prior Production</span></div>
+        <p>The Vedic tradition's own science of self-interpretation — the formalisation of the intelligence by which the Veda reads itself. It presents the nature and scope of Jaimini's inquiry, the structure of ritual doubt (vichikitsā), and the Bhāṭṭa and Prābhākara schools.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">35</div>
+      <div>
+        <div class="hd"><h4>Vedānta Śāstra</h4><span class="pill prod">Prior Production</span></div>
+        <p>Surveys the culmination of the Vedas across the three great schools — Śaṅkara's Advaita, Rāmānuja's Viśiṣṭādvaita, and Madhva's Dvaita — and the central doctrines of māyā, avidyā, and adhyāsa, presenting Vedānta as the living breath of the Upaniṣadic seers.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">36</div>
+      <div>
+        <div class="hd"><h4>Tarka</h4><span class="pill prod">Prior Production</span></div>
+        <p>The science of reasoning through the twin streams of Nyāya and Vaiśeṣika: the atom and its combinations, the nine substances and seven padārthas, the four pramāṇas, the five-membered syllogism, and the fallacies, up to the refinements of Navya-Nyāya.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">37</div>
+      <div>
+        <div class="hd"><h4>Yoga</h4><span class="pill prod">Prior Production</span></div>
+        <p>A practical presentation of yoga, from managing the mind (the vṛttis and kleśas) through āsana, prāṇāyāma, and the ṣaṭkarmas, to Patañjali's Kriyā and Aṣṭāṅga Yoga and the counsel of the Bhagavad Gītā on food, meditation, and action.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">38</div>
+      <div>
+        <div class="hd"><h4>Philosophical Heritage — Sarva Darśana Saṅgraha</h4><span class="pill prod">Prior Production</span></div>
+        <p>After Mādhava's classic, presents India's philosophical spectrum in ascending order — from Cārvāka materialism through the Buddhist and Jaina schools to Nyāya, Mīmāṃsā, Sāṃkhya-Yoga, and Vedānta — as a model of intellectual pluralism and peaceful co-existence.</p>
+      </div>
+    </div>
+  </div>
+  <div class="division">
+    <h3>UPAVEDAS AND APPLIED SCIENCES<span class="rng">Vols. 39–45</span></h3>
+    <div class="vol">
+      <div class="no">39</div>
+      <div>
+        <div class="hd"><h4>Āyurveda</h4><span class="pill prod">Prior Production</span></div>
+        <p>The science of life: the foundations of doṣa, dhātu, mala, and agni; the internal-medicine tradition of Caraka; the surgical tradition of Suśruta; and Vāgbhaṭa's great synthesis — with prevention through dinacaryā and ṛtucaryā as the first principle.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">40</div>
+      <div>
+        <div class="hd"><h4>Dhanurveda and Concepts of Defence</h4><span class="pill prod">Prior Production</span></div>
+        <p>The Yajurvedic upaveda of arms: its origin and lineage, its classical texts, the fourfold taxonomy of weapons, and the Vedic weaponry of the Rudram and the Āyudha-sūkta — force always exercised under dharma.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">41</div>
+      <div>
+        <div class="hd"><h4>Music — Saṅgīta Ratnākara etc.</h4><span class="pill prod">Prior Production</span></div>
+        <p>The Gāndharvaveda, the sacred science of sound: the two vīṇās — bodily and wooden — the mārga and deśī streams, and the theology by which music mirrors the cosmos, from the gātra-vīṇā to brahmānusandhāna.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">42</div>
+      <div>
+        <div class="hd"><h4>Artha Śāstra</h4><span class="pill prod">Prior Production</span></div>
+        <p>The science of statecraft: the aim of yogakṣema, the four sciences, and the coercive principle (daṇḍa) and its restraint, developed through Kauṭilya's fifteen books, the seven limbs of the state, the maṇḍala theory of foreign policy, and public administration and law.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">43</div>
+      <div>
+        <div class="hd"><h4>Mantra Śāstra</h4><span class="pill prod">Prior Production</span></div>
+        <p>The science of the sacred word, from the axiom that no syllable is without mantric power, through the phonic theology of Sanskrit as parā-vāk and śabda-brahman, the Vedic sources of mantra, the mātṛkā and bīja syllables, and the primary compendia.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">44</div>
+      <div>
+        <div class="hd"><h4>Sthāpatya Veda — Samarāṅgaṇa Sūtradhāra, Māyā Vāstu</h4><span class="pill prod">Prior Production</span></div>
+        <p>The science of built space: from the Atharvavedic Vāstoṣpati and the śālā hymns and the inheritance from the Śulba, through the myth of the Vāstupuruṣa, to the great texts of the house, the temple, and the planned city.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">45</div>
+      <div>
+        <div class="hd"><h4>Āgama — Temple Worship</h4><span class="pill prod">Prior Production</span></div>
+        <p>The lateral transformation of Vedic worship into temple ritual: the four pādas of the Āgamic system and the Śaiva, Śākta, and Vaiṣṇava Āgama corpora. It is positioned as the institutional culmination of the entire series.</p>
+      </div>
+    </div>
+  </div>
+  <div class="division">
+    <h3>ITIHĀSA<span class="rng">Vols. 46–47</span></h3>
+    <div class="vol">
+      <div class="no">46</div>
+      <div>
+        <div class="hd"><h4>Rāmāyaṇa</h4><span class="pill prod">Prior Production</span></div>
+        <p>A study of Vālmīki's ādi-kāvya at the headwaters of Sanskrit literature: its authorship and the origin-of-poetry narrative, its two principal recensions and manuscript families, and its transmission from Kuśa and Lava to print, situated within the Vedic-Purāṇic continuum.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">47</div>
+      <div>
+        <div class="hd"><h4>Mahābhārata</h4><span class="pill prod">Prior Production</span></div>
+        <p>A study of the largest single literary work in human history — some 100,000 verses in eighteen parvas — its authorship by Vyāsa, its frame structure, its status as the fifth Veda, the Pune critical edition, and the Bhagavad Gītā as its philosophical core.</p>
+      </div>
+    </div>
+  </div>
+  <div class="division">
+    <h3>PURĀṆAS<span class="rng">Vols. 48–50</span></h3>
+    <div class="vol">
+      <div class="no">48</div>
+      <div>
+        <div class="hd"><h4>Purāṇas 1–6 (Brahma, Padma, Viṣṇu, Śiva, Bhāgavata, Nārada)</h4><span class="pill prod">Prior Production</span></div>
+        <p>Opens the three-volume treatment of the eighteen Mahāpurāṇas with what a Purāṇa is — the pañcalakṣaṇa, the frame of cosmos and time, and the classification of the eighteen — then treats the Brahma through Nārada Purāṇas by text, structure, narrative, and living use.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">49</div>
+      <div>
+        <div class="hd"><h4>Purāṇas 7–12 (Mārkaṇḍeya, Agni, Bhaviṣya, Brahmavaivarta, Liṅga, Varāha)</h4><span class="pill prod">Prior Production</span></div>
+        <p>The second volume continues from the Mārkaṇḍeya through the Varāha Purāṇa, each presented under the same rubric of transmission, structure, principal narratives, distinctive teaching, and reception.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">50</div>
+      <div>
+        <div class="hd"><h4>Purāṇas 13–18 (Skanda, Vāmana, Kūrma, Matsya, Garuḍa, Brahmāṇḍa)</h4><span class="pill prod">Prior Production</span></div>
+        <p>The concluding volume completes the eighteen, from the Skanda through the Brahmāṇḍa Purāṇa, closing the Itihāsa-Purāṇa cluster of the series.</p>
+      </div>
+    </div>
+  </div>
+  <div class="division">
+    <h3>DHARMAŚĀSTRA<span class="rng">Vols. 51–53</span></h3>
+    <div class="vol">
+      <div class="no">51</div>
+      <div>
+        <div class="hd"><h4>Code of Conduct — Manu Smṛti</h4><span class="pill prod">Prior Production</span></div>
+        <p>After an overview of smṛti literature, presents the foundational code of classical Hindu dharma: its authorship, recensions, and twelve adhyāyas; the Svāyambhuva creation and the origin of the varṇas; and the āśrama system of life-stage conduct.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">52</div>
+      <div>
+        <div class="hd"><h4>Parāśara and Yājñavalkya Smṛti</h4><span class="pill prod">Prior Production</span></div>
+        <p>The two great towers built in Manu's shadow: the Parāśara Smṛti as the code of Kali-yuga conduct and lightened expiation, and the Yājñavalkya Smṛti with its three adhyāyas on conduct, civil law, and expiation — with the Mādhavīya commentary.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">53</div>
+      <div>
+        <div class="hd"><h4>Smṛti Granthas, Collections</h4><span class="pill prod">Prior Production</span></div>
+        <p>Surveys the wider smṛti landscape — the canon of eighteen, the foundational Dharmasūtras, and the secondary authorities such as Nārada, Bṛhaspati, and Kātyāyana — together with the role of regional custom and śiṣṭācāra as sources of law.</p>
+      </div>
+    </div>
+  </div>
+  <div class="division">
+    <h3>LITERATURE, ARTS &amp; MATHEMATICS<span class="rng">Vols. 54–61</span></h3>
+    <div class="vol">
+      <div class="no">54</div>
+      <div>
+        <div class="hd"><h4>Kāvyas</h4><span class="pill prod">Prior Production</span></div>
+        <p>The world of Sanskrit poetry: its anatomy of body and soul and its twofold fruit of delight and cultivation; the forms of verse, prose, and campū; the five great mahākāvyas; drama as the seen-poetry; and the schools of poetics.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">55</div>
+      <div>
+        <div class="hd"><h4>Composers Musical — Tyāgarāja</h4><span class="pill prod">Prior Production</span></div>
+        <p>Sets the Carnatic tradition in its context — its Vedic and śāstraic foundations, the Tanjavur courts, and the Trinity — then treats the life and vocation of Tyāgarāja, the path of Rāma-nāma, and the Pañcaratna kṛtis.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">56</div>
+      <div>
+        <div class="hd"><h4>Composers Musical — Purandaradāsa, Muttusvāmy Dīkṣitar, and Śyāma Śāstry</h4><span class="pill prod">Prior Production</span></div>
+        <p>Profiles the founder of Carnatic pedagogy, Purandaradāsa, and the encyclopaedic Sanskrit master Muttusvāmy Dīkṣitar, with Śyāma Śāstry — covering their theology, compositional architecture, and enduring legacy.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">57</div>
+      <div>
+        <div class="hd"><h4>Dance — Nāṭya Śāstra</h4><span class="pill prod">Prior Production</span></div>
+        <p>Bharata's fifth Veda of dance, drama, and music: the scope of the treatise, the theory of the navarasa and bhāva, the four modes of abhinaya and the language of gesture, and the distinctions of nṛtta, nṛtya, and nāṭya.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">58</div>
+      <div>
+        <div class="hd"><h4>Geography of Bhārat</h4><span class="pill prod">Prior Production</span></div>
+        <p>The sacred geography of Āryāvarta: the heartland of Brahmāvarta, the seven sacred rivers, the mountains and cities, and the cosmological frame of Bhū-maṇḍala and the nine divisions of Bhāratavarṣa.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">59</div>
+      <div>
+        <div class="hd"><h4>Shulba Sutra — Geometry, Architecture</h4><span class="pill prod">Prior Production</span></div>
+        <p>Geometry in the service of the sacred: the meaning of śulba, the six traditions, the diagonal theorem and the approximation of the square root of two, squaring the circle, and the construction of the sacrificial altars.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">60</div>
+      <div>
+        <div class="hd"><h4>Mathematical Traditions of India</h4><span class="pill prod">Prior Production</span></div>
+        <p>The indigenous science of number: the Sanskrit number-name and positional systems, the earliest written zero, the great number-scale of the epics and Purāṇas, and the tradition running from Vedic arithmetic to the Kerala school.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">61</div>
+      <div>
+        <div class="hd"><h4>Arithmetic — Lilavati Ganitam</h4><span class="pill prod">Prior Production</span></div>
+        <p>A complete edition of Bhāskarācārya's Līlāvatī, with its tables of weights, measures, and money, its number system, and its methods of arithmetic — including the regional Telugu Gaṇitamu variants.</p>
+      </div>
+    </div>
+  </div>
+  <div class="division">
+    <h3>PUNYA KṢETRA SERIES<span class="rng">Vols. 62–67</span></h3>
+    <div class="vol">
+      <div class="no">62</div>
+      <div>
+        <div class="hd"><h4>Punya Kṣetra 1 — Devī and Śiva, Famous Devotees</h4><span class="pill prod">Prior Production</span></div>
+        <p>Śakti as the supreme principle and Śiva as the Āgamic absolute: the Mahādevīs and the fifty-one Śakti Pīṭhas, the twelve Jyotirliṅgas and the major Śiva kṣetras, their worship and pilgrimage, and their famous devotees, including the sixty-three Nāyaṉārs.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">63</div>
+      <div>
+        <div class="hd"><h4>Punya Kṣetra 2 — Viṣṇu Avatāra, Hanumān, Famous Devotees</h4><span class="pill prod">Prior Production</span></div>
+        <p>Viṣṇu in the Vedas and the avatāra doctrine from Matsya to Kalki, the 108 Divya Desams, and the great kṣetras of Śrīraṅgam, Tirumala-Tirupati, Paṇḍharpur, Guruvāyūr, and Uḍupi — closing with Hanumān as the ideal bhakta.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">64</div>
+      <div>
+        <div class="hd"><h4>Punya Kṣetra 3 — Gaṇeśa, Subrahmaṇya, Sūrya, Famous Devotees</h4><span class="pill prod">Prior Production</span></div>
+        <p>The auspicious beginner Gaṇeśa and the Aṣṭa-Vināyaka circuit, the divine commander Subrahmaṇya and the six abodes of Murugan, and the solar deity Sūrya — their theology, iconography, sacred kṣetras, and famous devotees.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">65</div>
+      <div>
+        <div class="hd"><h4>Punya Kṣetra 4 — Teertha Kshetras, Pilgrimage, Shraddha, Parikrama</h4><span class="pill prod">Prior Production</span></div>
+        <p>The theology of the sacred crossing-place and the great tīrthas — rivers, sacred lakes, and ocean sites — and the major pilgrimage circuits such as the Char Dhāma, together with the observances of śrāddha and parikramā.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">66</div>
+      <div>
+        <div class="hd"><h4>Attire, Adornment, Śikhā, Gṛha Vāstu, and the Material Culture of Bhārat</h4><span class="pill prod">Prior Production</span></div>
+        <p>The aesthetic of daily life: the unstitched garments and their symbolism, the sixteen adornments (śṛṅgāra), the sacred śikhā, the nine gems and ornaments, and the planning of the home by the Vāstupuruṣa maṇḍala.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">67</div>
+      <div>
+        <div class="hd"><h4>Cuisine of Bhārat, Mulika, Siddha Oṣadhi, Home Remedies</h4><span class="pill prod">Prior Production</span></div>
+        <p>Food as life and medicine: the six tastes and the rule of suitability, the regional vegetarian cuisines, the structure and etiquette of the meal, spices as the pharmacy of the kitchen, and fasting, festival, and Siddha home remedies.</p>
+      </div>
+    </div>
+  </div>
+  <div class="division">
+    <h3>SEERS, SAINTS, AND CIVILISATION OF BHĀRAT<span class="rng">Vols. 68–72</span></h3>
+    <div class="vol">
+      <div class="no">68</div>
+      <div>
+        <div class="hd"><h4>Seers and Sages — Part 1 (Purāṇa Kāla)</h4><span class="pill prod">Prior Production</span></div>
+        <p>The ṛṣis of the Purāṇic age: their definition and cosmic function, the Vedic and Upaniṣadic seers, the Saptarṣis, and the great figures — Vyāsa, Nārada, Vasiṣṭha, Viśvāmitra, Agastya — together with the women seers of the tradition.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">69</div>
+      <div>
+        <div class="hd"><h4>Dharmik Leaders — Part 2 (Known History)</h4><span class="pill prod">Prior Production</span></div>
+        <p>The teachers of recorded history, from the śramaṇa challenge and Ādi Śaṅkara through the Vaiṣṇava ācāryas, the Bhakti movement, and the Sikh Gurus, to the modern reformers from Dayānanda and Vivekānanda to Gāndhī and Aurobindo.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">70</div>
+      <div>
+        <div class="hd"><h4>Saints of Bhārat (Post-Independence, Global)</h4><span class="pill prod">Prior Production</span></div>
+        <p>The dharmic teachers of the modern global era — from Śivānanda and Yogānanda through Prabhupāda, the yoga masters Iyengar and Jois, and other contemporary figures who carried the tradition worldwide.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">71</div>
+      <div>
+        <div class="hd"><h4>Monarchy &amp; Political Leaders of Bhārata</h4><span class="pill prod">Prior Production</span></div>
+        <p>The theology of kingship (rājadharma) and the great dynasties — the solar and lunar lineages, the ideal king Rāma, and the historical empires from the Mauryas and Guptas through Vijayanagara — as the political expression of dharma.</p>
+      </div>
+    </div>
+    <div class="vol">
+      <div class="no">72</div>
+      <div>
+        <div class="hd"><h4>Contributions of Bhārat to the World</h4><span class="pill prod">Prior Production</span></div>
+        <p>A closing survey of Bhārat's gifts to civilisation: the decimal place-value system and zero, astronomy, Āyurveda, the six darśanas, Pāṇinian linguistics, the arts and architecture, and metallurgy and materials science.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="academic" class="narrow">
+  <div class="sec-eyebrow">Recognition</div>
+  <h2 class="sec-title">Academic framework</h2>
+  <div class="prose">
+    <p>The Veda Vijñāna Series is produced under the academic framework of Veda Vijñāna Viṣṭaram (VVV), Mysore, which has applied for recognition as a research institution — Adarsha Samskruta Shodha Samsthaa (ASSS) — of the Central Sanskrit University.</p>
+    <p>The Series constitutes a primary research and publication output for grant applications to the Central Sanskrit University (CSU) under the Ashtaadashi scheme, and is documented as part of the ASSS recognition application of VVV or Relevant Projects. Individual volumes relevant to specific grant categories are identified in the detailed volume register above.</p>
+  </div>
+</section>
+
+<section id="collaborators">
+  <div class="sec-eyebrow">Partners</div>
+  <h2 class="sec-title">Collaborating institutions</h2>
+  <div class="insts">
+    <div class="inst">Veda Vijñāna Viṣṭaram (VVV), Mysore — a Unit of Sanatana Guru Sampradaya Pratishthanam</div>
+    <div class="inst">Dharma Poshanam Trust (DPT), Mysore</div>
+    <div class="inst">Vidya Koushala Garimaa Pratishthanam, Mysore</div>
+    <div class="inst">Dharma Poshanam Inc. (USA — 501(c)(3))</div>
+    <div class="inst">SRRS Seva Samithi Trust, Hyderabad</div>
+    <div class="inst">SGS VedaNidhi Academy &amp; Masters' Institute (SVAMI), Mysore</div>
+  </div>
+</section>
+
+<div class="sponsor">
+<section id="sponsor">
+  <div class="sec-eyebrow">An invitation to patrons and institutions</div>
+  <h2 class="sec-title">Sponsor a volume</h2>
+  <div class="prose narrow">
+  </div>
+  <div class="amount"><div class="big">USD 1,008</div><div class="cap">underwrites one volume — print and permanent online edition</div></div>
+  <div class="prose narrow" style="margin:0 auto">
+    <p>print and online</p>
+    <p>A single dedicated contribution of USD 1,008 carries one volume through its final editing, its archival print edition, and its permanent online edition.</p>
+    <p>The sponsor's name — or a dedication in honour of a guru or in memory of a departed elder — is recorded in that volume's colophon, in print and online, in perpetuity. The sum is deliberately chosen: 1,008 is among the most auspicious numbers of the tradition, echoing the sahasranāma by which the Divine is invoked.</p>
+  </div>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Way to contribute</th><th>Amount</th></tr></thead><tbody>
+      <tr><td>Sponsor a Volume  —  print + permanent online edition, named dedication</td><td class="amt">USD 1,008</td></tr>
+      <tr><td>Sponsor a Division  —  a complete thematic set of volumes</td><td class="amt">By arrangement</td></tr>
+      <tr><td>Institutional Partnership  —  full reference collection for a library</td><td class="amt">By arrangement</td></tr>
+      <tr><td>General Corpus Fund  —  a gift of any amount toward the whole Series</td><td class="amt">Any amount</td></tr>
+    </tbody></table></div>
+  <p class="sec-lede narrow" style="margin-top:1.2rem">Contributions from the United States are tax-deductible through Dharma Poshanam Inc., a 501(c)(3) organization; contributions within India are received through Sanatana Guru Sampradaya Pratishthanam and the Dharma Poshanam Trust, Mysore. Every gift, at every level, is acknowledged with gratitude and a report of the volume it helped bring into the world.</p>
+</section>
+</div>
+
+<div class="support" id="support">
+  <h2>Carry a volume into the world</h2>
+  <div class="dn">सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः</div>
+  <div class="gloss">May all be happy; may all be free from disease.</div>
+  <p>Contributions from the United States are tax-deductible through Dharma Poshanam Inc.,
+  a 501(c)(3) organization; contributions within India are received through Sanatana Guru
+  Sampradaya Pratishthanam and the Dharma Poshanam Trust, Mysore.</p>
+  <div class="donate-row">
+    <a class="btn donate-btn" href="https://www.dharmaposhanam.in/donate" target="_blank" rel="noopener noreferrer">
+      <span class="donate-main">🇮🇳 Donate · India</span>
+      <span class="donate-sub">Razorpay · UPI · INR</span></a>
+    <a class="btn donate-btn" href="https://dharmaposhanam.in/support" target="_blank" rel="noopener noreferrer">
+      <span class="donate-main">🌏 Support · Outside India</span>
+      <span class="donate-sub">Stripe · PayPal · USD</span></a>
+  </div>
+  <p style="margin-top:1.6rem">For institutional inquiries, collaboration, and grant
+  correspondence: <a href="mailto:contact@vedavishtaram.in" style="color:#C9A227">contact@vedavishtaram.in</a></p>
+</div>
+
+<footer>
+  <span class="dn">❧ OM TAT SAT ❧</span>
+  Veda Vijñāna Viṣṭaram · Mysore, Karnataka, India /
+  <a href="https://vedavishtaram.in" target="_blank" rel="noopener noreferrer">vedavishtaram.in</a>
+  — © 2026 Sanatana Guru Sampradaya Pratishthanam. All rights reserved.
+</footer>
+
+</body>
+</html>
