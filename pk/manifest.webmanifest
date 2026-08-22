@@ -1,0 +1,11 @@
+{
+ "name": "Pada Kośa — SarvaVeda",
+ "short_name": "Pada Kośa",
+ "description": "Sanskrit lexicon across rūḍha, vaidika and yaugika segments.",
+ "start_url": ".",
+ "scope": ".",
+ "display": "standalone",
+ "background_color": "#fbf7ef",
+ "theme_color": "#fbf7ef",
+ "lang": "sa"
+}

@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="sa">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>पदकोशः · Pada Kośa — SarvaVeda</title>
+<meta name="description" content="A unified Sanskrit lexicon across three segments: Rūḍha (kośa-attested), Vaidika (padapāṭha-attested with svara), and Yaugika (Pāṇinian derivation with its sūtra chain).">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#fbf7ef">
+<style>
+/* VKG, 2026-08-21: dark letters on a bright ground. One light world, no dark
+   theme, not even behind a media query. VKG, 2026-08-19: numerals in English
+   figures, so VijayaDV alone suffices for the Devanagari. */
+@font-face{
+  font-family:"VijayaDV";
+  src:url("assets/vijayadv.woff2") format("woff2");
+  font-display:swap;
+}
+:root{
+  --ink:#241c14; --ink-2:#5c4c3c; --ink-3:#8a7963;
+  --ground:#fbf7ef; --card:#fffdf8; --rule:#e3d9c6; --rule-2:#f0e8d8;
+  --accent:#8c2f14; --accent-soft:#f3e6de;
+  --r:#7a4b12; --r-bg:#f6ecd9;
+  --v:#1d5a4a; --v-bg:#e2f0ea;
+  --y:#2f4272; --y-bg:#e5eaf6;
+  --warn:#8a5a00; --warn-bg:#fdf3dc;
+  --sans:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --dv:"VijayaDV","Nirmala UI","Noto Sans Devanagari",serif;
+  --mono:"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--ground); color:var(--ink);
+  font-family:var(--sans); font-size:17px; line-height:1.6;
+  -webkit-text-size-adjust:100%;
+}
+.dv{font-family:var(--dv)}
+a{color:var(--accent)}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+header{border-bottom:1px solid var(--rule);background:var(--card)}
+.head{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;padding:20px 0 16px}
+h1{margin:0;font-size:32px;font-weight:600;letter-spacing:.01em}
+h1 .lat{font-size:19px;color:var(--ink-2);font-weight:400;margin-left:10px}
+.tagline{color:var(--ink-2);font-size:15px;margin:0 0 4px}
+nav{display:flex;gap:2px;flex-wrap:wrap;border-top:1px solid var(--rule-2)}
+nav button{
+  background:none;border:none;border-bottom:2px solid transparent;
+  font:inherit;font-size:15px;color:var(--ink-2);
+  padding:11px 15px;cursor:pointer;
+}
+nav button:hover{color:var(--ink)}
+nav button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
+
+main{padding:26px 0 70px;min-height:60vh}
+.panel[hidden]{display:none}
+
+/* ---- search ---- */
+.searchbar{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin-bottom:6px}
+#q{
+  flex:1 1 320px;min-width:0;
+  font-family:var(--dv);font-size:24px;padding:11px 14px;
+  border:1px solid var(--rule);border-radius:6px;background:var(--card);color:var(--ink);
+}
+#q:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:var(--accent)}
+select,.btn{
+  font:inherit;font-size:14px;padding:9px 12px;border:1px solid var(--rule);
+  border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer;
+}
+.hint{color:var(--ink-3);font-size:13.5px;margin:8px 0 20px}
+.hint code{font-family:var(--mono);font-size:12.5px;background:var(--rule-2);padding:1px 5px;border-radius:3px}
+
+.status{color:var(--ink-2);font-size:14px;margin:0 0 14px}
+.status b{color:var(--ink)}
+
+ul.results{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule-2)}
+ul.results li{border-bottom:1px solid var(--rule-2)}
+ul.results button{
+  width:100%;text-align:left;background:none;border:none;font:inherit;
+  padding:11px 6px;cursor:pointer;display:flex;flex-wrap:wrap;
+  align-items:baseline;gap:12px;color:inherit;
+}
+ul.results button:hover{background:var(--card)}
+ul.results .w{font-family:var(--dv);font-size:24px;line-height:1.25}
+ul.results .lat{color:var(--ink-3);font-family:var(--mono);font-size:13px}
+.tags{margin-left:auto;display:flex;gap:5px;flex-wrap:wrap}
+.tag{font-size:11.5px;font-family:var(--mono);padding:2px 7px;border-radius:10px;white-space:nowrap}
+.tag.r{background:var(--r-bg);color:var(--r)}
+.tag.v{background:var(--v-bg);color:var(--v)}
+.tag.y{background:var(--y-bg);color:var(--y)}
+
+/* ---- word card ---- */
+.card{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:22px 24px;margin:0 0 26px}
+.card .lemma{font-family:var(--dv);font-size:46px;line-height:1.15;margin:0}
+.card .translit{color:var(--ink-2);font-family:var(--mono);font-size:14px;margin:4px 0 2px}
+.card .tagline-tags{margin:14px 0 0;display:flex;gap:6px;flex-wrap:wrap}
+section.seg{margin:26px 0 0;padding:20px 0 0;border-top:1px solid var(--rule-2)}
+section.seg:first-of-type{border-top:none;padding-top:8px}
+section.seg h3{margin:0 0 4px;font-size:17px}
+section.seg h3 .code{font-family:var(--mono);font-size:12px;padding:2px 7px;border-radius:10px;margin-right:9px;vertical-align:2px}
+section.seg .sub{color:var(--ink-3);font-size:13.5px;margin:0 0 14px}
+
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+th,td{text-align:left;padding:7px 10px 7px 0;border-bottom:1px solid var(--rule-2);vertical-align:top}
+th{color:var(--ink-3);font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.kcode{font-family:var(--mono);font-size:12.5px;color:var(--ink-2)}
+
+.occ{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px}
+.chip{background:var(--v-bg);color:var(--v);border-radius:6px;padding:5px 10px;font-size:13px}
+.chip b{font-variant-numeric:tabular-nums}
+.samples{margin:0}
+.samples .s{
+  background:var(--ground);border:1px solid var(--rule-2);border-radius:6px;
+  padding:12px 14px;margin:0 0 8px;
+}
+.samples .pada{font-family:var(--dv);font-size:30px;line-height:1.4}
+.samples .loc{font-family:var(--mono);font-size:12px;color:var(--ink-3);margin-top:2px}
+
+.sutras{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 0}
+.sutra{font-family:var(--mono);font-size:12px;background:var(--y-bg);color:var(--y);padding:2px 7px;border-radius:4px}
+dl.feat{display:grid;grid-template-columns:auto 1fr;gap:3px 14px;margin:8px 0 0;font-size:14.5px}
+dl.feat dt{color:var(--ink-3);font-size:13px}
+dl.feat dd{margin:0}
+
+.note{background:var(--warn-bg);border-left:3px solid var(--warn);padding:11px 14px;margin:14px 0 0;font-size:14px;color:#5c3d00;border-radius:0 5px 5px 0}
+.note b{color:#3f2a00}
+
+/* ---- statistics / sources / method ---- */
+h2{font-size:23px;margin:0 0 6px;font-weight:600}
+.lede{color:var(--ink-2);margin:0 0 24px;max-width:70ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:14px;margin:0 0 30px}
+.stat{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:15px 16px}
+.stat .n{font-size:27px;font-variant-numeric:tabular-nums;line-height:1.15}
+.stat .l{color:var(--ink-3);font-size:13px;margin-top:3px}
+h3.sub{font-size:17px;margin:30px 0 8px}
+ul.plain{padding-left:20px;max-width:78ch}
+ul.plain li{margin:0 0 8px}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.muted{color:var(--ink-3)}
+footer{border-top:1px solid var(--rule);background:var(--card);padding:22px 0;font-size:13.5px;color:var(--ink-3)}
+footer p{margin:0 0 6px;max-width:80ch}
+.spin{display:inline-block;width:12px;height:12px;border:2px solid var(--rule);border-top-color:var(--accent);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (max-width:620px){
+  h1{font-size:26px} h1 .lat{display:block;margin:2px 0 0;font-size:16px}
+  .card{padding:18px 16px} .card .lemma{font-size:38px}
+  body{font-size:16px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <h1><span class="dv">पदकोशः</span><span class="lat">Pada Kośa</span></h1>
+        <p class="tagline">One word, three ways of being known — attested, Vedic, derived.</p>
+      </div>
+    </div>
+    <nav role="tablist">
+      <button role="tab" aria-selected="true"  data-tab="search">Search</button>
+      <button role="tab" aria-selected="false" data-tab="corpus">Corpus</button>
+      <button role="tab" aria-selected="false" data-tab="sources">Sources</button>
+      <button role="tab" aria-selected="false" data-tab="method">Method &amp; limits</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ======================= SEARCH ======================= -->
+  <div class="panel" id="tab-search">
+    <div class="searchbar">
+      <input id="q" type="search" autocomplete="off" spellcheck="false"
+             placeholder="अग्नि · agni · agni" aria-label="Search word">
+      <select id="mode" aria-label="Match">
+        <option value="prefix">begins with</option>
+        <option value="exact">exact</option>
+        <option value="contains">contains</option>
+        <option value="ends">ends with</option>
+      </select>
+      <select id="scheme" aria-label="Input scheme">
+        <option value="auto">auto-detect</option>
+        <option value="slp1">SLP1</option>
+        <option value="hk">Harvard-Kyoto</option>
+      </select>
+    </div>
+    <p class="hint">
+      Type Devanagari or IAST and the scheme is detected. Otherwise choose SLP1
+      (<code>kfzRa</code>) or Harvard-Kyoto (<code>kRSNa</code>). A trailing visarga or
+      anusvāra is matched loosely, since kośas and padapāṭhas cite stems differently.
+    </p>
+    <p class="status" id="status"><span class="spin"></span> loading the word pool…</p>
+    <div id="card"></div>
+    <ul class="results" id="results"></ul>
+  </div>
+
+  <!-- ======================= CORPUS ======================= -->
+  <div class="panel" id="tab-corpus" hidden>
+    <h2>What is in here</h2>
+    <p class="lede">
+      Three segments, counted in their own units. They are never added into a
+      single total, because a kośa stem, a padapāṭha occurrence and a generated
+      form are not the same kind of thing.
+    </p>
+    <div class="grid" id="stats"></div>
+    <h3 class="sub">Segment overlap</h3>
+    <p class="lede">How many words carry which combination of segment tags.</p>
+    <div class="scroll"><table id="overlap"></table></div>
+    <h3 class="sub">Vaidika texts</h3>
+    <div class="scroll"><table id="texts"></table></div>
+    <h3 class="sub">The render gate</h3>
+    <p class="lede">
+      Some keys in the raw union are not padas — a locus or a catalogue numeral
+      that leaked into a headword — and a few cannot be written in Devanagari
+      without loss, which is what an unresolved hyphen-compound looks like. They
+      are withheld rather than coerced into something printable, and counted here
+      so the shortfall is visible.
+    </p>
+    <div class="scroll"><table id="gate"></table></div>
+  </div>
+
+  <!-- ======================= SOURCES ======================= -->
+  <div class="panel" id="tab-sources" hidden>
+    <h2>Sources</h2>
+    <p class="lede">
+      Every title here is read from the kośa's own TEI <code>teiHeader</code>, never
+      hand-typed. Where a header is empty the site prints
+      <span class="muted">title unavailable</span> rather than guessing.
+    </p>
+    <div class="scroll"><table id="koshas"></table></div>
+    <h3 class="sub">Excluded from this surface</h3>
+    <p class="lede">
+      These kośas are indexed locally but are not published here. A word attested
+      only in them does not appear in search at all — the count you see is
+      smaller than the corpus, and this table is why.
+    </p>
+    <div class="scroll"><table id="excluded"></table></div>
+  </div>
+
+  <!-- ======================= METHOD ======================= -->
+  <div class="panel" id="tab-method" hidden>
+    <h2>Method &amp; limits</h2>
+    <p class="lede">
+      A reference work has to be checkable. This page says what each segment
+      means, where its authority comes from, and what is not yet true.
+    </p>
+
+    <h3 class="sub">The three segments</h3>
+    <ul class="plain">
+      <li><b>R · Rūḍha</b> — conventional vocabulary, non-compositional by
+        definition, so it must be enumerated rather than generated. Authority is
+        <i>kośa attestation</i>, cited to the printed page where the digitisation
+        preserves one.</li>
+      <li><b>V · Vaidika</b> — words of the Veda as the padapāṭha segments them,
+        with svara intact as VijayaDV codepoints. Authority is <i>textual
+        occurrence</i>. These are inflected forms, not lemmas.</li>
+      <li><b>Y · Yaugika</b> — forms produced by Pāṇinian derivation, each
+        carrying its full prakriyā chain. Authority is <i>the sūtra chain
+        itself</i>, which is printed on every card so it can be checked.</li>
+    </ul>
+
+    <h3 class="sub">Known limits</h3>
+    <ul class="plain" id="limits"></ul>
+
+    <h3 class="sub">Not built yet</h3>
+    <p class="lede">
+      The design carries more than this. These parts are named here so nobody
+      mistakes an absent feature for an empty one.
+    </p>
+    <ul class="plain">
+      <li>Stem analysis by the other three schools — Nirukta (Yāska),
+        Sthaulāṣṭhīvi, Śākapūṇi. School A (Vyākaraṇa) is what ships.</li>
+      <li>The grammarian-philosophy layer: Bhartṛhari, Nāgeśa, Kāśikā,
+        Mahābhāṣya, Siddhāntakaumudī, attached at the category level.</li>
+      <li>Usage and vivakṣā flags, and the guided new-word coinage engine.</li>
+      <li>Domain lenses. Śrautapadārthanirvacanam is extracted and staged as the
+        pilot, but is not published: its licence is unverified and its headwords
+        still need a scholar's pass.</li>
+      <li>Reverse lookup by meaning, and synonym clusters across kośas. Entry
+        <i>text</i> is not published here — only the fact of attestation — so
+        meanings are not searchable yet.</li>
+    </ul>
+
+    <h3 class="sub">Provenance</h3>
+    <div class="scroll"><table id="prov"></table></div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><b>Pada Kośa</b> — SarvaVeda LLM programme, Dr Vaṃśīkṛṣṇa Ghanapāṭhī, Mysore.
+       Devanagari set in VijayaDV, designed for this corpus so that Vedic svara
+       survives as a glyph rather than an approximation.</p>
+    <p id="foot-lic"></p>
+    <p class="muted">Text is stored and served exactly as digitised. No Unicode
+       normalisation is applied at any stage, so accent codepoints are
+       byte-identical to the source.</p>
+  </div>
+</footer>
+
+<script>
+"use strict";
+/* ------------------------------------------------------------------ tables
+   Generated from vidyut-lipi and round-trip verified; see
+   scripts/build_pk_platform.py. SLP1 is the join key everywhere. */
+var VOW = {"अ":"a","आ":"A","इ":"i","ई":"I","उ":"u","ऊ":"U","ऋ":"f","ॠ":"F",
+  "ऌ":"x","ॡ":"X","ए":"e","ऐ":"E","ओ":"o","औ":"O"};
+var MAT = {"ा":"A","ि":"i","ी":"I","ु":"u","ू":"U","ृ":"f","ॄ":"F",
+  "ॢ":"x","ॣ":"X","े":"e","ै":"E","ो":"o","ौ":"O"};
+var CON = {"क":"k","ख":"K","ग":"g","घ":"G","ङ":"N","च":"c","छ":"C","ज":"j",
+  "झ":"J","ञ":"Y","ट":"w","ठ":"W","ड":"q","ढ":"Q","ण":"R","त":"t","थ":"T",
+  "द":"d","ध":"D","न":"n","प":"p","फ":"P","ब":"b","भ":"B","म":"m","य":"y",
+  "र":"r","ल":"l","व":"v","श":"S","ष":"z","स":"s","ह":"h","ळ":"L"};
+var SIGN = {"ं":"M","ः":"H","ऽ":"'"};
+var VIRAMA = "्";
+
+/* IAST -> SLP1, longest match first. Both ḷa and ḻa are accepted for ळ, since
+   editions differ and a researcher should not have to guess ours. */
+var IAST = [["kh","K"],["gh","G"],["ch","C"],["jh","J"],["ṭh","W"],["ḍh","Q"],
+  ["th","T"],["dh","D"],["ph","P"],["bh","B"],["ai","E"],["au","O"],
+  ["ā","A"],["ī","I"],["ū","U"],["ṛ","f"],["ṝ","F"],["ḷ","x"],["ḹ","X"],
+  ["ṅ","N"],["ñ","Y"],["ṭ","w"],["ḍ","q"],["ṇ","R"],["ś","S"],["ṣ","z"],
+  ["ṃ","M"],["ḥ","H"],["ḻ","L"],
+  ["a","a"],["i","i"],["u","u"],["e","e"],["o","o"],["k","k"],["g","g"],
+  ["c","c"],["j","j"],["t","t"],["d","d"],["n","n"],["p","p"],["b","b"],
+  ["m","m"],["y","y"],["r","r"],["l","l"],["v","v"],["s","s"],["h","h"],
+  ["'","'"]];
+
+/* Harvard-Kyoto -> SLP1, longest match first. */
+var HK = [["lRR","X"],["RR","F"],["lR","x"],["kh","K"],["gh","G"],["ch","C"],
+  ["jh","J"],["Th","W"],["Dh","Q"],["th","T"],["dh","D"],["ph","P"],["bh","B"],
+  ["ai","E"],["au","O"],["A","A"],["I","I"],["U","U"],["R","f"],["G","N"],
+  ["J","Y"],["T","w"],["D","q"],["N","R"],["z","S"],["S","z"],["M","M"],
+  ["H","H"],["a","a"],["i","i"],["u","u"],["e","e"],["o","o"],["k","k"],
+  ["g","g"],["c","c"],["j","j"],["t","t"],["d","d"],["n","n"],["p","p"],
+  ["b","b"],["m","m"],["y","y"],["r","r"],["l","l"],["v","v"],["s","s"],
+  ["h","h"],["L","L"],["'","'"]];
+
+function devToSlp1(s){
+  var out = "", i = 0;
+  while (i < s.length){
+    var ch = s[i];
+    if (CON[ch] !== undefined){
+      out += CON[ch]; i++;
+      if (i < s.length && s[i] === VIRAMA){ i++; continue; }
+      // skip svara marks and Vedic accents sitting between letter and mātrā
+      var j = i;
+      while (j < s.length && isMark(s[j])) j++;
+      if (j < s.length && MAT[s[j]] !== undefined){ out += MAT[s[j]]; i = j + 1; }
+      else { out += "a"; i = j; }
+      continue;
+    }
+    if (VOW[ch] !== undefined){ out += VOW[ch]; i++; continue; }
+    if (SIGN[ch] !== undefined){ out += SIGN[ch]; i++; continue; }
+    i++;  // PUA svara, Vedic accents, punctuation: not part of the key
+  }
+  return out;
+}
+/* PUA (VijayaDV svara), Unicode Vedic accents and the nukta are display, not key. */
+function isMark(c){
+  var u = c.charCodeAt(0);
+  return (u >= 0xE000 && u <= 0xF8FF) || u === 0x093C ||
+         (u >= 0x0951 && u <= 0x0954) || (u >= 0x1CD0 && u <= 0x1CFF) ||
+         (u >= 0xA8E0 && u <= 0xA8FF);
+}
+function byTable(s, tbl){
+  var out = "", i = 0;
+  outer: while (i < s.length){
+    for (var k = 0; k < tbl.length; k++){
+      var a = tbl[k][0];
+      if (s.substr(i, a.length) === a){ out += tbl[k][1]; i += a.length; continue outer; }
+    }
+    i++;
+  }
+  return out;
+}
+function hasDev(s){ return /[ऀ-ॿ]/.test(s); }
+function hasIastDiacritic(s){ return /[āīūṛṝḷḹṅñṭḍṇśṣṃḥḻ]/i.test(s); }
+
+function toSlp1(raw, scheme){
+  var s = (raw || "").trim();
+  if (!s) return "";
+  if (scheme === "slp1") return s.replace(/\s+/g, "");
+  if (scheme === "hk")   return byTable(s.replace(/\s+/g, ""), HK);
+  if (hasDev(s))          return devToSlp1(s);
+  if (hasIastDiacritic(s))return byTable(s.toLowerCase().replace(/\s+/g, ""), IAST);
+  return s.replace(/\s+/g, "");   /* plain ASCII: already SLP1-compatible */
+}
+/* Report-time only, never stored: strip one trailing visarga or anusvāra so a
+   kośa stem and a printed nominative can meet. Same rule as `--norm final`. */
+function normFinal(k){ return /[HM]$/.test(k) ? k.slice(0, -1) : k; }
+
+/* Must equal bucket_of() in scripts/build_pk_platform.py: FNV-1a 32, low byte. */
+function pkBucket(key){
+  var bytes = new TextEncoder().encode(key), h = 0x811C9DC5;
+  for (var i = 0; i < bytes.length; i++){
+    h = (h ^ bytes[i]) >>> 0;
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return ("0" + (h & 0xFF).toString(16)).slice(-2);
+}
+
+/* --------------------------------------------------------------- app state */
+var WORDS = null, META = null, SHARD = {}, LOADING = {};
+var $ = function(id){ return document.getElementById(id); };
+function esc(s){
+  return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];
+  });
+}
+function num(n){ return (n == null) ? "—" : Number(n).toLocaleString("en-US"); }
+
+/* ------------------------------------------------------------------ search */
+function lowerBound(arr, x){
+  var lo = 0, hi = arr.length;
+  while (lo < hi){ var m = (lo + hi) >> 1; if (arr[m] < x) lo = m + 1; else hi = m; }
+  return lo;
+}
+var CAP = 300;
+function search(key, mode){
+  if (!key) return [];
+  var out = [], i, n = WORDS.length;
+  if (mode === "exact"){
+    i = lowerBound(WORDS, key);
+    if (i < n && WORDS[i] === key) out.push(WORDS[i]);
+    var nk = normFinal(key);
+    if (!out.length && nk !== key){
+      i = lowerBound(WORDS, nk);
+      if (i < n && WORDS[i] === nk) out.push(WORDS[i]);
+    }
+    if (!out.length){                       /* the other direction: stem -> printed form */
+      i = lowerBound(WORDS, key);
+      for (var j = i; j < n && j < i + 40; j++){
+        if (normFinal(WORDS[j]) === key) { out.push(WORDS[j]); break; }
+      }
+    }
+    return out;
+  }
+  if (mode === "prefix"){
+    i = lowerBound(WORDS, key);
+    while (i < n && WORDS[i].indexOf(key) === 0 && out.length < CAP) out.push(WORDS[i++]);
+    return out;
+  }
+  for (i = 0; i < n && out.length < CAP; i++){
+    var w = WORDS[i];
+    if (mode === "ends" ? endsWith(w, key) : w.indexOf(key) >= 0) out.push(w);
+  }
+  return out;
+}
+function endsWith(w, k){ return w.length >= k.length && w.indexOf(k, w.length - k.length) !== -1; }
+
+function shardByBucket(b){
+  if (SHARD[b]) return Promise.resolve(SHARD[b]);
+  if (LOADING[b]) return LOADING[b];
+  LOADING[b] = fetch("data/d/" + b + ".json")
+    .then(function(r){ if (!r.ok) throw new Error("shard " + b + " " + r.status); return r.json(); })
+    .then(function(j){ SHARD[b] = j; delete LOADING[b]; return j; });
+  return LOADING[b];
+}
+function shardFor(key){ return shardByBucket(pkBucket(key)); }
+
+/* ------------------------------------------------------------ render: list */
+function tagsFor(e){
+  var t = [];
+  if (e.r) for (var i = 0; i < e.r.length; i++){
+    var k = META.kosha_sources[e.r[i][0]];
+    if (k) t.push(['r', 'R-' + k.code]);
+  }
+  if (e.v){
+    var seen = {};
+    for (var j = 0; j < e.v.t.length; j++){
+      var tx = META.vaidika_texts[e.v.t[j][0]];
+      if (tx && !seen[tx.code]){ seen[tx.code] = 1; t.push(['v', 'V-' + tx.code]); }
+    }
+  }
+  if (e.y) t.push(['y', 'Y-Vyā']);
+  return t;
+}
+function tagHtml(t, limit){
+  var h = "", n = 0;
+  for (var i = 0; i < t.length; i++){
+    if (limit && n >= limit){ h += '<span class="tag">+' + (t.length - n) + '</span>'; break; }
+    h += '<span class="tag ' + t[i][0] + '">' + esc(t[i][1]) + '</span>'; n++;
+  }
+  return h;
+}
+function renderList(keys, q){
+  var ul = $("results");
+  if (!keys.length){
+    ul.innerHTML = "";
+    $("status").innerHTML = q
+      ? 'No word matches <b>' + esc(q) + '</b> in the published pool. It may exist only in '
+        + 'an excluded kośa — see <i>Sources</i>.'
+      : 'Pool loaded: <b>' + num(WORDS.length) + '</b> words. Type to search.';
+    return;
+  }
+  $("status").innerHTML = 'Showing <b>' + num(keys.length) + '</b>'
+    + (keys.length >= CAP ? ' (first ' + CAP + ')' : '') + ' of <b>'
+    + num(WORDS.length) + '</b> published words.';
+  /* one shard fetch per distinct bucket, then paint */
+  var buckets = {}, k;
+  for (var i = 0; i < keys.length; i++) buckets[pkBucket(keys[i])] = 1;
+  Promise.all(Object.keys(buckets).map(function(b){
+    return shardByBucket(b).catch(function(){ return null; });
+  }))
+    .then(function(){
+      var h = "";
+      for (var i = 0; i < keys.length; i++){
+        k = keys[i];
+        var e = (SHARD[pkBucket(k)] || {})[k] || {};
+        h += '<li><button data-k="' + esc(k) + '">'
+           + '<span class="w dv">' + esc(e.d || "") + '</span>'
+           + '<span class="lat">' + esc(k) + '</span>'
+           + '<span class="tags">' + tagHtml(tagsFor(e), 4) + '</span>'
+           + '</button></li>';
+      }
+      ul.innerHTML = h;
+    });
+}
+
+/* ------------------------------------------------------------ render: card */
+function renderCard(key){
+  shardFor(key).then(function(sh){
+    var e = sh[key];
+    var box = $("card");
+    if (!e){ box.innerHTML = ""; return; }
+    var h = '<div class="card">'
+      + '<p class="lemma dv">' + esc(e.d || "") + '</p>'
+      + '<p class="translit">' + esc(key) + '</p>'
+      + '<div class="tagline-tags">' + tagHtml(tagsFor(e)) + '</div>';
+
+    /* ---- R ---- */
+    if (e.r){
+      h += '<section class="seg"><h3><span class="code tag r">R</span>Rūḍha — kośa attestation</h3>'
+        + '<p class="sub">Attested in ' + num(e.r.length) + ' of '
+        + num(META.kosha_sources.length) + ' published kośas.'
+        + (e.r.length === 1 ? ' A single witness — treat with the caution one witness deserves.' : '')
+        + '</p><div class="scroll"><table><tr><th>Kośa</th><th>Code</th><th>Tier</th><th>Genre</th><th>Printed page</th></tr>';
+      for (var i = 0; i < e.r.length; i++){
+        var k = META.kosha_sources[e.r[i][0]] || {}, pg = e.r[i][1];
+        h += '<tr><td>' + (k.title ? esc(k.title) : '<span class="muted">title unavailable</span>')
+          + (k.author ? '<br><span class="muted">' + esc(k.author) + '</span>' : '')
+          + '</td><td class="kcode">' + esc(k.code || "") + '</td>'
+          + '<td class="num">' + esc(k.tier || "—") + '</td>'
+          + '<td>' + esc(k.genre || "—") + '</td>'
+          + '<td class="num">' + (pg ? esc(pg) : '<span class="muted">—</span>') + '</td></tr>';
+      }
+      h += '</table></div></section>';
+    }
+
+    /* ---- V ---- */
+    if (e.v){
+      h += '<section class="seg"><h3><span class="code tag v">V</span>Vaidika — padapāṭha occurrence</h3>'
+        + '<p class="sub">' + num(e.v.n) + ' occurrence' + (e.v.n === 1 ? '' : 's')
+        + ' across ' + num(e.v.t.length) + ' text' + (e.v.t.length === 1 ? '' : 's')
+        + '. Svara is shown as digitised, in VijayaDV.</p><div class="occ">';
+      for (var j = 0; j < e.v.t.length; j++){
+        var tx = META.vaidika_texts[e.v.t[j][0]] || {};
+        h += '<span class="chip">' + esc(tx.code || "?") + ' · ' + esc(tx.title || "")
+          + ' <b>' + num(e.v.t[j][1]) + '</b></span>';
+      }
+      h += '</div>';
+      if (e.v.s && e.v.s.length){
+        h += '<div class="samples">';
+        for (var s = 0; s < e.v.s.length; s++){
+          h += '<div class="s"><div class="pada dv">' + esc(e.v.s[s][0]) + '</div>'
+            + (e.v.s[s][1] ? '<div class="loc">at ' + esc(e.v.s[s][1]) + '</div>' : '')
+            + '</div>';
+        }
+        h += '</div>';
+      }
+      h += '<div class="note"><b>Citation is provisional.</b> The locus above is '
+        + 'structurally valid but not yet citable: the authoritative veda / śākhā / '
+        + 'grantha numbering belongs to the VedaNidhi vākya system and has not been '
+        + 'supplied. Do not quote these addresses in print.</div>'
+        + '<div class="note">This is an <b>inflected padapāṭha form</b>, not a lemma. '
+        + 'No lemma link exists yet, so any agreement with the kośa row above is '
+        + 'agreement of surface form only.</div>'
+        + '</section>';
+    }
+
+    /* ---- Y ---- */
+    if (e.y){
+      var y = e.y;
+      h += '<section class="seg"><h3><span class="code tag y">Y</span>Yaugika — Pāṇinian derivation</h3>'
+        + '<p class="sub">School A (Vyākaraṇa). Derived by vidyut-prakriya; the sūtra '
+        + 'chain below is the citation.</p>'
+        + '<dl class="feat">';
+      if (y.dev)   h += '<dt>form</dt><dd class="dv" style="font-size:26px">' + esc(y.dev) + '</dd>';
+      if (y.iast)  h += '<dt>accented</dt><dd class="kcode">' + esc(y.iast) + '</dd>';
+      if (y.dhatu) h += '<dt>dhātu</dt><dd>' + esc(y.dhatu)
+                     + (y.artha ? ' <span class="muted">— ' + esc(y.artha) + '</span>' : '') + '</dd>';
+      if (y.stem)  h += '<dt>prātipadika</dt><dd><span class="dv">' + esc(y.stemdev || "")
+                     + '</span> <span class="kcode">' + esc(y.stem) + '</span></dd>';
+      if (y.kind)  h += '<dt>pada type</dt><dd>' + esc(y.kind) + '</dd>';
+      if (y.svara) h += '<dt>svara authority</dt><dd>' + esc(y.svara)
+                     + (y.svara === "phit_derived"
+                        ? ' <span class="muted">— stem accent from the Phiṭsūtras, '
+                          + 'not from a dhātu</span>' : '') + '</dd>';
+      var fk = Object.keys(y.feat || {});
+      for (var f = 0; f < fk.length; f++)
+        h += '<dt>' + esc(fk[f]) + '</dt><dd>' + esc(y.feat[fk[f]]) + '</dd>';
+      h += '<dt>Vedic-only</dt><dd>' + (y.vedic
+        ? 'yes — the classical grammar cannot produce this form'
+        : 'no — also derivable classically') + '</dd></dl>';
+      if (y.sutras && y.sutras.length){
+        h += '<div class="sutras">';
+        for (var q = 0; q < y.sutras.length; q++)
+          h += '<span class="sutra">' + esc(y.sutras[q]) + '</span>';
+        h += '</div><p class="sub" style="margin-top:8px">'
+          + num(y.sutras.length) + ' rules applied'
+          + (y.sources && y.sources.length ? ' · ' + esc(y.sources.join(", ")) : '') + '</p>';
+      }
+      h += '<div class="note">Yaugika here is a <b>sample of 40 dhātus</b> out of 2,229. '
+        + 'Absence from this segment means the sample did not reach the word, not that '
+        + 'it is underivable.</div></section>';
+    }
+    h += '</div>';
+    box.innerHTML = h;
+    box.scrollIntoView({block: "nearest"});
+  });
+}
+
+/* ---------------------------------------------------------- static panels */
+function fillPanels(){
+  var c = META.counts, p = META.provenance;
+  $("stats").innerHTML = [
+    [num(c.pool), "words in the combined pool"],
+    [num(c.rudha), "R · rūḍha kośa stems"],
+    [num(c.vaidika_forms), "V · distinct padapāṭha forms"],
+    [num(c.vaidika_occurrences), "V · padapāṭha occurrences"],
+    [num(c.yaugika), "Y · generated forms (sample)"],
+    [num(c.kosha_sources_published), "kośas published"],
+    [num(c.kosha_sources_excluded), "kośas withheld"],
+    [num(c.withheld_by_render_gate), "keys withheld by the render gate"]
+  ].map(function(s){
+    return '<div class="stat"><div class="n">' + s[0] + '</div><div class="l">' + s[1] + '</div></div>';
+  }).join("");
+
+  var gr = c.render_gate_reasons || {};
+  $("gate").innerHTML = '<tr><th>Withheld because</th><th>Keys</th></tr>'
+    + Object.keys(gr).sort(function(a, b){ return gr[b] - gr[a]; }).map(function(k){
+        return '<tr><td>' + esc(k) + '</td><td class="num">' + num(gr[k]) + '</td></tr>';
+      }).join("")
+    + '<tr><td><b>published</b></td><td class="num"><b>' + num(c.pool) + '</b></td></tr>'
+    + '<tr><td class="muted">raw union before the gate</td><td class="num muted">'
+    + num(c.raw_union) + '</td></tr>';
+
+  var LBL = {R:"Rūḍha only", V:"Vaidika only", Y:"Yaugika only",
+    RV:"Rūḍha + Vaidika", RY:"Rūḍha + Yaugika", VY:"Vaidika + Yaugika",
+    RVY:"all three"};
+  var rows = Object.keys(c.segment_combinations)
+    .sort(function(a, b){ return c.segment_combinations[b] - c.segment_combinations[a]; });
+  $("overlap").innerHTML = '<tr><th>Tags</th><th>Meaning</th><th>Words</th></tr>'
+    + rows.map(function(k){
+        return '<tr><td class="kcode">' + esc(k) + '</td><td>' + esc(LBL[k] || k)
+          + '</td><td class="num">' + num(c.segment_combinations[k]) + '</td></tr>';
+      }).join("");
+
+  $("texts").innerHTML = '<tr><th>Code</th><th>Text</th><th>Padas</th></tr>'
+    + META.vaidika_texts.map(function(t){
+        return '<tr><td class="kcode">' + esc(t.code) + '</td><td>' + esc(t.title)
+          + '</td><td class="num">' + num(t.padas) + '</td></tr>';
+      }).join("");
+
+  $("koshas").innerHTML = '<tr><th>Title (from TEI)</th><th>Code</th><th>Year</th>'
+    + '<th>Tier</th><th>Genre</th><th>Domain</th><th>Words</th></tr>'
+    + META.kosha_sources.slice().sort(function(a, b){ return b.words - a.words; })
+      .map(function(k){
+        return '<tr><td>' + (k.title ? esc(k.title) : '<span class="muted">title unavailable</span>')
+          + (k.author ? '<br><span class="muted">' + esc(k.author) + '</span>' : '')
+          + '</td><td class="kcode">' + esc(k.code) + '</td>'
+          + '<td class="num">' + (k.year || "—") + '</td>'
+          + '<td class="num">' + esc(k.tier || "—") + '</td>'
+          + '<td>' + esc(k.genre || "—") + '</td>'
+          + '<td>' + esc(k.domain || "—") + '</td>'
+          + '<td class="num">' + num(k.words) + '</td></tr>';
+      }).join("");
+
+  $("excluded").innerHTML = '<tr><th>Kośa</th><th>Code</th><th>Tier</th><th>Why withheld</th></tr>'
+    + META.excluded_sources.map(function(k){
+        return '<tr><td>' + (k.label ? esc(k.label) : '<span class="muted">—</span>')
+          + '</td><td class="kcode">' + esc(k.code) + '</td>'
+          + '<td class="num">' + esc(k.tier || "—") + '</td>'
+          + '<td>' + esc(k.reason) + '</td></tr>';
+      }).join("");
+
+  $("limits").innerHTML = META.known_limits.map(function(l){
+    return '<li>' + esc(l) + '</li>';
+  }).join("");
+
+  $("prov").innerHTML = '<tr><th>Item</th><th>Value</th></tr>' + [
+    ["Padapāṭha texts loaded", num(META.vaidika_texts.length)],
+    ["Padas extracted, all texts", num(p.vaidika_padas_total)],
+    ["Padas flagged for review", num(p.vaidika_needs_review)],
+    ["Punarukti spans marked", num(p.vaidika_punarukti)],
+    ["Dhātus in the yaugika sample", num(p.yaugika_dhatus) + " of " + num(p.yaugika_dhatus_available)],
+    ["Vedic-only forms in the sample", num(p.yaugika_vedic_forms)],
+    ["Derivation engine", "vidyut-prakriya, commit " + esc((p.vidyut_commit || "").slice(0, 12))],
+    ["Svara print convention", esc(p.print_convention || "—")],
+    ["Kṛdanta sweep, unique stems", num(p.krdanta_sweep_stems)],
+    ["Kṛdanta sweep, forms produced", num(p.krdanta_sweep_forms)],
+    ["Implements", esc(META.built.implements)]
+  ].map(function(r){
+    return '<tr><td>' + r[0] + '</td><td class="num">' + r[1] + '</td></tr>';
+  }).join("");
+
+  $("foot-lic").innerHTML = 'Published from ' + num(c.kosha_sources_published)
+    + ' public-domain kośas. ' + num(c.kosha_sources_excluded) + ' further kośas are '
+    + 'held back — twelve in copyright, ten whose licence has not been established, '
+    + 'and four whose headwords are not Sanskrit vocabulary. Restricted material is '
+    + 'used locally for comparison only and is never served here.';
+}
+
+/* -------------------------------------------------------------------- wire */
+(function(){
+  var tabs = document.querySelectorAll("nav button");
+  function show(name){
+    tabs.forEach(function(b){ b.setAttribute("aria-selected", String(b.dataset.tab === name)); });
+    ["search", "corpus", "sources", "method"].forEach(function(n){
+      $("tab-" + n).hidden = (n !== name);
+    });
+    if (location.hash.slice(1) !== name) history.replaceState(null, "", "#" + name);
+  }
+  tabs.forEach(function(b){ b.onclick = function(){ show(b.dataset.tab); }; });
+
+  var timer = null;
+  function run(){
+    if (!WORDS) return;
+    var raw = $("q").value;
+    var key = toSlp1(raw, $("scheme").value);
+    var mode = $("mode").value;
+    if (!key){ $("card").innerHTML = ""; renderList([], ""); return; }
+    var hits = search(key, mode);
+    renderList(hits, raw);
+    $("card").innerHTML = "";
+    if (mode === "exact" && hits.length === 1) renderCard(hits[0]);
+  }
+  $("q").oninput = function(){ clearTimeout(timer); timer = setTimeout(run, 130); };
+  $("mode").onchange = run;
+  $("scheme").onchange = run;
+  $("results").onclick = function(ev){
+    var b = ev.target.closest("button[data-k]");
+    if (b) renderCard(b.dataset.k);
+  };
+
+  Promise.all([
+    fetch("data/words.txt").then(function(r){ return r.text(); }),
+    fetch("data/meta.json").then(function(r){ return r.json(); })
+  ]).then(function(res){
+    WORDS = res[0].split("\n").filter(Boolean);
+    META = res[1];
+    fillPanels();
+    $("status").innerHTML = 'Pool loaded: <b>' + num(WORDS.length)
+      + '</b> published words across ' + num(META.counts.kosha_sources_published)
+      + ' kośas and ' + num(META.vaidika_texts.length) + ' padapāṭha texts. Type to search.';
+    show(location.hash.slice(1) || "search");
+    var q = new URLSearchParams(location.search).get("q");
+    if (q){ $("q").value = q; run(); }
+  }).catch(function(err){
+    $("status").innerHTML = 'Could not load the word pool: ' + esc(err.message)
+      + '. Reload, or report this.';
+  });
+
+  if ("serviceWorker" in navigator){
+    navigator.serviceWorker.register("sw.js").catch(function(){ /* offline is a bonus, not a requirement */ });
+  }
+})();
+</script>
+</body>
+</html>
