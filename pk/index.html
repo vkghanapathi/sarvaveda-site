@@ -801,8 +801,12 @@ function cdslToHtml(raw, translitSpans){
   if (!raw) return "";
   var out = esc(raw)
     .replace(/&lt;s1?&gt;([\s\S]*?)&lt;\/s1?&gt;/g, function(_m, t){
+      /* An <s> span can contain further markup — <srs/> is a syllable-break
+         marker. Those must come out BEFORE transliteration, or their letters
+         are read as SLP1 and "<srs/>" arrives on the page as Devanagari. */
+      var inner = t.replace(/&lt;[\s\S]*?&gt;/g, "");
       return '<span class="dv sk">'
-        + esc(translitSpans ? slp1ToDev(t) : t) + '</span>';
+        + esc(translitSpans ? slp1ToDev(inner) : inner) + '</span>';
     })
     .replace(/&lt;lex&gt;([\s\S]*?)&lt;\/lex&gt;/g, '<i class="lex">$1</i>')
     .replace(/&lt;ls&gt;([\s\S]*?)&lt;\/ls&gt;/g, '<span class="ls">$1</span>')
