@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pada Kośa API — SarvaVeda</title>
-<meta name="description" content="Programmatic access to the Pada Kośa corpus: 1.29 million Sanskrit words across 63 kośas, with definition text from the 51 that are not in copyright.">
+<meta name="description" content="Programmatic access to the Pada Kośa corpus: 1.29 million Sanskrit words across 51 kośas, with their definition text.">
 <style>
 /* Same light world as the lexicon. VKG, 2026-08-21: dark letters on a bright
    ground, no dark theme, not even behind a media query. */
@@ -82,10 +82,9 @@ footer p{margin:0 0 6px}
   <h2>What it serves</h2>
   <p class="lede">
     The whole corpus behind <a href="./">the lexicon</a>: <b id="n-words">1,286,475</b>
-    words across <b id="n-src">63</b> kośas and seven padapāṭha texts, with
-    definition text from the <b id="n-full">51</b> sources that are not in
-    copyright. Nothing is filtered by tier — the tiers meter how often you may
-    ask, never what you are allowed to see.
+    words across <b id="n-src">51</b> kośas and seven padapāṭha texts, with their
+    definition text. Nothing is filtered by tier — the tiers meter how often you
+    may ask, never what you are allowed to see.
   </p>
 
   <h2>Tiers</h2>
@@ -114,9 +113,9 @@ footer p{margin:0 0 6px}
   <h2>Endpoints</h2>
   <table>
     <tr><th>Method</th><th>Path</th><th>What it returns</th></tr>
-    <tr><td>GET</td><td><code>/v1/word/{slp1}</code></td><td>one entry: every source with its printed page and, where permitted, its definition text; padapāṭha occurrences; derivation</td></tr>
+    <tr><td>GET</td><td><code>/v1/word/{slp1}</code></td><td>one entry: every source with its definition text and printed page; padapāṭha occurrences; derivation</td></tr>
     <tr><td>GET</td><td><code>/v1/search</code></td><td><code>q</code>, <code>mode</code> = prefix·exact·contains, <code>limit</code></td></tr>
-    <tr><td>GET</td><td><code>/v1/sources</code></td><td>all 63 kośas with licence, tier, genre, display rank and whether their text is served</td></tr>
+    <tr><td>GET</td><td><code>/v1/sources</code></td><td>all 51 kośas with tier, genre and display rank</td></tr>
     <tr><td>GET</td><td><code>/v1/tiers</code></td><td>the table above, as JSON</td></tr>
     <tr><td>POST</td><td><code>/v1/key</code></td><td><code>{"tier","email","organisation"}</code> → a key, shown once</td></tr>
     <tr><td>POST</td><td><code>/v1/report</code></td><td>report a problem with an entry</td></tr>
@@ -127,7 +126,6 @@ footer p{margin:0 0 6px}
   <ul class="plain">
     <li><b>Without a key</b> the anonymous limit is <span id="lim">90 a minute and 3,000 a day per address</span>. That is far above reading speed; it exists so the corpus cannot be mirrored in bulk, not to ration lookups.</li>
     <li><b>Your key is shown once.</b> Only a hash is stored, so it cannot be recovered — generate another if you lose it.</li>
-    <li><b>The 12 in-copyright kośas return no definition text</b>, on any tier, including Institutional. You get the source name and the printed page. This is not a quota; it is what may lawfully be republished.</li>
     <li><b>Vaidika loci are provisional.</b> The <code class="inline">citation_warning</code> field says so on every response that carries them — do not quote those addresses in print until the VedaNidhi vākya table is published.</li>
     <li><b>Cite the printed edition</b>, not this API, when the source is a printed work.</li>
   </ul>

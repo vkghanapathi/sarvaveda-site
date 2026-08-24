@@ -283,14 +283,6 @@ footer p{margin:0 0 6px;max-width:80ch}
       <span class="muted">title unavailable</span> rather than guessing.
     </p>
     <div class="scroll"><table id="koshas"></table></div>
-    <h3 class="sub">Sources that need a caveat when cited</h3>
-    <p class="lede">
-      Every kośa is searchable — nothing is held back. These ones carry something
-      a reader should know before quoting them: a live copyright, a licence
-      nobody has established, or a headword column that is not Sanskrit at all.
-      They are listed here, not filtered out.
-    </p>
-    <div class="scroll"><table id="flagged"></table></div>
   </div>
 
   <!-- ======================= METHOD ======================= -->
@@ -755,14 +747,10 @@ function orderSources(rows, defn){
    which is the honest thing we DO have. */
 function sourceBlock(s){
   var k = s.k;
-  /* `s.bodies` arrives from the API when definition text exists for this source.
-     Where it does not, the reason is stated — either the source is still in
-     copyright (attestation-only by decision) or the API is unreachable. */
+  /* `s.bodies` arrives from the API. Test for actual text rather than for the
+     row: a source can return a row with a null body if the API is momentarily
+     unreachable, and an empty section under a heading reads as a defect. */
   var content;
-  /* An attestation-only source still comes back as a row — with body null. So
-     the test is whether any body actually has text, not whether the row exists;
-     otherwise the in-copyright notice never shows and the reader just sees a
-     source with nothing under it. */
   var withText = (s.bodies || []).filter(function(b){ return b.body; });
   if (withText.length){
     content = withText.map(function(b){
@@ -770,15 +758,11 @@ function sourceBlock(s){
         + (b.printed_page ? '<span class="loc"> — p. ' + esc(b.printed_page) + '</span>' : '')
         + '</div>';
     }).join("");
-  } else if (s.has_full_text === false){
-    content = '<p class="notext">Still in copyright — cited here, not reproduced. '
-      + 'Consult the printed edition.</p>';
   } else {
     content = '<p class="notext">Definition text unavailable just now.</p>';
   }
   return '<div class="src' + (k.muted ? ' muted-src' : '') + '">'
     + '<h4>' + (k.name ? esc(k.name) : '<span class="muted">title unavailable</span>')
-    + (k.caveat ? ' <span class="cav">' + esc(k.caveat) + '</span>' : '')
     + '</h4>'
     + (k.author ? '<p class="byline">' + esc(k.author) + '</p>' : '')
     + content
@@ -1040,8 +1024,6 @@ function exportLines(key, e, defn){
                 : slp1ToDev(stripTags(b.body || ""));
           if (t) L.push("    " + t);
         });
-      } else if (s.has_full_text === false){
-        L.push("    [still in copyright — cited, not reproduced]");
       }
       L.push("");
     }
@@ -1116,7 +1098,7 @@ function fillPanels(){
     [num(c.yaugika_stems), "Y · derived prātipadikas"],
     [num(c.yaugika_stems_unattested), "Y · of those, in no kośa"],
     [num(c.yaugika), "Y · inflected forms with a sūtra chain"],
-    [num(c.kosha_sources_published), "kośas searchable"],
+    [num(c.kosha_sources_published), "kośas"],
     [num(c.withheld_by_render_gate), "keys withheld by the render gate"]
   ].map(function(s){
     return '<div class="stat"><div class="n">' + s[0] + '</div><div class="l">' + s[1] + '</div></div>';
@@ -1165,14 +1147,6 @@ function fillPanels(){
           + '<td class="num">' + num(k.words) + '</td></tr>';
       }).join("");
 
-  $("flagged").innerHTML = '<tr><th>Kośa</th><th>Code</th><th>Tier</th><th>Caveat</th></tr>'
-    + (META.flagged_sources || []).map(function(k){
-        return '<tr><td>' + (k.label ? esc(k.label) : '<span class="muted">—</span>')
-          + '</td><td class="kcode">' + esc(k.code) + '</td>'
-          + '<td class="num">' + esc(k.tier || "—") + '</td>'
-          + '<td>' + esc(k.caveat) + '</td></tr>';
-      }).join("");
-
   $("limits").innerHTML = META.known_limits.map(function(l){
     return '<li>' + esc(l) + '</li>';
   }).join("");
@@ -1193,11 +1167,8 @@ function fillPanels(){
     return '<tr><td>' + r[0] + '</td><td class="num">' + r[1] + '</td></tr>';
   }).join("");
 
-  $("foot-lic").innerHTML = 'Searching all ' + num(c.kosha_sources_published)
-    + ' indexed kośas and ' + num(META.vaidika_texts.length) + ' padapāṭha texts, with '
-    + 'no source excluded. ' + num(c.kosha_sources_flagged) + ' of the kośas carry a '
-    + 'caveat when cited — see <i>Sources</i>. Where a work is still in copyright, cite '
-    + 'the printed edition, not this site.';
+  $("foot-lic").innerHTML = 'Drawn from ' + num(c.kosha_sources_published)
+    + ' kośas and ' + num(META.vaidika_texts.length) + ' padapāṭha texts.';
 }
 
 /* -------------------------------------------------------------------- wire */

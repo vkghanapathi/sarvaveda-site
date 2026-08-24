@@ -1,7 +1,7 @@
-/* Pada Kośa offline cache. Build 1286475-63-256.
+/* Pada Kośa offline cache. Build 1228103-51-256.
    HTML is network-first so a redeploy is picked up; the data files are
    immutable for a given build, so they are cache-first. */
-var C = "pk-1286475-63-256";
+var C = "pk-1228103-51-256";
 var SHELL = ["./", "./index.html", "./data/words.txt", "./data/meta.json",
              "./assets/vijayadv.woff2"];
 self.addEventListener("install", function(e){
