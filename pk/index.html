@@ -39,40 +39,57 @@ body{
 a{color:var(--accent)}
 .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
 
-header{border-bottom:1px solid var(--rule);background:var(--card)}
-.head{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;padding:20px 0 16px}
-h1{margin:0;font-size:32px;font-weight:600;letter-spacing:.01em}
-h1 .lat{font-size:19px;color:var(--ink-2);font-weight:400;margin-left:10px}
-.tagline{color:var(--ink-2);font-size:15px;margin:0 0 4px}
-nav{display:flex;gap:2px;flex-wrap:wrap;border-top:1px solid var(--rule-2)}
+/* The search bar is the page. Masthead is small, the tabs are a quiet
+   secondary row beneath it, and nothing else competes. VKG, 2026-08-24. */
+header{background:var(--card);border-bottom:1px solid var(--rule)}
+.masthead{display:flex;align-items:baseline;gap:12px;padding:16px 0 0}
+h1{margin:0;font-size:21px;font-weight:600;letter-spacing:.01em}
+h1 .lat{font-size:14px;color:var(--ink-3);font-weight:400;margin-left:8px}
+
+/* ---- the one big search bar ---- */
+form.hero{display:flex;gap:10px;align-items:stretch;padding:20px 0 6px}
+#q{
+  flex:1 1 auto;min-width:0;
+  font-family:var(--dv);font-size:31px;line-height:1.3;
+  padding:16px 22px;
+  border:1px solid var(--rule);border-radius:40px;
+  background:var(--ground);color:var(--ink);
+  box-shadow:0 1px 3px rgba(36,28,20,.06);
+  transition:box-shadow .15s,border-color .15s;
+}
+#q::placeholder{color:var(--ink-3);opacity:.75}
+#q:focus{
+  outline:none;border-color:var(--accent);
+  box-shadow:0 2px 12px rgba(140,47,20,.13);
+}
+button.go{
+  flex:0 0 auto;font:inherit;font-size:17px;font-weight:600;
+  padding:0 34px;border:1px solid var(--accent);border-radius:40px;
+  background:var(--accent);color:#fff;cursor:pointer;white-space:nowrap;
+}
+button.go:hover{background:#7a2810;border-color:#7a2810}
+button.go:active{transform:translateY(1px)}
+.opts{display:flex;gap:8px;flex-wrap:wrap;padding:0 0 16px 6px}
+select{
+  font:inherit;font-size:13px;padding:5px 9px;border:1px solid var(--rule-2);
+  border-radius:5px;background:transparent;color:var(--ink-3);cursor:pointer;
+}
+select:hover{color:var(--ink);border-color:var(--rule)}
+
+nav{display:flex;gap:1px;flex-wrap:wrap;padding:0 0 2px}
 nav button{
   background:none;border:none;border-bottom:2px solid transparent;
-  font:inherit;font-size:15px;color:var(--ink-2);
-  padding:11px 15px;cursor:pointer;
+  font:inherit;font-size:13.5px;color:var(--ink-3);
+  padding:7px 13px;cursor:pointer;letter-spacing:.02em;
 }
 nav button:hover{color:var(--ink)}
 nav button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent);font-weight:600}
 
-main{padding:26px 0 70px;min-height:60vh}
+main{padding:24px 0 70px;min-height:60vh}
 .panel[hidden]{display:none}
 
-/* ---- search ---- */
-.searchbar{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin-bottom:6px}
-#q{
-  flex:1 1 320px;min-width:0;
-  font-family:var(--dv);font-size:24px;padding:11px 14px;
-  border:1px solid var(--rule);border-radius:6px;background:var(--card);color:var(--ink);
-}
-#q:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:var(--accent)}
-select,.btn{
-  font:inherit;font-size:14px;padding:9px 12px;border:1px solid var(--rule);
-  border-radius:6px;background:var(--card);color:var(--ink);cursor:pointer;
-}
-.hint{color:var(--ink-3);font-size:13.5px;margin:8px 0 20px}
-.hint code{font-family:var(--mono);font-size:12.5px;background:var(--rule-2);padding:1px 5px;border-radius:3px}
-
-.status{color:var(--ink-2);font-size:14px;margin:0 0 14px}
-.status b{color:var(--ink)}
+.status{color:var(--ink-3);font-size:13.5px;margin:0 0 14px}
+.status b{color:var(--ink-2)}
 
 ul.results{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule-2)}
 ul.results li{border-bottom:1px solid var(--rule-2)}
@@ -144,7 +161,10 @@ footer p{margin:0 0 6px;max-width:80ch}
 .spin{display:inline-block;width:12px;height:12px;border:2px solid var(--rule);border-top-color:var(--accent);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px}
 @keyframes sp{to{transform:rotate(360deg)}}
 @media (max-width:620px){
-  h1{font-size:26px} h1 .lat{display:block;margin:2px 0 0;font-size:16px}
+  h1{font-size:18px} h1 .lat{display:none}
+  form.hero{padding:14px 0 4px;gap:8px}
+  #q{font-size:24px;padding:13px 17px}
+  button.go{padding:0 20px;font-size:15px}
   .card{padding:18px 16px} .card .lemma{font-size:38px}
   body{font-size:16px}
 }
@@ -153,17 +173,32 @@ footer p{margin:0 0 6px;max-width:80ch}
 <body>
 <header>
   <div class="wrap">
-    <div class="head">
-      <div>
-        <h1><span class="dv">पदकोशः</span><span class="lat">Pada Kośa</span></h1>
-        <p class="tagline">One word, three ways of being known — attested, Vedic, derived.</p>
-      </div>
+    <div class="masthead">
+      <h1><span class="dv">पदकोशः</span><span class="lat">Pada Kośa</span></h1>
+    </div>
+    <form class="hero" id="form" autocomplete="off">
+      <input id="q" type="search" autocomplete="off" spellcheck="false"
+             placeholder="अग्नि" aria-label="Search word" enterkeyhint="search">
+      <button class="go" type="submit">Search</button>
+    </form>
+    <div class="opts">
+      <select id="mode" aria-label="Match">
+        <option value="prefix">begins with</option>
+        <option value="exact">exact</option>
+        <option value="contains">contains</option>
+        <option value="ends">ends with</option>
+      </select>
+      <select id="scheme" aria-label="Input scheme">
+        <option value="auto">auto-detect script</option>
+        <option value="slp1">SLP1</option>
+        <option value="hk">Harvard-Kyoto</option>
+      </select>
     </div>
     <nav role="tablist">
-      <button role="tab" aria-selected="true"  data-tab="search">Search</button>
-      <button role="tab" aria-selected="false" data-tab="corpus">Corpus</button>
-      <button role="tab" aria-selected="false" data-tab="sources">Sources</button>
-      <button role="tab" aria-selected="false" data-tab="method">Method &amp; limits</button>
+      <button type="button" role="tab" aria-selected="true"  data-tab="search">Search</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="corpus">Corpus</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="sources">Sources</button>
+      <button type="button" role="tab" aria-selected="false" data-tab="method">Method &amp; limits</button>
     </nav>
   </div>
 </header>
@@ -172,26 +207,6 @@ footer p{margin:0 0 6px;max-width:80ch}
 
   <!-- ======================= SEARCH ======================= -->
   <div class="panel" id="tab-search">
-    <div class="searchbar">
-      <input id="q" type="search" autocomplete="off" spellcheck="false"
-             placeholder="अग्नि · agni · agni" aria-label="Search word">
-      <select id="mode" aria-label="Match">
-        <option value="prefix">begins with</option>
-        <option value="exact">exact</option>
-        <option value="contains">contains</option>
-        <option value="ends">ends with</option>
-      </select>
-      <select id="scheme" aria-label="Input scheme">
-        <option value="auto">auto-detect</option>
-        <option value="slp1">SLP1</option>
-        <option value="hk">Harvard-Kyoto</option>
-      </select>
-    </div>
-    <p class="hint">
-      Type Devanagari or IAST and the scheme is detected. Otherwise choose SLP1
-      (<code>kfzRa</code>) or Harvard-Kyoto (<code>kRSNa</code>). A trailing visarga or
-      anusvāra is matched loosely, since kośas and padapāṭhas cite stems differently.
-    </p>
     <p class="status" id="status"><span class="spin"></span> loading the word pool…</p>
     <div id="card"></div>
     <ul class="results" id="results"></ul>
@@ -231,13 +246,14 @@ footer p{margin:0 0 6px;max-width:80ch}
       <span class="muted">title unavailable</span> rather than guessing.
     </p>
     <div class="scroll"><table id="koshas"></table></div>
-    <h3 class="sub">Excluded from this surface</h3>
+    <h3 class="sub">Sources that need a caveat when cited</h3>
     <p class="lede">
-      These kośas are indexed locally but are not published here. A word attested
-      only in them does not appear in search at all — the count you see is
-      smaller than the corpus, and this table is why.
+      Every kośa is searchable — nothing is held back. These ones carry something
+      a reader should know before quoting them: a live copyright, a licence
+      nobody has established, or a headword column that is not Sanskrit at all.
+      They are listed here, not filtered out.
     </p>
-    <div class="scroll"><table id="excluded"></table></div>
+    <div class="scroll"><table id="flagged"></table></div>
   </div>
 
   <!-- ======================= METHOD ======================= -->
@@ -403,8 +419,46 @@ function pkBucket(key){
   return ("0" + (h & 0xFF).toString(16)).slice(-2);
 }
 
-/* --------------------------------------------------------------- app state */
-var WORDS = null, META = null, SHARD = {}, LOADING = {};
+/* --------------------------------------------------------------- app state
+   The index is 1.29 million keys. Held as ONE concatenated string plus a
+   Uint32Array of line starts, not as 1.29 M separate JS strings: the array of
+   strings costs well over 100 MB of heap and would put a phone in trouble,
+   while string-plus-offsets is about 19 MB and makes "contains" a single
+   native indexOf over the whole corpus. */
+var IDX = "", OFF = null, NW = 0, META = null, SHARD = {}, LOADING = {};
+
+/* Undo the builder's front coding: line[0] is how many leading characters to
+   carry over from the previous key, line[1:] is the rest. */
+function inflateIndex(text){
+  var lines = text.split("\n");
+  var n = lines.length;
+  if (n && lines[n - 1] === "") n--;
+  var parts = new Array(n), off = new Uint32Array(n + 1);
+  var prev = "", pos = 0;
+  for (var i = 0; i < n; i++){
+    var ln = lines[i];
+    var share = ln.charCodeAt(0) - 32;
+    var w = (share > 0 ? prev.substring(0, share) : "") + ln.substring(1);
+    parts[i] = w;
+    off[i] = pos;
+    pos += w.length + 1;          /* +1 for the "\n" we join with */
+    prev = w;
+  }
+  off[n] = pos;
+  IDX = parts.join("\n");
+  OFF = off;
+  NW = n;
+}
+function wordAt(i){
+  var end = (i + 1 < NW) ? OFF[i + 1] - 1 : IDX.length;
+  return IDX.substring(OFF[i], end);
+}
+/* offset in IDX -> its word index, by binary search over OFF */
+function indexAtOffset(p){
+  var lo = 0, hi = NW - 1;
+  while (lo < hi){ var m = (lo + hi + 1) >> 1; if (OFF[m] <= p) lo = m; else hi = m - 1; }
+  return lo;
+}
 var $ = function(id){ return document.getElementById(id); };
 function esc(s){
   return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){
@@ -414,39 +468,56 @@ function esc(s){
 function num(n){ return (n == null) ? "—" : Number(n).toLocaleString("en-US"); }
 
 /* ------------------------------------------------------------------ search */
-function lowerBound(arr, x){
-  var lo = 0, hi = arr.length;
-  while (lo < hi){ var m = (lo + hi) >> 1; if (arr[m] < x) lo = m + 1; else hi = m; }
+function lowerBound(x){
+  var lo = 0, hi = NW;
+  while (lo < hi){ var m = (lo + hi) >> 1; if (wordAt(m) < x) lo = m + 1; else hi = m; }
   return lo;
 }
 var CAP = 300;
 function search(key, mode){
-  if (!key) return [];
-  var out = [], i, n = WORDS.length;
+  if (!key || !NW) return [];
+  var out = [], i, w;
   if (mode === "exact"){
-    i = lowerBound(WORDS, key);
-    if (i < n && WORDS[i] === key) out.push(WORDS[i]);
+    i = lowerBound(key);
+    if (i < NW && wordAt(i) === key) out.push(key);
     var nk = normFinal(key);
     if (!out.length && nk !== key){
-      i = lowerBound(WORDS, nk);
-      if (i < n && WORDS[i] === nk) out.push(WORDS[i]);
+      i = lowerBound(nk);
+      if (i < NW && wordAt(i) === nk) out.push(nk);
     }
     if (!out.length){                       /* the other direction: stem -> printed form */
-      i = lowerBound(WORDS, key);
-      for (var j = i; j < n && j < i + 40; j++){
-        if (normFinal(WORDS[j]) === key) { out.push(WORDS[j]); break; }
+      i = lowerBound(key);
+      for (var j = i; j < NW && j < i + 40; j++){
+        w = wordAt(j);
+        if (normFinal(w) === key){ out.push(w); break; }
       }
     }
     return out;
   }
   if (mode === "prefix"){
-    i = lowerBound(WORDS, key);
-    while (i < n && WORDS[i].indexOf(key) === 0 && out.length < CAP) out.push(WORDS[i++]);
+    i = lowerBound(key);
+    while (i < NW && out.length < CAP){
+      w = wordAt(i++);
+      if (w.indexOf(key) !== 0) break;
+      out.push(w);
+    }
     return out;
   }
-  for (i = 0; i < n && out.length < CAP; i++){
-    var w = WORDS[i];
-    if (mode === "ends" ? endsWith(w, key) : w.indexOf(key) >= 0) out.push(w);
+  /* contains / ends: one native scan over the whole concatenated index, which
+     is why it is held as a single string. Each hit maps back to its word. */
+  var from = 0, seen = -1;
+  while (out.length < CAP){
+    var p = IDX.indexOf(key, from);
+    if (p < 0) break;
+    from = p + 1;
+    var wi = indexAtOffset(p);
+    if (wi === seen) continue;
+    seen = wi;
+    w = wordAt(wi);
+    if (w.indexOf("\n") >= 0) continue;             /* spanned a boundary */
+    if (mode === "ends" && !endsWith(w, key)) continue;
+    if (p < OFF[wi] || p + key.length > OFF[wi] + w.length) continue;
+    out.push(w);
   }
   return out;
 }
@@ -476,7 +547,7 @@ function tagsFor(e){
       if (tx && !seen[tx.code]){ seen[tx.code] = 1; t.push(['v', 'V-' + tx.code]); }
     }
   }
-  if (e.y) t.push(['y', 'Y-Vyā']);
+  if (e.y || e.ys) t.push(['y', 'Y-Vyā']);
   return t;
 }
 function tagHtml(t, limit){
@@ -492,14 +563,12 @@ function renderList(keys, q){
   if (!keys.length){
     ul.innerHTML = "";
     $("status").innerHTML = q
-      ? 'No word matches <b>' + esc(q) + '</b> in the published pool. It may exist only in '
-        + 'an excluded kośa — see <i>Sources</i>.'
-      : 'Pool loaded: <b>' + num(WORDS.length) + '</b> words. Type to search.';
+      ? 'No results found.'
+      : num(NW) + ' words. Type to search.';
     return;
   }
-  $("status").innerHTML = 'Showing <b>' + num(keys.length) + '</b>'
-    + (keys.length >= CAP ? ' (first ' + CAP + ')' : '') + ' of <b>'
-    + num(WORDS.length) + '</b> published words.';
+  $("status").innerHTML = num(keys.length)
+    + (keys.length >= CAP ? ' (first ' + CAP + ')' : '') + ' of ' + num(NW) + ' words.';
   /* one shard fetch per distinct bucket, then paint */
   var buckets = {}, k;
   for (var i = 0; i < keys.length; i++) buckets[pkBucket(keys[i])] = 1;
@@ -582,10 +651,42 @@ function renderCard(key){
         + '</section>';
     }
 
-    /* ---- Y ---- */
+    /* ---- Y: derived stem (prātipadika) ---- */
+    if (e.ys){
+      var ys = e.ys, T = META.yaugika_tables || {};
+      h += '<section class="seg"><h3><span class="code tag y">Y</span>Yaugika — derived stem</h3>'
+        + '<p class="sub">A prātipadika the kṛt sweep builds from the Dhātupāṭha'
+        + (ys.n_routes > 1 ? ', by ' + num(ys.n_routes) + ' different routes' : '')
+        + '.</p><div class="scroll"><table><tr><th>Dhātu</th><th>Code</th><th>Gaṇa</th>'
+        + '<th>Kṛt pratyaya</th><th>Upasarga</th></tr>';
+      for (var q2 = 0; q2 < ys.routes.length; q2++){
+        var rt = ys.routes[q2];
+        h += '<tr><td class="kcode">' + esc((T.dhatu || [])[rt[0]] || "—") + '</td>'
+          + '<td class="num kcode">' + esc((ys.codes || [])[q2] || "—") + '</td>'
+          + '<td>' + esc((T.gana || [])[rt[1]] || "—") + '</td>'
+          + '<td class="kcode">' + esc((T.krt || [])[rt[2]] || "—") + '</td>'
+          + '<td class="kcode">' + (esc((T.upasarga || [])[rt[3]] || "") || '<span class="muted">—</span>') + '</td></tr>';
+      }
+      h += '</table></div>';
+      if (ys.n_routes > ys.routes.length)
+        h += '<p class="sub" style="margin-top:8px">Showing ' + ys.routes.length
+           + ' of ' + num(ys.n_routes) + ' derivation routes.</p>';
+      h += ys.att
+        ? '<div class="note">This stem is <b>also attested</b> in a kośa above — '
+          + 'derivable and listed. Whether it is yaugika, yogarūḍha or simply rūḍha '
+          + 'is a scholar’s decision, not the sweep’s.</div>'
+        : '<div class="note"><b>Derived, not attested.</b> Pāṇini produces this stem, '
+          + 'but no indexed kośa records it and it has not been found in a text. It is '
+          + 'well-formed Sanskrit, which is not the same as used Sanskrit.</div>';
+      h += '<div class="note">The sweep is <b>kṛt only</b> — dhātu × kṛt pratyaya × '
+        + 'upasarga. Taddhitānta, samāsa and uṇādi derivations are not swept.</div>'
+        + '</section>';
+    }
+
+    /* ---- Y: inflected form with its full prakriyā ---- */
     if (e.y){
       var y = e.y;
-      h += '<section class="seg"><h3><span class="code tag y">Y</span>Yaugika — Pāṇinian derivation</h3>'
+      h += '<section class="seg"><h3><span class="code tag y">Y</span>Yaugika — inflected form</h3>'
         + '<p class="sub">School A (Vyākaraṇa). Derived by vidyut-prakriya; the sūtra '
         + 'chain below is the citation.</p>'
         + '<dl class="feat">';
@@ -614,9 +715,10 @@ function renderCard(key){
           + num(y.sutras.length) + ' rules applied'
           + (y.sources && y.sources.length ? ' · ' + esc(y.sources.join(", ")) : '') + '</p>';
       }
-      h += '<div class="note">Yaugika here is a <b>sample of 40 dhātus</b> out of 2,229. '
-        + 'Absence from this segment means the sample did not reach the word, not that '
-        + 'it is underivable.</div></section>';
+      h += '<div class="note">The inflected-form layer is a <b>sample of 40 dhātus</b> '
+        + 'out of 2,229 — it is the only place the sūtra chain itself is shown. Absence '
+        + 'means the sample did not reach the word, not that it is underivable.</div>'
+        + '</section>';
     }
     h += '</div>';
     box.innerHTML = h;
@@ -632,9 +734,10 @@ function fillPanels(){
     [num(c.rudha), "R · rūḍha kośa stems"],
     [num(c.vaidika_forms), "V · distinct padapāṭha forms"],
     [num(c.vaidika_occurrences), "V · padapāṭha occurrences"],
-    [num(c.yaugika), "Y · generated forms (sample)"],
-    [num(c.kosha_sources_published), "kośas published"],
-    [num(c.kosha_sources_excluded), "kośas withheld"],
+    [num(c.yaugika_stems), "Y · derived prātipadikas"],
+    [num(c.yaugika_stems_unattested), "Y · of those, in no kośa"],
+    [num(c.yaugika), "Y · inflected forms with a sūtra chain"],
+    [num(c.kosha_sources_published), "kośas searchable"],
     [num(c.withheld_by_render_gate), "keys withheld by the render gate"]
   ].map(function(s){
     return '<div class="stat"><div class="n">' + s[0] + '</div><div class="l">' + s[1] + '</div></div>';
@@ -680,12 +783,12 @@ function fillPanels(){
           + '<td class="num">' + num(k.words) + '</td></tr>';
       }).join("");
 
-  $("excluded").innerHTML = '<tr><th>Kośa</th><th>Code</th><th>Tier</th><th>Why withheld</th></tr>'
-    + META.excluded_sources.map(function(k){
+  $("flagged").innerHTML = '<tr><th>Kośa</th><th>Code</th><th>Tier</th><th>Caveat</th></tr>'
+    + (META.flagged_sources || []).map(function(k){
         return '<tr><td>' + (k.label ? esc(k.label) : '<span class="muted">—</span>')
           + '</td><td class="kcode">' + esc(k.code) + '</td>'
           + '<td class="num">' + esc(k.tier || "—") + '</td>'
-          + '<td>' + esc(k.reason) + '</td></tr>';
+          + '<td>' + esc(k.caveat) + '</td></tr>';
       }).join("");
 
   $("limits").innerHTML = META.known_limits.map(function(l){
@@ -708,11 +811,11 @@ function fillPanels(){
     return '<tr><td>' + r[0] + '</td><td class="num">' + r[1] + '</td></tr>';
   }).join("");
 
-  $("foot-lic").innerHTML = 'Published from ' + num(c.kosha_sources_published)
-    + ' public-domain kośas. ' + num(c.kosha_sources_excluded) + ' further kośas are '
-    + 'held back — twelve in copyright, ten whose licence has not been established, '
-    + 'and four whose headwords are not Sanskrit vocabulary. Restricted material is '
-    + 'used locally for comparison only and is never served here.';
+  $("foot-lic").innerHTML = 'Searching all ' + num(c.kosha_sources_published)
+    + ' indexed kośas and ' + num(META.vaidika_texts.length) + ' padapāṭha texts, with '
+    + 'no source excluded. ' + num(c.kosha_sources_flagged) + ' of the kośas carry a '
+    + 'caveat when cited — see <i>Sources</i>. Where a work is still in copyright, cite '
+    + 'the printed edition, not this site.';
 }
 
 /* -------------------------------------------------------------------- wire */
@@ -729,7 +832,7 @@ function fillPanels(){
 
   var timer = null;
   function run(){
-    if (!WORDS) return;
+    if (!NW) return;
     var raw = $("q").value;
     var key = toSlp1(raw, $("scheme").value);
     var mode = $("mode").value;
@@ -739,9 +842,16 @@ function fillPanels(){
     $("card").innerHTML = "";
     if (mode === "exact" && hits.length === 1) renderCard(hits[0]);
   }
-  $("q").oninput = function(){ clearTimeout(timer); timer = setTimeout(run, 130); };
+  $("q").oninput = function(){ clearTimeout(timer); timer = setTimeout(run, 160); };
   $("mode").onchange = run;
   $("scheme").onchange = run;
+  $("form").onsubmit = function(ev){
+    ev.preventDefault();
+    clearTimeout(timer);
+    show("search");
+    run();
+    $("q").blur();          /* let the on-screen keyboard get out of the way */
+  };
   $("results").onclick = function(ev){
     var b = ev.target.closest("button[data-k]");
     if (b) renderCard(b.dataset.k);
@@ -751,13 +861,14 @@ function fillPanels(){
     fetch("data/words.txt").then(function(r){ return r.text(); }),
     fetch("data/meta.json").then(function(r){ return r.json(); })
   ]).then(function(res){
-    WORDS = res[0].split("\n").filter(Boolean);
+    inflateIndex(res[0]);
     META = res[1];
     fillPanels();
-    $("status").innerHTML = 'Pool loaded: <b>' + num(WORDS.length)
-      + '</b> published words across ' + num(META.counts.kosha_sources_published)
-      + ' kośas and ' + num(META.vaidika_texts.length) + ' padapāṭha texts. Type to search.';
+    $("status").innerHTML = num(NW) + ' words across '
+      + num(META.counts.kosha_sources_published) + ' kośas and '
+      + num(META.vaidika_texts.length) + ' padapāṭha texts.';
     show(location.hash.slice(1) || "search");
+    $("q").focus();
     var q = new URLSearchParams(location.search).get("q");
     if (q){ $("q").value = q; run(); }
   }).catch(function(err){
