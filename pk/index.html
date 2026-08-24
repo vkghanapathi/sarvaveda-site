@@ -109,9 +109,28 @@ ul.results .lat{color:var(--ink-3);font-family:var(--mono);font-size:13px}
 
 /* ---- word card ---- */
 .card{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:22px 24px;margin:0 0 26px}
+.cardtop{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start;justify-content:space-between}
+.cardctl{display:flex;gap:8px;flex-wrap:wrap;margin-left:auto}
 .card .lemma{font-family:var(--dv);font-size:46px;line-height:1.15;margin:0}
 .card .translit{color:var(--ink-2);font-family:var(--mono);font-size:14px;margin:4px 0 2px}
-.card .tagline-tags{margin:14px 0 0;display:flex;gap:6px;flex-wrap:wrap}
+.card .stype{color:var(--ink-3);font-size:12.5px;margin:6px 0 0;letter-spacing:.04em}
+.derivedtag{background:var(--y-bg);color:var(--y);font-size:11px;padding:2px 7px;border-radius:10px;margin-left:6px}
+
+/* one block per source: the name, then what we hold for it */
+.src{border-top:1px solid var(--rule-2);padding:15px 0 4px}
+.src:first-child{border-top:none;padding-top:6px}
+.src h4{margin:0 0 3px;font-size:16.5px;font-weight:700}
+.src.muted-src h4{color:var(--ink-3);font-weight:600}
+.src .byline{margin:0 0 4px;color:var(--ink-3);font-size:13px}
+.src .cite{margin:0 0 6px;font-family:var(--mono);font-size:12.5px;color:var(--ink-2)}
+.src .notext{margin:0;font-size:13.5px;color:var(--ink-3);font-style:italic}
+.src .cav{font-size:11px;font-weight:400;color:var(--warn);background:var(--warn-bg);
+  padding:2px 7px;border-radius:10px;vertical-align:2px;font-style:normal}
+.alsoin{margin:16px 0 0;font-size:14px;color:var(--ink-2);border-top:1px solid var(--rule-2);padding-top:14px}
+.alsoin span{white-space:nowrap}
+button.linkish{background:none;border:none;font:inherit;font-size:13.5px;color:var(--accent);
+  cursor:pointer;text-decoration:underline;padding:0 2px}
+#reportbar{margin:26px 0 0;font-size:13px}
 section.seg{margin:26px 0 0;padding:20px 0 0;border-top:1px solid var(--rule-2)}
 section.seg:first-of-type{border-top:none;padding-top:8px}
 section.seg h3{margin:0 0 4px;font-size:17px}
@@ -160,8 +179,26 @@ footer{border-top:1px solid var(--rule);background:var(--card);padding:22px 0;fo
 footer p{margin:0 0 6px;max-width:80ch}
 .spin{display:inline-block;width:12px;height:12px;border:2px solid var(--rule);border-top-color:var(--accent);border-radius:50%;animation:sp .7s linear infinite;vertical-align:-2px}
 @keyframes sp{to{transform:rotate(360deg)}}
+/* PDF route (§4): the browser's own print-to-PDF, so VijayaDV embeds and the
+   svara survives into the document a scholar would cite. Everything that is
+   not the entry gets out of the way. */
+@media print{
+  header, nav, .opts, form.hero, .status, ul.results, .cardctl,
+  #reportbar, .panel[hidden]{display:none !important}
+  body{background:#fff;font-size:11pt}
+  main{padding:0}
+  .card{border:none;border-radius:0;padding:0;margin:0;background:#fff}
+  .card .lemma{font-size:32pt}
+  .src{break-inside:avoid}
+  .note{break-inside:avoid;background:#f6f6f6;border-left:2px solid #999}
+  footer{border-top:1px solid #ccc;padding-top:8pt;font-size:8.5pt}
+  a[href]:after{content:""}
+  @page{margin:18mm}
+}
+
 @media (max-width:620px){
   h1{font-size:18px} h1 .lat{display:none}
+  .cardctl{margin-left:0;width:100%}
   form.hero{padding:14px 0 4px;gap:8px}
   #q{font-size:24px;padding:13px 17px}
   button.go{padding:0 20px;font-size:15px}
@@ -281,6 +318,31 @@ footer p{margin:0 0 6px;max-width:80ch}
     <h3 class="sub">Known limits</h3>
     <ul class="plain" id="limits"></ul>
 
+    <h3 class="sub">How to read an entry</h3>
+    <p class="lede">
+      Sources appear in the order the project owner has set, which lives in an
+      editable file rather than in the code: Śrauta padārtha first, then Veda
+      references, Amarakośa, Vācaspatyam, Śabdakalpadrumaḥ, then the remaining
+      kośas, with Monier-Williams last and de-emphasised. A source with no entry
+      for the word is skipped silently. You can override the order for your
+      browser session — "my order" or "my top 3 only" — with no account.
+    </p>
+    <p class="lede">
+      Each source is named in full and paired with the citation we hold for it,
+      normally its printed page. <b>Definition text is not published yet.</b>
+      What is published is attestation: which kośa records the word, and where.
+      Serving the definitions needs a database rather than static files, and
+      that decision has not been taken.
+    </p>
+
+    <h3 class="sub">Typing a word</h3>
+    <p class="lede">
+      Devanagari and IAST are detected automatically. SLP1 (<code>kfzRa</code>)
+      and Harvard-Kyoto (<code>kRSNa</code>) can be chosen explicitly. A trailing
+      visarga or anusvāra is matched loosely, because kośas cite stems and
+      printed editions cite nominatives.
+    </p>
+
     <h3 class="sub">Not built yet</h3>
     <p class="lede">
       The design carries more than this. These parts are named here so nobody
@@ -307,13 +369,15 @@ footer p{margin:0 0 6px;max-width:80ch}
 
 <footer>
   <div class="wrap">
-    <p><b>Pada Kośa</b> — SarvaVeda LLM programme, Dr Vaṃśīkṛṣṇa Ghanapāṭhī, Mysore.
-       Devanagari set in VijayaDV, designed for this corpus so that Vedic svara
-       survives as a glyph rather than an approximation.</p>
+    <p id="reportbar"><a id="reportlink" href="#">⚑ report an issue</a>
+       <span class="muted">— sends this page’s address and your note by mail.</span></p>
+    <p><b>Pada Kośa</b> — Devanagari set in VijayaDV, designed for this corpus so
+       that Vedic svara survives as a glyph rather than an approximation.</p>
     <p id="foot-lic"></p>
     <p class="muted">Text is stored and served exactly as digitised. No Unicode
        normalisation is applied at any stage, so accent codepoints are
        byte-identical to the source.</p>
+    <p><b>Content by VKG Foundation · Published by Dharma Poshanam</b></p>
   </div>
 </footer>
 
@@ -408,6 +472,19 @@ function toSlp1(raw, scheme){
 /* Report-time only, never stored: strip one trailing visarga or anusvāra so a
    kośa stem and a printed nominative can meet. Same rule as `--norm final`. */
 function normFinal(k){ return /[HM]$/.test(k) ? k.slice(0, -1) : k; }
+
+/* SLP1 -> IAST, for the transliteration shown beside the headword (spec §2).
+   Inverted from the IAST table above so the two can never drift apart. */
+var SLP2IAST = (function(){
+  var m = {};
+  for (var i = 0; i < IAST.length; i++) if (!(IAST[i][1] in m)) m[IAST[i][1]] = IAST[i][0];
+  return m;
+})();
+function toIast(s){
+  var out = "";
+  for (var i = 0; i < s.length; i++) out += (SLP2IAST[s[i]] !== undefined ? SLP2IAST[s[i]] : s[i]);
+  return out;
+}
 
 /* Must equal bucket_of() in scripts/build_pk_platform.py: FNV-1a 32, low byte. */
 function pkBucket(key){
@@ -534,20 +611,22 @@ function shardByBucket(b){
 function shardFor(key){ return shardByBucket(pkBucket(key)); }
 
 /* ------------------------------------------------------------ render: list */
+/* Badges for a result ROW. Deliberately not per-source codes: the spec forbids
+   a bare "R-mw72" with no content attached, so a row says what KIND of word
+   this is and how many witnesses it has, and the card names them in full. */
 function tagsFor(e){
   var t = [];
-  if (e.r) for (var i = 0; i < e.r.length; i++){
-    var k = META.kosha_sources[e.r[i][0]];
-    if (k) t.push(['r', 'R-' + k.code]);
-  }
+  if (e.r) t.push(['r', e.r.length === 1 ? 'rūḍha · 1 kośa'
+                                         : 'rūḍha · ' + e.r.length + ' kośas']);
   if (e.v){
-    var seen = {};
+    var names = {};
     for (var j = 0; j < e.v.t.length; j++){
       var tx = META.vaidika_texts[e.v.t[j][0]];
-      if (tx && !seen[tx.code]){ seen[tx.code] = 1; t.push(['v', 'V-' + tx.code]); }
+      if (tx) names[tx.code] = 1;
     }
+    t.push(['v', 'vaidika · ' + Object.keys(names).join(" ")]);
   }
-  if (e.y || e.ys) t.push(['y', 'Y-Vyā']);
+  if (e.ys || e.y) t.push(['y', e.r ? 'yaugika' : 'derived form']);
   return t;
 }
 function tagHtml(t, limit){
@@ -590,34 +669,240 @@ function renderList(keys, q){
     });
 }
 
+/* ---------------------------------------------------- source ordering (§2–3)
+   Order is the project owner's, read from display_order.json and passed through
+   in META.display_order. Nothing here decides an order of its own; the two
+   alternatives below are the reader's own preference, held for the browser
+   session only, with no account (spec §3). */
+/* The API carries the definition text; the static shards carry attestation and
+   the search index. Search never touches the network — only opening a word does,
+   which is what keeps the running cost near zero. */
+var API = "https://pk-api-709115207250.us-west1.run.app";
+var DEFN = {};          /* slp1 -> {bySource, withheld} once fetched */
+
+function fetchDefinitions(key){
+  if (DEFN[key]) return Promise.resolve(DEFN[key]);
+  return fetch(API + "/v1/word/" + encodeURIComponent(key))
+    .then(function(r){ if (!r.ok) throw new Error(String(r.status)); return r.json(); })
+    .then(function(j){
+      var by = {};
+      (j.sources || []).forEach(function(s){
+        (by[s.code] = by[s.code] || []).push({
+          body: s.body, body_encoding: s.body_encoding,
+          printed_page: s.printed_page, has_full_text: s.has_full_text});
+      });
+      DEFN[key] = {bySource: by, withheld: j.text_withheld_for || [],
+                   reason: j.text_withheld_reason || ""};
+      return DEFN[key];
+    })
+    .catch(function(){ DEFN[key] = {bySource: {}, withheld: [], reason: "",
+                                    offline: true}; return DEFN[key]; });
+}
+
+var PREF_KEY = "pk.sourcepref";
+function pref(){
+  try { return JSON.parse(sessionStorage.getItem(PREF_KEY)) || {mode: "recommended"}; }
+  catch (err) { return {mode: "recommended"}; }
+}
+function setPref(p){
+  try { sessionStorage.setItem(PREF_KEY, JSON.stringify(p)); } catch (err) {}
+}
+function primaryLimit(){
+  var p = pref();
+  if (p.mode === "top3") return 3;
+  return (META.display_order && META.display_order.primary_shown) || 5;
+}
+/* e.r is [[sourceIndex, printedPage], …]. Returns [{k, page}] in display order. */
+function orderSources(rows, defn){
+  var items = rows.map(function(r){
+    var k = META.kosha_sources[r[0]] || {};
+    var d = defn && defn.bySource[k.code];
+    return {k: k, page: r[1], bodies: d,
+            has_full_text: d && d.length ? d[0].has_full_text
+                         : (defn && defn.withheld.indexOf(k.code) >= 0 ? false : undefined)};
+  }).filter(function(x){ return x.k.code; });
+  var p = pref();
+  if (p.mode === "custom" && p.order && p.order.length){
+    var pos = {};
+    p.order.forEach(function(c, i){ pos[c] = i; });
+    items.sort(function(a, b){
+      var pa = (a.k.code in pos) ? pos[a.k.code] : 9999;
+      var pb = (b.k.code in pos) ? pos[b.k.code] : 9999;
+      return pa - pb || a.k.rank - b.k.rank;
+    });
+    return items;
+  }
+  if (p.mode === "top3" && p.top3 && p.top3.length){
+    var want = {};
+    p.top3.forEach(function(c, i){ want[c] = i; });
+    return items.filter(function(x){ return x.k.code in want; })
+                .sort(function(a, b){ return want[a.k.code] - want[b.k.code]; });
+  }
+  /* recommended: the owner's tier ranks; inside a tier, the better-corroborated
+     source first, then alphabetically so the order never wobbles */
+  items.sort(function(a, b){
+    return (a.k.rank - b.k.rank)
+        || (b.k.words - a.k.words)
+        || (a.k.name < b.k.name ? -1 : a.k.name > b.k.name ? 1 : 0);
+  });
+  return items;
+}
+/* One source, named, with whatever content we hold for it. The spec forbids a
+   bare code with nothing attached — so where no definition text exists the
+   block says plainly that the text is not published yet and gives the citation,
+   which is the honest thing we DO have. */
+function sourceBlock(s){
+  var k = s.k;
+  /* `s.bodies` arrives from the API when definition text exists for this source.
+     Where it does not, the reason is stated — either the source is still in
+     copyright (attestation-only by decision) or the API is unreachable. */
+  var content;
+  /* An attestation-only source still comes back as a row — with body null. So
+     the test is whether any body actually has text, not whether the row exists;
+     otherwise the in-copyright notice never shows and the reader just sees a
+     source with nothing under it. */
+  var withText = (s.bodies || []).filter(function(b){ return b.body; });
+  if (withText.length){
+    content = withText.map(function(b){
+      return '<div class="defn">' + renderBody(b.body, b.body_encoding)
+        + (b.printed_page ? '<span class="loc"> — p. ' + esc(b.printed_page) + '</span>' : '')
+        + '</div>';
+    }).join("");
+  } else if (s.has_full_text === false){
+    content = '<p class="notext">Still in copyright — cited here, not reproduced. '
+      + 'Consult the printed edition.</p>';
+  } else {
+    content = '<p class="notext">Definition text unavailable just now.</p>';
+  }
+  return '<div class="src' + (k.muted ? ' muted-src' : '') + '">'
+    + '<h4>' + (k.name ? esc(k.name) : '<span class="muted">title unavailable</span>')
+    + (k.caveat ? ' <span class="cav">' + esc(k.caveat) + '</span>' : '')
+    + '</h4>'
+    + (k.author ? '<p class="byline">' + esc(k.author) + '</p>' : '')
+    + content
+    + '<p class="cite">'
+    + (s.page ? 'printed page ' + esc(s.page)
+              : '<span class="muted">page not recorded in this digitisation</span>')
+    + (k.year ? ' · ' + k.year : '') + '</p>'
+    + '</div>';
+}
+
+/* Bodies are NOT uniformly encoded, and CDSL says so itself: they "mix
+   Devanagari, IAST and CDSL markup", differently per dictionary. The API reports
+   which, detected from the loaded data rather than assumed:
+
+     devanagari   render as-is (the indic-dict builds)
+     slp1         the whole body is SLP1 — transliterate it (pw, vcp, skd, …)
+     slp1_markup  only the <s> spans are SLP1 (mw, ae)
+
+   Guessing here would put Latin letters in the middle of a Devanagari entry, or
+   mangle a body that was already Devanagari. */
+function renderBody(raw, enc){
+  if (!raw) return "";
+  if (enc === "devanagari") return cdslToHtml(raw, false);
+  if (enc === "slp1") return '<span class="dv">' + esc(slp1ToDev(stripTags(raw)))
+                            + '</span>';
+  return cdslToHtml(raw, true);
+}
+function stripTags(s){
+  return s.replace(/<[^>]*>/g, "").replace(/\{#|#\}/g, "").trim();
+}
+
+/* CDSL markup is lexicographic, not decorative: <s> is Sanskrit in SLP1, <ls> a
+   literary source, <lex> a grammatical label. Rendering it as marked-up text
+   rather than flattening it keeps the citation intact. */
+function cdslToHtml(raw, translitSpans){
+  if (!raw) return "";
+  var out = esc(raw)
+    .replace(/&lt;s1?&gt;([\s\S]*?)&lt;\/s1?&gt;/g, function(_m, t){
+      return '<span class="dv sk">'
+        + esc(translitSpans ? slp1ToDev(t) : t) + '</span>';
+    })
+    .replace(/&lt;lex&gt;([\s\S]*?)&lt;\/lex&gt;/g, '<i class="lex">$1</i>')
+    .replace(/&lt;ls&gt;([\s\S]*?)&lt;\/ls&gt;/g, '<span class="ls">$1</span>')
+    .replace(/&lt;ab&gt;([\s\S]*?)&lt;\/ab&gt;/g, '<abbr>$1</abbr>')
+    .replace(/&lt;hom&gt;([\s\S]*?)&lt;\/hom&gt;/g, '<b>$1</b>')
+    .replace(/&lt;br\s*\/?&gt;/g, '<br>')
+    .replace(/&lt;br&gt;&lt;br&gt;/g, '<br>')
+    /* Remaining structural tags. Must be [\s\S]*? and not [^&]*? — an attribute
+       like <info lex="inh"/> escapes to &quot; which contains an ampersand, so
+       the tighter class stops short and the tag leaks onto the page. */
+    .replace(/&lt;[\s\S]*?&gt;/g, "")
+    .replace(/¦/g, '<span class="pipe">¦</span>');
+  return out;
+}
+/* SLP1 -> Devanagari for the <s> spans. Built from the same tables as the
+   reverse direction, so the two cannot drift. */
+function slp1ToDev(s){
+  var V2 = {}, C2 = {}, M2 = {};
+  for (var d in VOW) V2[VOW[d]] = d;
+  for (var d2 in CON) C2[CON[d2]] = d2;
+  for (var d3 in MAT) M2[MAT[d3]] = d3;
+  var out = "", i = 0;
+  while (i < s.length){
+    var c = s[i];
+    if (C2[c]){
+      out += C2[c];
+      var nx = s[i + 1];
+      if (nx && M2[nx] !== undefined){ out += M2[nx]; i += 2; continue; }
+      if (nx === "a"){ i += 2; continue; }
+      out += VIRAMA; i += 1; continue;
+    }
+    if (V2[c]){ out += V2[c]; i += 1; continue; }
+    if (c === "M"){ out += "ं"; i += 1; continue; }
+    if (c === "H"){ out += "ः"; i += 1; continue; }
+    if (c === "'"){ out += "ऽ"; i += 1; continue; }
+    out += c; i += 1;
+  }
+  return out;
+}
+
 /* ------------------------------------------------------------ render: card */
 function renderCard(key){
-  shardFor(key).then(function(sh){
+  Promise.all([shardFor(key), fetchDefinitions(key)]).then(function(both){
+    var sh = both[0], defn = both[1];
     var e = sh[key];
     var box = $("card");
     if (!e){ box.innerHTML = ""; return; }
-    var h = '<div class="card">'
-      + '<p class="lemma dv">' + esc(e.d || "") + '</p>'
-      + '<p class="translit">' + esc(key) + '</p>'
-      + '<div class="tagline-tags">' + tagHtml(tagsFor(e)) + '</div>';
+    var stype = [];
+    if (e.r) stype.push("rūḍha");
+    if (e.v) stype.push("vaidika");
+    if (e.y || e.ys) stype.push("yaugika");
+    var derived = (e.ys || e.y) && !e.r;
+    var p0 = pref();
+    var h = '<div class="card" id="wordcard" data-k="' + esc(key) + '">'
+      + '<div class="cardtop">'
+      + '<div><p class="lemma dv">' + esc(e.d || "") + '</p>'
+      + '<p class="translit">' + esc(toIast(key)) + ' <span class="muted">· ' + esc(key) + '</span></p>'
+      + '<p class="stype">' + esc(stype.join(" · "))
+      + (derived ? ' <span class="derivedtag">derived form</span>' : '') + '</p></div>'
+      + '<div class="cardctl">'
+      + '<select id="srcorder" aria-label="Source order">'
+      + '<option value="recommended"' + (p0.mode === "recommended" ? " selected" : "") + '>makers’ recommended order</option>'
+      + '<option value="custom"' + (p0.mode === "custom" ? " selected" : "") + '>my order</option>'
+      + '<option value="top3"' + (p0.mode === "top3" ? " selected" : "") + '>my top 3 only</option>'
+      + '</select>'
+      + '<select id="exportas" aria-label="Export">'
+      + '<option value="">export…</option><option value="txt">Text</option>'
+      + '<option value="pdf">PDF</option></select>'
+      + '</div></div>';
 
-    /* ---- R ---- */
+    /* ---- R: one block per source, named, in the owner's order ---- */
     if (e.r){
-      h += '<section class="seg"><h3><span class="code tag r">R</span>Rūḍha — kośa attestation</h3>'
-        + '<p class="sub">Attested in ' + num(e.r.length) + ' of '
-        + num(META.kosha_sources.length) + ' published kośas.'
-        + (e.r.length === 1 ? ' A single witness — treat with the caution one witness deserves.' : '')
-        + '</p><div class="scroll"><table><tr><th>Kośa</th><th>Code</th><th>Tier</th><th>Genre</th><th>Printed page</th></tr>';
-      for (var i = 0; i < e.r.length; i++){
-        var k = META.kosha_sources[e.r[i][0]] || {}, pg = e.r[i][1];
-        h += '<tr><td>' + (k.title ? esc(k.title) : '<span class="muted">title unavailable</span>')
-          + (k.author ? '<br><span class="muted">' + esc(k.author) + '</span>' : '')
-          + '</td><td class="kcode">' + esc(k.code || "") + '</td>'
-          + '<td class="num">' + esc(k.tier || "—") + '</td>'
-          + '<td>' + esc(k.genre || "—") + '</td>'
-          + '<td class="num">' + (pg ? esc(pg) : '<span class="muted">—</span>') + '</td></tr>';
+      var ordered = orderSources(e.r, defn);
+      var lim = primaryLimit();
+      var head = ordered.slice(0, lim), tail = ordered.slice(lim);
+      h += '<section class="seg">';
+      for (var i = 0; i < head.length; i++) h += sourceBlock(head[i]);
+      if (tail.length){
+        h += '<p class="alsoin">also in: '
+          + tail.map(function(s){ return '<span>' + esc(s.k.name
+              || "title unavailable") + '</span>'; }).join(' · ')
+          + ' <button type="button" class="linkish" id="showall">show all</button></p>'
+          + '<div id="tailblocks" hidden>'
+          + tail.map(sourceBlock).join("") + '</div>';
       }
-      h += '</table></div></section>';
+      h += '</section>';
     }
 
     /* ---- V ---- */
@@ -726,6 +1011,98 @@ function renderCard(key){
   });
 }
 
+/* -------------------------------------------------------------- export (§4)
+   Text and PDF only. Both carry the citation locator for every source, not just
+   its name, and both honour whatever source order is active on screen.
+
+   PDF goes through the browser's own print-to-PDF rather than a bundled
+   generator: the page must stay self-contained (no CDN), and a hand-rolled PDF
+   writer cannot embed VijayaDV, so the svara would be lost in the very document
+   a scholar would cite. The print stylesheet is built for it. */
+function exportLines(key, e, defn){
+  var L = [];
+  L.push(e.d + "   " + toIast(key) + "   [" + key + "]");
+  L.push("");
+  if (e.r){
+    var ordered = orderSources(e.r, defn);
+    for (var i = 0; i < ordered.length; i++){
+      var s = ordered[i], k = s.k;
+      L.push((k.name || "title unavailable") + (k.year ? " (" + k.year + ")" : ""));
+      if (k.author) L.push("    " + k.author);
+      L.push("    " + (s.page ? "printed page " + s.page
+                              : "page not recorded in this digitisation"));
+      if (k.caveat) L.push("    [" + k.caveat + "]");
+      if (s.bodies && s.bodies.length){
+        s.bodies.forEach(function(b){
+          var t = b.body_encoding === "devanagari" ? stripTags(b.body || "")
+                : slp1ToDev(stripTags(b.body || ""));
+          if (t) L.push("    " + t);
+        });
+      } else if (s.has_full_text === false){
+        L.push("    [still in copyright — cited, not reproduced]");
+      }
+      L.push("");
+    }
+  }
+  if (e.v){
+    L.push("Veda references — padapāṭha occurrence");
+    for (var j = 0; j < e.v.t.length; j++){
+      var tx = META.vaidika_texts[e.v.t[j][0]] || {};
+      L.push("    " + (tx.title || tx.code) + ": " + e.v.t[j][1] + " occurrence(s)");
+    }
+    if (e.v.s) for (var s2 = 0; s2 < e.v.s.length; s2++)
+      L.push("    " + e.v.s[s2][0] + (e.v.s[s2][1] ? "   at " + e.v.s[s2][1] : ""));
+    L.push("    NOTE: loci are provisional — the VedaNidhi vākya code table is "
+         + "not yet supplied, so these addresses are not citable.");
+    L.push("");
+  }
+  if (e.ys){
+    var T = META.yaugika_tables || {};
+    L.push("Yaugika — derived stem" + (e.ys.att ? " (also attested)" : " (not attested)"));
+    for (var r2 = 0; r2 < e.ys.routes.length; r2++){
+      var rt = e.ys.routes[r2];
+      L.push("    " + (T.dhatu || [])[rt[0]] + " + " + (T.krt || [])[rt[2]]
+        + ((T.upasarga || [])[rt[3]] ? " (" + (T.upasarga || [])[rt[3]] + ")" : "")
+        + "   " + ((e.ys.codes || [])[r2] || ""));
+    }
+    L.push("");
+  }
+  if (e.y && e.y.sutras && e.y.sutras.length){
+    L.push("Yaugika — inflected form, prakriyā: " + e.y.sutras.join(" · "));
+    L.push("");
+  }
+  L.push("—");
+  L.push("Pada Kośa · " + location.origin + location.pathname + "?q=" + encodeURIComponent(key));
+  L.push("Content by VKG Foundation · Published by Dharma Poshanam");
+  return L.join("\n");
+}
+function download(name, text, mime){
+  var b = new Blob([text], {type: mime + ";charset=utf-8"});
+  var u = URL.createObjectURL(b), a = document.createElement("a");
+  a.href = u; a.download = name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){ URL.revokeObjectURL(u); }, 1000);
+}
+
+/* ---------------------------------------------------- report an issue (§5)
+   On every page, no login. The screenshot the spec asks for needs a service to
+   receive it — there is none behind a static site — so this sends the page URL,
+   the word in view and the reader's note by mail, and says so rather than
+   pretending to attach an image. */
+function reportHref(){
+  var card = $("wordcard");
+  var subject = "Pada Kośa — issue report"
+    + (card ? " — " + (card.dataset.k || "") : "");
+  var body = "What looks wrong:\n\n\n"
+    + "-- please keep the lines below --\n"
+    + "page: " + location.href + "\n"
+    + (card ? "entry: " + card.dataset.k + "\n" : "")
+    + "view: " + (document.querySelector('nav button[aria-selected="true"]') || {}).textContent + "\n"
+    + "screen: " + window.innerWidth + "x" + window.innerHeight + "\n";
+  return "mailto:t2@dharmaposhanam.in?subject=" + encodeURIComponent(subject)
+       + "&body=" + encodeURIComponent(body);
+}
+
 /* ---------------------------------------------------------- static panels */
 function fillPanels(){
   var c = META.counts, p = META.provenance;
@@ -769,12 +1146,15 @@ function fillPanels(){
           + '</td><td class="num">' + num(t.padas) + '</td></tr>';
       }).join("");
 
-  $("koshas").innerHTML = '<tr><th>Title (from TEI)</th><th>Code</th><th>Year</th>'
+  $("koshas").innerHTML = '<tr><th>Source</th><th>Code</th><th>Year</th>'
     + '<th>Tier</th><th>Genre</th><th>Domain</th><th>Words</th></tr>'
-    + META.kosha_sources.slice().sort(function(a, b){ return b.words - a.words; })
+    + META.kosha_sources.slice().sort(function(a, b){
+        return (a.rank - b.rank) || (b.words - a.words); })
       .map(function(k){
-        return '<tr><td>' + (k.title ? esc(k.title) : '<span class="muted">title unavailable</span>')
+        return '<tr><td>' + (k.name ? esc(k.name) : '<span class="muted">title unavailable</span>')
           + (k.author ? '<br><span class="muted">' + esc(k.author) + '</span>' : '')
+          + (k.name_from && k.name_from.indexOf("registry label") === 0
+             ? '<br><span class="muted">no TEI title for this build</span>' : '')
           + '</td><td class="kcode">' + esc(k.code) + '</td>'
           + '<td class="num">' + (k.year || "—") + '</td>'
           + '<td class="num">' + esc(k.tier || "—") + '</td>'
@@ -856,6 +1236,58 @@ function fillPanels(){
     var b = ev.target.closest("button[data-k]");
     if (b) renderCard(b.dataset.k);
   };
+
+  /* card controls, delegated so they survive a re-render */
+  $("card").addEventListener("click", function(ev){
+    if (ev.target.id === "showall"){
+      var t = $("tailblocks");
+      if (t){ t.hidden = false; ev.target.remove(); }
+    }
+  });
+  $("card").addEventListener("change", function(ev){
+    var card = $("wordcard");
+    if (!card) return;
+    var key = card.dataset.k;
+    if (ev.target.id === "srcorder"){
+      var mode = ev.target.value, p = pref();
+      p.mode = mode;
+      if (mode !== "recommended" && !(p.order || p.top3)){
+        /* seed the reader's list from the recommended order of THIS entry, so
+           "my order" starts from something sensible rather than empty */
+        shardFor(key).then(function(sh){
+          var e = sh[key];
+          var codes = (e && e.r ? orderSources(e.r) : []).map(function(s){ return s.k.code; });
+          p.order = codes.slice();
+          p.top3 = codes.slice(0, 3);
+          setPref(p);
+          renderCard(key);
+        });
+        return;
+      }
+      setPref(p);
+      renderCard(key);
+      return;
+    }
+    if (ev.target.id === "exportas"){
+      var how = ev.target.value;
+      ev.target.value = "";
+      if (!how) return;
+      shardFor(key).then(function(sh){
+        var e = sh[key];
+        if (!e) return;
+        if (how === "txt"){
+          fetchDefinitions(key).then(function(dn){
+            download("pada-kosha-" + key + ".txt", exportLines(key, e, dn), "text/plain");
+          });
+        } else {
+          window.print();   /* the print stylesheet renders the entry for PDF */
+        }
+      });
+    }
+  });
+
+  var rl = $("reportlink");
+  if (rl) rl.addEventListener("click", function(){ rl.href = reportHref(); });
 
   Promise.all([
     fetch("data/words.txt").then(function(r){ return r.text(); }),
