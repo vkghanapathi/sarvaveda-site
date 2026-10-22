@@ -1,0 +1,70 @@
+/* sarvaveda.info/devataa — Rūpa Dhyāna Ratnāvalī. Tokens from adhikarana.css. */
+:root{ --telugu:'Noto Serif Telugu','Gautami',serif; }
+.wrap{max-width:980px}
+.te{font-family:var(--telugu)}
+.masthead h1.te{font-family:var(--telugu)}
+.crumb{padding-top:18px; font-size:.86rem; color:var(--muted)}
+.crumb a{color:var(--muted)}
+
+.groups{display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; margin:8px 0 28px}
+.gcard{display:flex; flex-direction:column; gap:2px; text-decoration:none; color:var(--ink);
+  background:#fff; border:1px solid var(--line); border-radius:6px; padding:12px; transition:border-color .15s}
+.gcard:hover{border-color:var(--gold)}
+.gcard img{width:100%; height:190px; object-fit:contain; background:var(--ivory-deep); border-radius:4px; margin-bottom:8px}
+.gcard .gname{font-size:1.3rem; color:var(--indigo-deep)}
+.gcard .rom{font-family:var(--display); font-size:1.05rem; color:var(--maroon)}
+.gcard .n{font-size:.78rem; color:var(--muted)}
+
+nav.subs{display:flex; flex-wrap:wrap; gap:8px; margin:18px 0 6px}
+nav.subs a{font-size:.9rem; text-decoration:none; border:1px solid var(--line); border-radius:999px; padding:4px 12px; background:#fff}
+nav.subs a .n{color:var(--muted); font-size:.78rem}
+
+.tools{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:16px 0 4px;
+  position:sticky; top:0; background:var(--ivory); padding:8px 0; z-index:2}
+.tools input{flex:1 1 260px; font:inherit; padding:8px 12px; border:1px solid var(--line); border-radius:6px; background:#fff}
+.script{display:flex; border:1px solid var(--line); border-radius:6px; overflow:hidden}
+.script button{font:inherit; font-size:.92rem; border:0; background:#fff; padding:7px 12px; cursor:pointer; color:var(--ink)}
+.script button[aria-pressed="true"]{background:var(--indigo-deep); color:var(--ivory)}
+.found{font-size:.86rem; color:var(--muted); margin:4px 0}
+
+h2.sec .te{font-family:var(--telugu)}
+h2.sec .lk{display:block; font-family:var(--body); font-size:.8rem; color:var(--muted); letter-spacing:.02em; font-weight:400}
+
+article.dv{display:grid; grid-template-columns:220px 1fr; gap:20px; padding:22px 0; border-bottom:1px solid var(--line); scroll-margin-top:70px}
+article.dv:target{background:var(--ivory-deep)}
+.figs{display:flex; flex-direction:column; gap:10px}
+.figs figure{margin:0}
+.figs img{width:100%; height:auto; display:block; border:1px solid var(--line); border-radius:4px; background:#fff; cursor:zoom-in}
+.figs figcaption{font-size:.74rem; color:var(--muted); margin-top:3px}
+.noplate{font-size:.82rem; color:var(--muted); border:1px dashed var(--line); border-radius:4px; padding:18px 12px; text-align:center}
+article.dv h3{margin:0; font-size:1.35rem; color:var(--indigo-deep); font-weight:600; line-height:1.4}
+article.dv h3 .num{display:inline-block; min-width:2.2em; font-family:var(--display); color:var(--gold); font-weight:700}
+article.dv .rom{font-family:var(--display); font-size:1.02rem; color:var(--maroon); margin:2px 0 10px}
+.sl{font-size:1.12rem; line-height:1.95; color:var(--ink); border-left:3px solid var(--gold); padding:4px 0 4px 14px; margin:8px 0 12px; white-space:normal}
+.sl.dn{font-family:var(--deva)}
+.mean{font-size:1rem; line-height:1.9; margin:0 0 10px}
+.mean b{color:var(--leaf); margin-right:6px}
+.empty{font-size:.9rem; color:var(--muted); font-style:italic}
+h4.te{margin:14px 0 4px; color:var(--indigo); font-weight:600}
+.passage{padding:14px 0; border-bottom:1px solid var(--line)}
+
+.results{margin:6px 0 20px}
+.results a{display:flex; gap:12px; align-items:center; padding:8px 0; border-bottom:1px solid var(--line); text-decoration:none; color:var(--ink)}
+.results img{width:54px; height:68px; object-fit:contain; background:var(--ivory-deep); border-radius:3px}
+.results .g{font-size:.78rem; color:var(--muted)}
+
+dialog#plate{border:0; padding:0; background:transparent; max-width:96vw; max-height:96vh}
+dialog#plate::backdrop{background:rgba(20,30,66,.82)}
+dialog#plate img{max-width:94vw; max-height:92vh; display:block; border-radius:4px; background:#fff}
+dialog#plate button{position:absolute; top:6px; right:8px; font-size:1.6rem; border:0; background:var(--indigo-deep);
+  color:var(--ivory); width:40px; height:40px; border-radius:50%; cursor:pointer}
+
+footer.site .credit{margin-top:6px; font-size:.82rem}
+
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  article.dv{grid-template-columns:1fr; gap:12px}
+  .figs{flex-direction:row; flex-wrap:wrap}
+  .figs figure,.noplate{flex:1 1 140px; max-width:240px}
+  .gcard img{height:150px}
+}
